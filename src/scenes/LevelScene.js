@@ -196,10 +196,42 @@ export class LevelScene extends Phaser.Scene {
       if (tile.index === T.PLANK) tile.setCollision(false, false, true, false);
     });
 
-    const ddata = g.decor.map((row) => row.map((ch) => (DECOR.has(ch) ? DECOR_INDEX[ch] : -1)));
+    // Пустые клетки внутри земли (ямы, проёмы) закрашиваем тёмным, чтобы сквозь землю не просвечивало небо.
+    const solidAt = (x, y) => SOLID.has(g.tiles[y][x]);
+    const underground = (x, y) => {
+      let l = false;
+      let r = false;
+      for (let k = 1; k <= 8 && x - k >= 0; k++) if (solidAt(x - k, y)) { l = true; break; }
+      for (let k = 1; k <= 8 && x + k < g.w; k++) if (solidAt(x + k, y)) { r = true; break; }
+      return l && r && (y === 0 || !this.def.ceiling || y > 1);
+    };
+    const ddata = g.decor.map((row, y) =>
+      row.map((ch, x) => {
+        if (DECOR.has(ch)) return DECOR_INDEX[ch];
+        if (!solidAt(x, y) && g.tiles[y][x] === '.' && this.groundBelowSurface(g, x, y) && underground(x, y)) return T.CAVITY;
+        return -1;
+      }),
+    );
     const dmap = this.make.tilemap({ data: ddata, tileWidth: 16, tileHeight: 16 });
     const dts = dmap.addTilesetImage('tiles', `tiles-${this.style}`, 16, 16, 0, 0);
     this.decorLayer = dmap.createLayer(0, dts, 0, 0).setDepth(3);
+  }
+
+  /** Клетка ниже поверхности земли по соседству (а не в воздухе над платформами). */
+  groundBelowSurface(g, x, y) {
+    for (const dx of [-1, 1]) {
+      for (let k = 1; k <= 8; k++) {
+        const xx = x + dx * k;
+        if (xx < 0 || xx >= g.w) break;
+        if (SOLID.has(g.tiles[y][xx])) {
+          // сосед — часть массива земли: над ним (в той же колонке) тоже грунт или это верх земли
+          const top = g.tiles.findIndex((row) => SOLID.has(row[xx]));
+          if (top <= y && g.tiles.slice(y).every((row) => SOLID.has(row[xx]))) return true;
+          break;
+        }
+      }
+    }
+    return false;
   }
 
   buildObjects(g) {

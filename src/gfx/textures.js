@@ -30,6 +30,7 @@ export const T = {
   CEIL: 18,
   BRACE: 19,
   CABLE: 20,
+  CAVITY: 21, // тёмная «стенка» внутри ям и проёмов
 };
 export const SOLID_TILES = [T.TOP, T.TOP2, T.FILL, T.FILL2, T.CRATE, T.WALL, T.WALL2, T.CEIL];
 
@@ -255,6 +256,10 @@ function decorTiles(p, idx, style, r) {
       break;
     case T.CABLE:
       p.rect(7, 0, 1, 16, SHADE.blackMid);
+      break;
+    case T.CAVITY:
+      p.rect(0, 0, 16, 16, style === 3 ? SHADE.blackMid : SHADE.blackSoft);
+      speckle(p, r, [K, SHADE.blackMid], 10);
       break;
     default:
       break;

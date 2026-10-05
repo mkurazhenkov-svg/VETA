@@ -209,7 +209,8 @@ export function drawHeroFrame(name) {
   helmet.rect(15 + lean, cy, 3, 7, C.helmetShade); // ребро жёсткости
   helmet.rect(12 + lean, cy + 2, 2, 2, BRAND.white);
   helmet.rect(19 + lean, cy + 4, 4, 2, BRAND.blue); // фирменная синяя наклейка
-  // очистим каску над головой, чтобы обводка была ровной
+  // купол не должен вылезать ниже полей каски — иначе на лбу появляется белое пятно
+  for (let y = cy + 9; y < cy + 14; y++) for (let x = 0; x < HERO_W; x++) if (helmet.get(x, y) === C.helmet) helmet.set(x, y, -1);
   return { body, helmet, generic, face: { x: hx, y: hy, w: FACE.w, h: FACE.h } };
 }
 

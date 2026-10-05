@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#024F99" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Прораб против волков — игра от Экспертной группы VETA</title>
+    <style>
+      html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #01376B; overflow: hidden; }
+      body { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+      #game { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+      #game canvas { display: block; }
+      #rotate { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 16px;
+        background: #024F99; color: #fff; font: 700 20px/1.3 Manrope, system-ui, sans-serif; text-align: center; padding: 24px; z-index: 10; }
+      #rotate .phone { width: 46px; height: 76px; border: 4px solid #fff; border-radius: 8px; animation: rot 2s ease-in-out infinite; }
+      @keyframes rot { 0%, 30% { transform: rotate(0); } 60%, 100% { transform: rotate(90deg); } }
+      @media (orientation: portrait) and (pointer: coarse) { #rotate { display: flex; } }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div id="rotate"><div class="phone"></div><div id="rotate-text">Поверните телефон горизонтально</div></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

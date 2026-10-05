@@ -1,0 +1,662 @@
+{
+  "_readme": {
+    "text": "Все тексты игры. Поле status: draft — черновик, ждёт согласования с А. Терентьевым. После согласования поменять на approved.",
+    "status": "info"
+  },
+  "meta.loading": {
+    "text": "Загрузка…",
+    "status": "draft"
+  },
+  "meta.rotate": {
+    "text": "Поверните телефон горизонтально",
+    "status": "draft"
+  },
+  "title.name": {
+    "text": "Прораб против волков",
+    "status": "draft"
+  },
+  "title.subtitle": {
+    "text": "Игра от Экспертной группы VETA",
+    "status": "draft"
+  },
+  "title.play": {
+    "text": "Играть",
+    "status": "draft"
+  },
+  "title.continue": {
+    "text": "Продолжить: уровень {n}",
+    "status": "draft"
+  },
+  "title.howto": {
+    "text": "Как играть",
+    "status": "draft"
+  },
+  "title.sound.on": {
+    "text": "Звук: вкл",
+    "status": "draft"
+  },
+  "title.sound.off": {
+    "text": "Звук: выкл",
+    "status": "draft"
+  },
+  "title.easy.on": {
+    "text": "Лёгкий режим: вкл",
+    "status": "draft"
+  },
+  "title.easy.off": {
+    "text": "Лёгкий режим: выкл",
+    "status": "draft"
+  },
+  "title.easyNote": {
+    "text": "Лёгкий режим: 5 касок, ворота суда пускают с любым числом документов",
+    "status": "draft"
+  },
+  "title.best": {
+    "text": "Лучший счёт: {n}",
+    "status": "draft"
+  },
+  "howto.title": {
+    "text": "Как играть",
+    "status": "draft"
+  },
+  "howto.rule": {
+    "text": "Срывай шкуры, собирай документы",
+    "status": "draft"
+  },
+  "howto.move": {
+    "text": "Идти",
+    "status": "draft"
+  },
+  "howto.move.kb": {
+    "text": "← →  или  A D",
+    "status": "draft"
+  },
+  "howto.jump": {
+    "text": "Прыжок",
+    "status": "draft"
+  },
+  "howto.jump.kb": {
+    "text": "Пробел,  W  или  ↑",
+    "status": "draft"
+  },
+  "howto.beam": {
+    "text": "Луч нивелира",
+    "status": "draft"
+  },
+  "howto.beam.kb": {
+    "text": "X  или  J",
+    "status": "draft"
+  },
+  "howto.pause": {
+    "text": "Пауза",
+    "status": "draft"
+  },
+  "howto.pause.kb": {
+    "text": "Esc  или  P",
+    "status": "draft"
+  },
+  "howto.touch": {
+    "text": "На телефоне — кнопки на экране: слева ходьба, справа прыжок и луч.",
+    "status": "draft"
+  },
+  "howto.p1": {
+    "text": "Волки прячутся под овечьими шкурами — их выдаёт серый хвост. Луч срывает шкуру, прыжок сверху выводит волка из игры.",
+    "status": "draft"
+  },
+  "howto.p2": {
+    "text": "Честных овец не трогайте: ложные подозрения попадут в итоги.",
+    "status": "draft"
+  },
+  "howto.p3": {
+    "text": "Собирайте документы: без них ворота суда не откроются, а главного волка не одолеть.",
+    "status": "draft"
+  },
+  "howto.p4": {
+    "text": "Светите лучом на пол и стены — так находятся скрытые дефекты.",
+    "status": "draft"
+  },
+  "howto.back": {
+    "text": "Назад",
+    "status": "draft"
+  },
+  "who.client": {
+    "text": "Заказчик",
+    "status": "draft"
+  },
+  "who.hero": {
+    "text": "Терентьев",
+    "status": "draft"
+  },
+  "who.lawyer": {
+    "text": "Юрист заказчика",
+    "status": "draft"
+  },
+  "intro.1.text": {
+    "text": "Объект сдали, а через месяц подвал затопило. Подрядчик говорит — всё по проекту. Документы у него в порядке… вроде бы.",
+    "status": "draft"
+  },
+  "intro.2.text": {
+    "text": "«Вроде бы» — это шкура. Посмотрим, что под ней.",
+    "status": "draft"
+  },
+  "intro.3.text": {
+    "text": "Если пойдём в суд, нам нужна доказательная база.",
+    "status": "draft"
+  },
+  "intro.4.text": {
+    "text": "Тогда собираем документы и проверяем каждый метр. Начнём с котлована.",
+    "status": "draft"
+  },
+  "intro.next": {
+    "text": "Дальше",
+    "status": "draft"
+  },
+  "intro.skip": {
+    "text": "Пропустить",
+    "status": "draft"
+  },
+  "intro.start": {
+    "text": "Начать",
+    "status": "draft"
+  },
+  "level.label": {
+    "text": "Уровень {n}",
+    "status": "draft"
+  },
+  "level.1": {
+    "text": "Котлован",
+    "status": "draft"
+  },
+  "level.2": {
+    "text": "Каркас",
+    "status": "draft"
+  },
+  "level.3": {
+    "text": "Сдача объекта",
+    "status": "draft"
+  },
+  "hint.l1.run.kb": {
+    "text": "← → или A D — идти. Осмотрим котлован.",
+    "status": "draft"
+  },
+  "hint.l1.run.touch": {
+    "text": "Кнопки слева — идти. Осмотрим котлован.",
+    "status": "draft"
+  },
+  "hint.l1.jump.kb": {
+    "text": "Пробел, W или ↑ — прыжок. Держите дольше — прыгнете выше.",
+    "status": "draft"
+  },
+  "hint.l1.jump.touch": {
+    "text": "Кнопка «Прыжок» — прыжок. Держите дольше — прыгнете выше.",
+    "status": "draft"
+  },
+  "hint.l1.beam.kb": {
+    "text": "X или J — луч нивелира. Он срывает шкуры и находит скрытые дефекты.",
+    "status": "draft"
+  },
+  "hint.l1.beam.touch": {
+    "text": "Кнопка «Луч» — луч нивелира. Он срывает шкуры и находит скрытые дефекты.",
+    "status": "draft"
+  },
+  "hint.l1.wolf": {
+    "text": "Волк прячется под овечьей шкурой — выдаёт серый хвост. Сорвите шкуру лучом и прыгните сверху.",
+    "status": "draft"
+  },
+  "hint.l1.doc": {
+    "text": "Документы — главное в споре. Без них ворота суда не откроются.",
+    "status": "draft"
+  },
+  "hint.l1.checkpoint": {
+    "text": "Красная галочка — чекпоинт. Если каски кончатся, начнёте отсюда.",
+    "status": "draft"
+  },
+  "hint.l1.defect": {
+    "text": "Под отделкой бывают скрытые дефекты. Светите лучом на пол и стены.",
+    "status": "draft"
+  },
+  "hint.l1.hider": {
+    "text": "Волк-маскировщик спрятался в опалубке — видно только хвост. Луч его проявит.",
+    "status": "draft"
+  },
+  "hint.l1.gate": {
+    "text": "Впереди ворота суда. Пустят, если в папке хватает документов.",
+    "status": "draft"
+  },
+  "hint.l2.start": {
+    "text": "Каркас. Крюки крана и лифт возят по стройке. Падение в проём стоит каски.",
+    "status": "draft"
+  },
+  "hint.l2.estimator": {
+    "text": "Волк-сметчик кидается «пухлыми сметами». Уворачивайтесь или сбивайте их лучом.",
+    "status": "draft"
+  },
+  "hint.l2.estwall": {
+    "text": "Стена из смет «Объём завышен». Луч её разберёт — путь станет короче.",
+    "status": "draft"
+  },
+  "hint.l2.lift": {
+    "text": "Лифтовая клеть. Встаньте на площадку — она поднимет наверх.",
+    "status": "draft"
+  },
+  "hint.l3.start": {
+    "text": "Сдача объекта. Отделка свежая, но под ней может быть что угодно.",
+    "status": "draft"
+  },
+  "hint.l3.water": {
+    "text": "Вода прибывает! Где-то течь — найдите её лучом.",
+    "status": "draft"
+  },
+  "hint.l3.waterStopped": {
+    "text": "Течь найдена, вода уходит. В жизни причину подтопления фиксируют сразу: фото, акт осмотра, вызов подрядчика.",
+    "status": "draft"
+  },
+  "hint.l3.notary": {
+    "text": "Нотариальный протокол где-то наверху. Он бонусный, но очень весомый.",
+    "status": "draft"
+  },
+  "doc.act.name": {
+    "text": "Акт освидетельствования скрытых работ",
+    "status": "draft"
+  },
+  "doc.act.hint": {
+    "text": "Доказывает, что скрытые работы проверили до того, как их закрыли.",
+    "status": "draft"
+  },
+  "doc.scheme.name": {
+    "text": "Исполнительная схема",
+    "status": "draft"
+  },
+  "doc.scheme.hint": {
+    "text": "Показывает, как построено на самом деле, а не как задумано в проекте.",
+    "status": "draft"
+  },
+  "doc.journal.name": {
+    "text": "Общий журнал работ",
+    "status": "draft"
+  },
+  "doc.journal.hint": {
+    "text": "Хронология стройки: кто, что и когда делал.",
+    "status": "draft"
+  },
+  "doc.contract.name": {
+    "text": "Договор подряда и приложения",
+    "status": "draft"
+  },
+  "doc.contract.hint": {
+    "text": "Фиксирует, что именно и за какие деньги обещали сделать.",
+    "status": "draft"
+  },
+  "doc.ks2.name": {
+    "text": "КС-2 — акт о приёмке выполненных работ",
+    "status": "draft"
+  },
+  "doc.ks2.hint": {
+    "text": "Объёмы, которые подрядчик предъявил к оплате. Их сверяют с фактом.",
+    "status": "draft"
+  },
+  "doc.ks3.name": {
+    "text": "КС-3 — справка о стоимости",
+    "status": "draft"
+  },
+  "doc.ks3.hint": {
+    "text": "Сколько денег запросили за работы. Основа для проверки завышения.",
+    "status": "draft"
+  },
+  "doc.letters.name": {
+    "text": "Переписка и претензии",
+    "status": "draft"
+  },
+  "doc.letters.hint": {
+    "text": "Доказывают, что о проблемах сообщали вовремя.",
+    "status": "draft"
+  },
+  "doc.photos.name": {
+    "text": "Фотофиксация",
+    "status": "draft"
+  },
+  "doc.photos.hint": {
+    "text": "Снимки с датами показывают состояние объекта на момент осмотра.",
+    "status": "draft"
+  },
+  "doc.notary.name": {
+    "text": "Нотариальный протокол осмотра",
+    "status": "draft"
+  },
+  "doc.notary.hint": {
+    "text": "Особо весомое доказательство: осмотр заверен нотариусом.",
+    "status": "draft"
+  },
+  "defect.void": {
+    "text": "Пустота под фундаментной плитой",
+    "status": "draft"
+  },
+  "defect.noproof": {
+    "text": "Нет гидроизоляции",
+    "status": "draft"
+  },
+  "defect.crack": {
+    "text": "Трещина в колонне",
+    "status": "draft"
+  },
+  "defect.rebar": {
+    "text": "Оголённая арматура",
+    "status": "draft"
+  },
+  "defect.tilt": {
+    "text": "Отклонение от вертикали",
+    "status": "draft"
+  },
+  "defect.pipe": {
+    "text": "Течь в стыке трубы",
+    "status": "draft"
+  },
+  "defect.screed": {
+    "text": "Пустота под стяжкой",
+    "status": "draft"
+  },
+  "defect.bath": {
+    "text": "Нет гидроизоляции в санузле",
+    "status": "draft"
+  },
+  "toast.doc": {
+    "text": "Документ в папке",
+    "status": "draft"
+  },
+  "toast.defect": {
+    "text": "Скрытый дефект найден",
+    "status": "draft"
+  },
+  "toast.defectFeet": {
+    "text": "Дефект нашёлся под ногами. Лучом — безопаснее!",
+    "status": "draft"
+  },
+  "toast.clean": {
+    "text": "Ложное подозрение: это честная овца",
+    "status": "draft"
+  },
+  "toast.checkpoint": {
+    "text": "Чекпоинт. Документы сохранены",
+    "status": "draft"
+  },
+  "toast.noHelmets": {
+    "text": "Каски кончились. Возвращаемся к чекпоинту",
+    "status": "draft"
+  },
+  "toast.fall": {
+    "text": "Проём! Минус каска",
+    "status": "draft"
+  },
+  "toast.water": {
+    "text": "Вода заливает этаж — минус каска",
+    "status": "draft"
+  },
+  "toast.estwall": {
+    "text": "Смета разобрана: объём завышен",
+    "status": "draft"
+  },
+  "sheep.clean": {
+    "text": "Чисто!",
+    "status": "draft"
+  },
+  "wolf.claim": {
+    "text": "Претензия принята",
+    "status": "draft"
+  },
+  "estwall.label": {
+    "text": "Объём завышен",
+    "status": "draft"
+  },
+  "gate.title": {
+    "text": "ВОРОТА СУДА",
+    "status": "draft"
+  },
+  "gate.locked": {
+    "text": "Ворота суда закрыты. Нужно документов: {need}, в папке: {have}",
+    "status": "draft"
+  },
+  "gate.lockedLevel": {
+    "text": "Ворота суда закрыты. Нужно документов этого уровня: {need}, собрано: {have}",
+    "status": "draft"
+  },
+  "gate.open": {
+    "text": "Ворота суда открыты!",
+    "status": "draft"
+  },
+  "lawyer.gate1": {
+    "text": "Суд смотрит на документы. Принесите хотя бы два — и ворота откроются.",
+    "status": "draft"
+  },
+  "lawyer.gate2": {
+    "text": "Договор, КС-2 и КС-3 — по ним сверяют объёмы и деньги. Без них в суд рано.",
+    "status": "draft"
+  },
+  "lawyer.arena": {
+    "text": "У генподрядчика заключение «всё идеально». Похоже на пустышку.",
+    "status": "draft"
+  },
+  "tip.title": {
+    "text": "Совет эксперта",
+    "status": "draft"
+  },
+  "tip.levelDone": {
+    "text": "Уровень {n} пройден!",
+    "status": "draft"
+  },
+  "tip.summary": {
+    "text": "Время {time} · бонус за скорость +{bonus} · счёт {score}",
+    "status": "draft"
+  },
+  "tip.1": {
+    "text": "Споры на стройке чаще всего упираются в документы. Нет акта скрытых работ — доказать, что было под стяжкой, почти невозможно.",
+    "status": "draft"
+  },
+  "tip.2": {
+    "text": "Досудебная строительно-техническая экспертиза фиксирует результат работ, пока стороны ещё договариваются. Это дешевле суда.",
+    "status": "draft"
+  },
+  "tip.boss": {
+    "text": "Если заключение эксперта оппонента вызывает сомнения или содержит противоречия, его можно оспорить рецензией и ходатайством о повторной экспертизе.",
+    "status": "draft"
+  },
+  "tip.next": {
+    "text": "Дальше",
+    "status": "draft"
+  },
+  "boss.name": {
+    "text": "Главный волк — генподрядчик",
+    "status": "draft"
+  },
+  "boss.intro": {
+    "text": "Всё по проекту! Вот заключение — не подкопаешься.",
+    "status": "draft"
+  },
+  "boss.shield": {
+    "text": "Заключение-пустышка",
+    "status": "draft"
+  },
+  "boss.block": {
+    "text": "Щит «Заключение-пустышка». Луч его не берёт.",
+    "status": "draft"
+  },
+  "boss.summon": {
+    "text": "Субподрядчики, ко мне!",
+    "status": "draft"
+  },
+  "boss.phase2": {
+    "text": "Генподрядчик закрылся заключением.",
+    "status": "draft"
+  },
+  "boss.petition": {
+    "text": "Ходатайство о повторной экспертизе",
+    "status": "draft"
+  },
+  "boss.docsOk": {
+    "text": "Документы на месте. Заявляем ходатайство!",
+    "status": "draft"
+  },
+  "boss.noDocs": {
+    "text": "Без документов суд нас не услышит. Вернёмся за актами.",
+    "status": "draft"
+  },
+  "boss.needDocs": {
+    "text": "Нужен полный пакет: {need} документов. В папке: {have}",
+    "status": "draft"
+  },
+  "boss.shieldBroken": {
+    "text": "Назначена повторная экспертиза — щит рассыпался!",
+    "status": "draft"
+  },
+  "boss.ripHint": {
+    "text": "Сорвите шкуру лучом и прыгайте сверху",
+    "status": "draft"
+  },
+  "boss.hit": {
+    "text": "Ай! Это не по смете!",
+    "status": "draft"
+  },
+  "final.hero": {
+    "text": "Шкуры сняты, дефекты найдены, документы на месте. Теперь у суда есть на что опереться.",
+    "status": "draft"
+  },
+  "final.title": {
+    "text": "Итоги экспертизы",
+    "status": "draft"
+  },
+  "final.score": {
+    "text": "Счёт",
+    "status": "draft"
+  },
+  "final.defects": {
+    "text": "Найдено дефектов",
+    "status": "draft"
+  },
+  "final.docs": {
+    "text": "Собрано документов",
+    "status": "draft"
+  },
+  "final.wolves": {
+    "text": "Разоблачено волков",
+    "status": "draft"
+  },
+  "final.false": {
+    "text": "Ложных подозрений",
+    "status": "draft"
+  },
+  "final.time": {
+    "text": "Время",
+    "status": "draft"
+  },
+  "final.of": {
+    "text": "{x} из {y}",
+    "status": "draft"
+  },
+  "final.best": {
+    "text": "Лучший счёт: {n}",
+    "status": "draft"
+  },
+  "final.rating.perfect": {
+    "text": "Дело собрано идеально",
+    "status": "draft"
+  },
+  "final.rating.strong": {
+    "text": "Позиция сильная",
+    "status": "draft"
+  },
+  "final.rating.weak": {
+    "text": "Позиция слабая: в настоящем суде документов не хватило бы",
+    "status": "draft"
+  },
+  "final.cta.text": {
+    "text": "Ваш спор — не игра. Эксперты VETA проверят объект и документы до суда.",
+    "status": "draft"
+  },
+  "final.cta.button": {
+    "text": "Разобрать мой спор",
+    "status": "draft"
+  },
+  "final.again": {
+    "text": "Сыграть ещё раз",
+    "status": "draft"
+  },
+  "final.share": {
+    "text": "Поделиться",
+    "status": "draft"
+  },
+  "final.shareTitle": {
+    "text": "Прораб против волков",
+    "status": "draft"
+  },
+  "final.shareText": {
+    "text": "Сорвал шкуры с волков на стройке и собрал {docs} из 9 документов. Игра от Экспертной группы VETA.",
+    "status": "draft"
+  },
+  "final.copied": {
+    "text": "Ссылка скопирована",
+    "status": "draft"
+  },
+  "final.copyFail": {
+    "text": "Ссылка: {url}",
+    "status": "draft"
+  },
+  "pause.title": {
+    "text": "Пауза",
+    "status": "draft"
+  },
+  "pause.resume": {
+    "text": "Продолжить",
+    "status": "draft"
+  },
+  "pause.restart": {
+    "text": "Начать уровень заново",
+    "status": "draft"
+  },
+  "pause.menu": {
+    "text": "Выйти в меню",
+    "status": "draft"
+  },
+  "hud.folder": {
+    "text": "Папка дела",
+    "status": "draft"
+  },
+  "touch.jump": {
+    "text": "Прыжок",
+    "status": "draft"
+  },
+  "touch.beam": {
+    "text": "Луч",
+    "status": "draft"
+  },
+  "touch.action": {
+    "text": "Действие",
+    "status": "draft"
+  },
+  "intro.title": {
+    "text": "Дело о затопленном подвале",
+    "status": "draft"
+  },
+  "howto.icons.wolf": {
+    "text": "Волк в шкуре: виден серый хвост",
+    "status": "draft"
+  },
+  "howto.icons.sheep": {
+    "text": "Честная овца-рабочий в каске",
+    "status": "draft"
+  },
+  "howto.icons.doc": {
+    "text": "Документ — в папку дела",
+    "status": "draft"
+  },
+  "howto.icons.cp": {
+    "text": "Чекпоинт",
+    "status": "draft"
+  },
+  "final.newBest": {
+    "text": "Новый рекорд!",
+    "status": "draft"
+  },
+  "final.easy": {
+    "text": "Лёгкий режим",
+    "status": "draft"
+  }
+}

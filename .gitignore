@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+*.log
+# Исходные фото не попадают в репозиторий и сборку
+assets/source/*
+!assets/source/README.md
+# Превью спрайта — только для проверки глазами
+assets/sprites/hero_preview.png

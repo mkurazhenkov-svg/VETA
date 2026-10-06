@@ -34,7 +34,8 @@ export function dialogPanel(scene, x, y, w, h, { who, name, text, size = 20 }) {
   // Перенос строк считаем заранее, чтобы при побуквенной печати слова не прыгали между строками.
   c.fullText = body.getWrappedText(text).join('\n');
   body.setWordWrapWidth(null);
-  body.setText(c.fullText);
+  // текст пустой до начала печати — иначе при появлении панели фраза на миг показывалась целиком
+  body.setText('');
   return c;
 }
 

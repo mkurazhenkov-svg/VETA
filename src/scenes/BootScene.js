@@ -9,6 +9,7 @@ import { makeTileset, makeHero, makeCreatures, makeBoss, makeItems, makeDefects,
 // Необязательные файлы: если их нет, сборка не падает (берётся пустой список).
 const HERO_SHEET = import.meta.glob('../../assets/sprites/hero.png', { eager: true, query: '?inline', import: 'default' });
 const HERO_PORTRAIT = import.meta.glob('../../assets/sprites/hero_portrait.png', { eager: true, query: '?inline', import: 'default' });
+const HERO_PORTRAIT_TALK = import.meta.glob('../../assets/sprites/hero_portrait_talk.png', { eager: true, query: '?inline', import: 'default' });
 const LOGO = import.meta.glob('../../assets/brand/logo.{svg,png}', { eager: true, query: '?inline', import: 'default' });
 
 export class BootScene extends Phaser.Scene {
@@ -24,6 +25,8 @@ export class BootScene extends Phaser.Scene {
     if (this.photoHero) this.load.spritesheet('hero', sheet, { frameWidth: HERO_W, frameHeight: HERO_H });
     else if (USE_PORTRAIT) console.info('Фото героя не найдено (assets/sprites/hero.png) — используется обезличенный «Прораб». См. README: npm run sprite');
     if (USE_PORTRAIT && pt) this.load.image('pt-hero-photo', pt);
+    const ptTalk = Object.values(HERO_PORTRAIT_TALK)[0];
+    if (USE_PORTRAIT && pt && ptTalk) this.load.image('pt-hero-photo-talk', ptTalk);
     if (logo) this.load.image('logo', logo);
   }
 

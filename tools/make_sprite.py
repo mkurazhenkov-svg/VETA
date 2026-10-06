@@ -27,6 +27,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 TEMPLATE = os.path.join(ROOT, 'assets', 'sprites', 'hero_template.json')
 OUT_SHEET = os.path.join(ROOT, 'assets', 'sprites', 'hero.png')
 OUT_PORTRAIT = os.path.join(ROOT, 'assets', 'sprites', 'hero_portrait.png')
+OUT_PORTRAIT_TALK = os.path.join(ROOT, 'assets', 'sprites', 'hero_portrait_talk.png')
 OUT_PREVIEW = os.path.join(ROOT, 'assets', 'sprites', 'hero_preview.png')
 DEFAULT_PHOTO = os.path.join(ROOT, 'assets', 'source', 'terentyev.jpg')
 
@@ -261,7 +262,17 @@ def make_portrait(photo, head, colors, fg, size=96):
             if mp[x, y] < 128:
                 lp[x, y] = blue_deep
     q = quantize(low, colors + [blue_deep])
-    return q.resize((size, size), Image.NEAREST)
+    # Второй кадр — с открытым ртом (для «говорящей» анимации в диалогах).
+    scale = (size // 2) / side
+    chin = head.get('chin') or head['top'] + w * 1.3
+    mx = (head['cx'] - x0) * scale
+    my = (head['top'] + (chin - head['top']) * 0.74 - y0) * scale
+    mw = max(4, round(w * 0.24 * scale))
+    talk = q.copy()
+    d = ImageDraw.Draw(talk)
+    d.rectangle((round(mx - mw / 2), round(my - 1), round(mx + mw / 2) - 1, round(my + 1)), fill=hex_to_rgb('#1a1a1a'))
+    d.line((round(mx - mw / 2) + 1, round(my - 1), round(mx + mw / 2) - 2, round(my - 1)), fill=hex_to_rgb('#b7b7b6'))
+    return q.resize((size, size), Image.NEAREST), talk.resize((size, size), Image.NEAREST)
 
 
 def main():
@@ -326,8 +337,9 @@ def main():
     sheet = compose(template, face_img, face_alpha)
     os.makedirs(os.path.dirname(OUT_SHEET), exist_ok=True)
     sheet.save(OUT_SHEET)
-    portrait = make_portrait(photo, head, portrait_colors, fg)
+    portrait, portrait_talk = make_portrait(photo, head, portrait_colors, fg)
     portrait.save(OUT_PORTRAIT)
+    portrait_talk.save(OUT_PORTRAIT_TALK)
 
     # Превью для проверки глазами: кадры ×6 на фирменном синем фоне + портрет.
     scale = 6

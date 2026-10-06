@@ -1,10 +1,11 @@
-// Вступление — комикс из 4 кадров. Можно пропустить.
+// Вступление — комикс из 4 кадров. Проигрывается сам по таймингу: реплики печатаются по буквам,
+// у говорящего открывается рот. Клик/пробел — допечатать реплику сразу, «Пропустить»/Esc — сразу к игре.
 import Phaser from 'phaser';
 import { BRAND, SHADE, textStyle, CornerFrame } from '../brand.js';
 import { t } from '../content.js';
-import { dialogPanel } from '../ui/Dialog.js';
+import { dialogPanel, typeText } from '../ui/Dialog.js';
 import { Button } from '../ui/Button.js';
-import { sfx } from '../audio/sfx.js';
+import { playMusic } from '../audio/music.js';
 
 const PANELS = [
   { who: 'client', name: 'who.client', text: 'intro.1.text' },
@@ -41,11 +42,16 @@ export class IntroScene extends Phaser.Scene {
     this.i = -1;
 
     this.skipBtn = new Button(this, 870, 24, t('intro.skip'), () => this.finish(), { style: 'ghost', w: 150, h: 34, size: 15 });
-    this.nextBtn = new Button(this, 480, 521, t('intro.next'), () => this.next(), { style: 'primary', w: 200, h: 30, size: 16 });
-    this.input.keyboard.on('keydown-SPACE', () => this.next());
-    this.input.keyboard.on('keydown-ENTER', () => this.next());
+    this.hint = this.add.text(480, 521, t('intro.hint'), textStyle('text', 14, BRAND.white)).setOrigin(0.5).setAlpha(0.7);
+    const hurry = () => this.typer && !this.typer.done && this.typer.finish();
+    this.input.keyboard.on('keydown-SPACE', hurry);
+    this.input.keyboard.on('keydown-ENTER', hurry);
+    this.input.on('pointerdown', (p, over) => {
+      if (!over.length) hurry();
+    });
     this.input.keyboard.on('keydown-ESC', () => this.finish());
-    this.next();
+    playMusic('title');
+    this.time.delayedCall(500, () => this.next());
   }
 
   /** Шапка-иллюстрация: дом в разрезе с затопленным подвалом. */
@@ -80,12 +86,30 @@ export class IntroScene extends Phaser.Scene {
       return;
     }
     this.i += 1;
-    sfx.click();
-    const c = this.panels[this.i];
-    const [x, y] = this.slots[this.i];
+    const i = this.i;
+    const c = this.panels[i];
+    const [x, y] = this.slots[i];
     c.setPosition(x, y + 14);
-    this.tweens.add({ targets: c, alpha: 1, y, duration: 280, ease: 'Cubic.easeOut' });
-    if (this.i === PANELS.length - 1) this.nextBtn.setLabel(t('intro.start'));
+    // прошлая реплика приглушается — видно, кто говорит сейчас
+    if (i > 0) this.tweens.add({ targets: this.panels[i - 1], alpha: 0.55, duration: 250 });
+    this.tweens.add({
+      targets: c,
+      alpha: 1,
+      y,
+      duration: 300,
+      ease: 'Cubic.easeOut',
+      onComplete: () => {
+        this.typer = typeText(this, c, {
+          cps: 32,
+          onDone: () => {
+            // пауза на прочтение зависит от длины реплики
+            const pause = 700 + c.fullText.length * 15;
+            const last = i === PANELS.length - 1;
+            this.time.delayedCall(last ? pause + 600 : pause, () => (last ? this.finish() : this.next()));
+          },
+        });
+      },
+    });
   }
 
   finish() {

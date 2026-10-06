@@ -4,6 +4,7 @@ import { BRAND, SHADE, textStyle, CornerFrame } from '../brand.js';
 import { t } from '../content.js';
 import { setSound, isSoundOn } from '../audio/sfx.js';
 import { resetTouch } from '../input.js';
+import { setDuck } from '../audio/music.js';
 import { Button, MenuNav } from '../ui/Button.js';
 
 export class PauseScene extends Phaser.Scene {
@@ -35,12 +36,14 @@ export class PauseScene extends Phaser.Scene {
 
   resume() {
     resetTouch();
+    setDuck(1);
     this.scene.stop();
     this.scene.resume('Level');
   }
 
   restart() {
     resetTouch();
+    setDuck(1);
     const level = this.scene.get('Level');
     this.scene.stop();
     this.scene.resume('Level');
@@ -49,6 +52,7 @@ export class PauseScene extends Phaser.Scene {
 
   toMenu() {
     resetTouch();
+    setDuck(1);
     this.scene.stop('HUD');
     this.scene.stop('Level');
     this.scene.start('Title');

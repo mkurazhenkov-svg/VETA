@@ -10,6 +10,7 @@ import { ctaUrl, openUrl, shareGame } from '../share.js';
 import { track } from '../analytics.js';
 import { addLogo } from './TitleScene.js';
 import { sfx } from '../audio/sfx.js';
+import { playMusic } from '../audio/music.js';
 
 function fmtTime(ms) {
   const s = Math.round(ms / 1000);
@@ -79,6 +80,7 @@ export class FinalScene extends Phaser.Scene {
     this.add.sprite(rx + 90, 330, 'wolf', 3).setOrigin(0.5, 1).setScale(2);
     this.add.sprite(rx - 96, 330, 'sheep', 2).setOrigin(0.5, 1).setScale(2).setFlipX(true);
     sfx.victory();
+    this.time.delayedCall(1600, () => playMusic('title'));
 
     // призыв
     this.add.text(480, 378, t('final.cta.text'), textStyle('head', 21, BRAND.white, { align: 'center', wordWrap: { width: 820 } })).setOrigin(0.5);

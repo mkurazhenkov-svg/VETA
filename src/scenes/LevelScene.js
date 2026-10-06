@@ -7,6 +7,7 @@ import { bus } from '../bus.js';
 import { touch, resetTouch, isTouchDevice } from '../input.js';
 import { session, prefs, clone, docsOfLevel, maxHealth, DOCS } from '../state.js';
 import { sfx } from '../audio/sfx.js';
+import { playMusic, stopMusic, setDuck } from '../audio/music.js';
 import { track } from '../analytics.js';
 import { LEVELS } from '../levels/levels.js';
 import { SOLID, DECOR } from '../levels/LevelGrid.js';
@@ -142,7 +143,14 @@ export class LevelScene extends Phaser.Scene {
     });
 
     this.cameras.main.fadeIn(350, 1, 55, 107);
+    setDuck(1);
+    this.playLevelMusic();
     if (DEBUG) this.setupDebug();
+  }
+
+  /** Своя тональность у каждого уровня: одна тема, но звучит по-разному. */
+  playLevelMusic() {
+    playMusic('level', { transpose: { 1: 0, 2: 2, 3: -3 }[this.levelId] || 0 });
   }
 
   // ------------------------------------------------------------------ построение
@@ -800,6 +808,7 @@ export class LevelScene extends Phaser.Scene {
     hero.locked = true;
     hero.won = true;
     hero.body.setVelocity(0, hero.body.velocity.y);
+    stopMusic();
     sfx.victory();
     const run = this.run;
     const secs = Math.round(run.levelTimeMs / 1000);
@@ -862,6 +871,7 @@ export class LevelScene extends Phaser.Scene {
 
   enterArena() {
     this.arenaIn = true;
+    playMusic('boss');
     const cam = this.cameras.main;
     cam.setBounds(this.arena.x0, 0, this.arena.x1 - this.arena.x0, this.H);
     this.barrier.body.enable = true;
@@ -935,6 +945,7 @@ export class LevelScene extends Phaser.Scene {
   /** Неполный пакет: возвращаемся к последнему чекпоинту, уровень не сбрасывается. */
   leaveArena() {
     const cam = this.cameras.main;
+    this.playLevelMusic();
     this.arenaIn = false;
     this.barrier.body.enable = false;
     this.barrier.setVisible(false);
@@ -964,6 +975,7 @@ export class LevelScene extends Phaser.Scene {
       const hero = this.hero;
       hero.won = true;
       hero.locked = true;
+      stopMusic();
       sfx.victory();
       new Bubble(this, hero, t('final.hero'), { duration: 5000, name: t('who.hero'), width: 190 });
       this.time.delayedCall(5000, () => this.finishGame());
@@ -1022,6 +1034,7 @@ export class LevelScene extends Phaser.Scene {
     if (this.completing || this.hero?.dead || !this.scene.isActive()) return;
     resetTouch();
     this.scene.pause();
+    setDuck(0.3);
     this.scene.launch('Pause');
     this.scene.bringToTop('Pause');
   }

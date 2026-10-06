@@ -777,7 +777,7 @@ function personArt(kind, frame) {
   return outlined(p);
 }
 
-function portraitArt(kind) {
+function portraitArt(kind, talk = false) {
   const p = new PixelArt(32, 32);
   p.rect(0, 0, 32, 32, kind === 'hero' ? BRAND.blue : kind === 'lawyer' ? SHADE.blueDusk : SHADE.blueDeepLight);
   const suit = kind === 'hero' ? BRAND.blueDeep : kind === 'lawyer' ? SHADE.blueDark : BRAND.blueDeep;
@@ -806,7 +806,12 @@ function portraitArt(kind) {
   p.rect(10, 12, 4, 1, SHADE.blackSoft);
   p.rect(18, 12, 4, 1, SHADE.blackSoft);
   p.rect(15, 16, 2, 3, SKIN[2]);
-  p.rect(13, 20, 6, 1, SKIN[3]);
+  if (talk) {
+    // открытый рот — для «говорящей» анимации, как в играх на Денди
+    p.rect(13, 19, 6, 3, K);
+    p.rect(14, 19, 4, 1, W);
+    p.rect(14, 21, 4, 1, SHADE.redDark);
+  } else p.rect(13, 20, 6, 1, SKIN[3]);
   if (kind === 'hero') {
     // каска
     p.ellipse(16, 7, 10, 6, W);
@@ -930,9 +935,10 @@ export function makeItems(scene) {
   single(scene, 'gateDoor', gateDoorArt());
   sheet(scene, 'lawyer', 22, 46, [personArt('lawyer', 0), personArt('lawyer', 1)]);
   sheet(scene, 'client', 22, 46, [personArt('client', 0), personArt('client', 1)]);
-  single(scene, 'pt-hero', portraitArt('hero'));
-  single(scene, 'pt-client', portraitArt('client'));
-  single(scene, 'pt-lawyer', portraitArt('lawyer'));
+  for (const k of ['hero', 'client', 'lawyer']) {
+    single(scene, `pt-${k}`, portraitArt(k));
+    single(scene, `pt-${k}-talk`, portraitArt(k, true));
+  }
   sheet(scene, 'proj', 12, 12, [projectileArt(0), projectileArt(1)]);
   single(scene, 'drip', particle(SHADE.blueLighter, 3, 5, true));
   single(scene, 'wool', outlined(particle(W, 5, 5, true), G));

@@ -8,6 +8,7 @@ import { setSound, isSoundOn, unlockAudio } from '../audio/sfx.js';
 import { T } from '../gfx/textures.js';
 import { Button, MenuNav } from '../ui/Button.js';
 import { track } from '../analytics.js';
+import { playMusic } from '../audio/music.js';
 
 /** Логотип: официальный файл из assets/brand/ или текстовая заглушка «VETA». */
 export function addLogo(scene, x, y, height = 40) {
@@ -27,6 +28,7 @@ export class TitleScene extends Phaser.Scene {
   create() {
     this.cameras.main.setBackgroundColor(BRAND.blueDeep);
     this.cameras.main.fadeIn(300, 2, 79, 153);
+    playMusic('title');
 
     // земля и персонажи — декорация
     this.add.tileSprite(480, 540, 320, 16, 'tiles-1', T.TOP).setOrigin(0.5, 1).setScale(3);

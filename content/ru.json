@@ -658,5 +658,9 @@
   "final.easy": {
     "text": "Лёгкий режим",
     "status": "draft"
+  },
+  "intro.hint": {
+    "text": "Клик или пробел — быстрее · Esc — пропустить",
+    "status": "draft"
   }
 }

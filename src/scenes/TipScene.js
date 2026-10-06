@@ -3,7 +3,8 @@ import Phaser from 'phaser';
 import { BRAND, SHADE, textStyle } from '../brand.js';
 import { t } from '../content.js';
 import { session } from '../state.js';
-import { dialogPanel } from '../ui/Dialog.js';
+import { dialogPanel, typeText } from '../ui/Dialog.js';
+import { playMusic } from '../audio/music.js';
 import { Button, MenuNav } from '../ui/Button.js';
 
 function fmtTime(secs) {
@@ -42,13 +43,26 @@ export class TipScene extends Phaser.Scene {
     const key = overlay ? 'tip.boss' : `tip.${d.after}`;
     const panel = dialogPanel(this, 120, top, 720, 220, { who: 'hero', name: t('tip.title'), text: t(key), size: 21 });
     panel.setAlpha(0);
-    this.tweens.add({ targets: panel, alpha: 1, y: { from: top + 16, to: top }, duration: 320, ease: 'Cubic.easeOut' });
+    this.tweens.add({
+      targets: panel,
+      alpha: 1,
+      y: { from: top + 16, to: top },
+      duration: 320,
+      ease: 'Cubic.easeOut',
+      onComplete: () => (this.typer = typeText(this, panel, { cps: 34 })),
+    });
+    if (!overlay) playMusic('title');
 
     const btn = new Button(this, 480, top + 268, t('tip.next'), () => this.next(), { style: 'primary', w: 240, h: 48 });
     new MenuNav(this, [btn]);
   }
 
   next() {
+    // первое нажатие во время печати — допечатать реплику
+    if (this.typer && !this.typer.done) {
+      this.typer.finish();
+      return;
+    }
     if (this.done) return;
     this.done = true;
     const d = this.data2;

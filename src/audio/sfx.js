@@ -20,9 +20,20 @@ export function unlockAudio() {
       for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
     }
     if (ctx.state === 'suspended') ctx.resume();
+    unlockListeners.forEach((fn) => fn());
   } catch {
     /* без звука */
   }
+}
+
+const unlockListeners = [];
+/** Для музыки: вызвать fn, когда звук станет доступен. */
+export function onAudioUnlock(fn) {
+  unlockListeners.push(fn);
+}
+
+export function getAudio() {
+  return ctx && master ? { ctx, master, noiseBuf } : null;
 }
 
 export function setSound(on) {
@@ -79,6 +90,7 @@ function arp(notes, { type = 'square', step = 0.07, dur = 0.12, vol = 0.18 } = {
 }
 
 export const sfx = {
+  blip: () => tone({ type: 'square', f0: 880, f1: 880, dur: 0.035, vol: 0.05 }),
   click: () => tone({ type: 'square', f0: 660, f1: 880, dur: 0.05, vol: 0.12 }),
   jump: () => tone({ type: 'square', f0: 260, f1: 520, dur: 0.12, vol: 0.14 }),
   land: () => noise({ dur: 0.05, vol: 0.08, freq: 400, type: 'lowpass' }),

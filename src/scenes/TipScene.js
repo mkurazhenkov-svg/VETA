@@ -23,6 +23,9 @@ export class TipScene extends Phaser.Scene {
   }
 
   create() {
+    // сцена переиспользуется Phaser'ом — сбрасываем флаги прошлого показа
+    this.done = false;
+    this.typer = null;
     const d = this.data2;
     const overlay = d.mode === 'boss';
     if (overlay) this.add.rectangle(0, 0, 960, 540, SHADE.blueNight, 0.82).setOrigin(0);

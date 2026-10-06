@@ -49,6 +49,16 @@ export class LevelScene extends Phaser.Scene {
     this.levelId = data.level || session.run.level || 1;
     this.snapshot = data.snapshot || null; // рестарт с чекпоинта
     this.levelStart = data.levelStart || null; // состояние на начало уровня (для «начать заново»)
+    // Phaser при перезапуске использует тот же объект сцены — сбрасываем всё, что осталось от прошлой попытки.
+    // (Раньше флаг «герой на арене» оставался включённым, и при второй попытке босс не начинал бой.)
+    this.arenaIn = false;
+    this.waterStoppedAtStart = false;
+    this.lastCp = null;
+    this.cpSnapshot = this.snapshot && this.snapshot.cpId ? { run: this.snapshot.run, cpId: this.snapshot.cpId } : null;
+    this.water = null;
+    this.boss = null;
+    this.arena = null;
+    this.barrier = null;
   }
 
   create() {
@@ -111,7 +121,10 @@ export class LevelScene extends Phaser.Scene {
     const cpId = this.snapshot?.cpId;
     if (cpId) {
       const cp = this.cps.find((c) => c.id === cpId);
-      if (cp) start = { x: cp.x + 14, y: cp.y };
+      if (cp) {
+        start = { x: cp.x + 14, y: cp.y };
+        this.lastCp = cp;
+      }
     }
     this.hero = new Hero(this, start.x, start.y, maxHealth(run));
     this.hero.body.setCollideWorldBounds(true);

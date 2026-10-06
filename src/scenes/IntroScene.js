@@ -20,6 +20,9 @@ export class IntroScene extends Phaser.Scene {
   }
 
   create() {
+    // сцена переиспользуется Phaser'ом — сбрасываем флаги прошлого показа
+    this.done = false;
+    this.typer = null;
     this.cameras.main.setBackgroundColor(SHADE.blueNight);
     this.cameras.main.fadeIn(300, 1, 55, 107);
     this.drawHeader();

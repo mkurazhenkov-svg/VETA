@@ -1,0 +1,322 @@
+{
+ "id": "bank",
+ "title": "Ярмарочная касса Госбанка",
+ "canvas": [
+  1600,
+  1000
+ ],
+ "origin": [
+  683,
+  283
+ ],
+ "pxPerArshin": 54,
+ "palette": {
+  "ground": "#3a3228",
+  "floor": "#8a7558",
+  "wall": "#b8a684",
+  "wallDark": "#8a7a60",
+  "accent": "#c9a45a",
+  "grunt": "#d2c6ac"
+ },
+ "light": {
+  "ambient": 0.75,
+  "tint": "#c8a870",
+  "sources": [
+   {
+    "pos": [
+     4,
+     0
+    ],
+    "radius": 5,
+    "power": 0.3
+   },
+   {
+    "pos": [
+     10,
+     0
+    ],
+    "radius": 5,
+    "power": 0.3
+   }
+  ]
+ },
+ "room": {
+  "floor": [
+   [
+    0,
+    0
+   ],
+   [
+    14,
+    0
+   ],
+   [
+    14,
+    9
+   ],
+   [
+    0,
+    9
+   ]
+  ],
+  "walls": [
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     14,
+     0
+    ],
+    "h": 4.5,
+    "window": {
+     "at": 4,
+     "w": 1.8,
+     "h": 2.2,
+     "z": 1.4
+    }
+   },
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     0,
+     9
+    ],
+    "h": 4.5,
+    "window": {
+     "at": 4.5,
+     "w": 1.6,
+     "h": 2.2,
+     "z": 1.4
+    }
+   }
+  ]
+ },
+ "walkable": [
+  [
+   [
+    0.4,
+    3.9
+   ],
+   [
+    13.7,
+    3.9
+   ],
+   [
+    13.7,
+    8.7
+   ],
+   [
+    0.4,
+    8.7
+   ]
+  ]
+ ],
+ "props": [
+  {
+   "id": "counter",
+   "shape": "counter",
+   "pos": [
+    6.5,
+    3.2
+   ],
+   "size": [
+    9.0,
+    0.9,
+    1.25
+   ],
+   "color": "#5a3f2a",
+   "label": "Стойка"
+  },
+  {
+   "id": "grille",
+   "shape": "panel",
+   "pos": [
+    6.5,
+    3.0
+   ],
+   "z": 1.25,
+   "size": [
+    9.0,
+    0.05,
+    1.0
+   ],
+   "color": "#8a7a50"
+  },
+  {
+   "id": "safe",
+   "shape": "box",
+   "pos": [
+    1.2,
+    1.2
+   ],
+   "size": [
+    1.2,
+    1.0,
+    1.8
+   ],
+   "color": "#3a3a3a"
+  },
+  {
+   "id": "table",
+   "shape": "box",
+   "pos": [
+    6.5,
+    5.6
+   ],
+   "size": [
+    1.8,
+    1.0,
+    1.0
+   ],
+   "color": "#6a4a30",
+   "detail": true,
+   "label": "Стол для сличения"
+  },
+  {
+   "id": "bills_flat",
+   "shape": "flat",
+   "pos": [
+    6.4,
+    5.6
+   ],
+   "z": 1.0,
+   "size": [
+    0.8,
+    0.5,
+    0.06
+   ],
+   "color": "#9aa880",
+   "detail": true
+  },
+  {
+   "id": "bench1",
+   "shape": "box",
+   "pos": [
+    11.5,
+    6.8
+   ],
+   "size": [
+    2.2,
+    0.6,
+    0.5
+   ],
+   "color": "#5a4026"
+  },
+  {
+   "id": "bench2",
+   "shape": "box",
+   "pos": [
+    2.5,
+    7.6
+   ],
+   "size": [
+    2.2,
+    0.6,
+    0.5
+   ],
+   "color": "#5a4026"
+  }
+ ],
+ "hotspots": [
+  {
+   "id": "HS_table",
+   "prop": "table",
+   "approach": [
+    6.5,
+    6.8
+   ],
+   "label": "Стол для сличения"
+  }
+ ],
+ "sectors": [
+  {
+   "id": "hall",
+   "title": "Операционный зал",
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     14,
+     0
+    ],
+    [
+     14,
+     9
+    ],
+    [
+     0,
+     9
+    ]
+   ]
+  }
+ ],
+ "landmarks": [
+  {
+   "id": "counter",
+   "title": "Стойка",
+   "pos": [
+    6.5,
+    3.2
+   ]
+  }
+ ],
+ "north": 35,
+ "hidden": [],
+ "noFlash": [],
+ "fragile": [],
+ "exits": [
+  {
+   "id": "to_map",
+   "to": "map",
+   "pos": [
+    13.4,
+    8.4
+   ],
+   "label": "На ярмарку"
+  }
+ ],
+ "spawn": [
+  12.6,
+  7.8
+ ],
+ "npcs": [
+  {
+   "id": "cashier",
+   "pos": [
+    6.5,
+    2.0
+   ],
+   "knot": "cashier"
+  },
+  {
+   "id": "merchant",
+   "pos": [
+    10.5,
+    4.6
+   ],
+   "knot": "merchant",
+   "person": "merchant"
+  }
+ ],
+ "followers": false,
+ "photoTargets": [
+  {
+   "id": "PT_bank",
+   "title": "Стол со сличаемыми билетами",
+   "pos": [
+    6.5,
+    5.6
+   ],
+   "kinds": [
+    "overview"
+   ]
+  }
+ ]
+}

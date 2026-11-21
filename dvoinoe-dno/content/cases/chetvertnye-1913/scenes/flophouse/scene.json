@@ -1,0 +1,252 @@
+{
+ "id": "flophouse",
+ "title": "Ночлежный дом",
+ "canvas": [
+  1600,
+  1000
+ ],
+ "origin": [
+  683,
+  283
+ ],
+ "pxPerArshin": 54,
+ "palette": {
+  "ground": "#2a2620",
+  "floor": "#5a4c3a",
+  "wall": "#6c6050",
+  "wallDark": "#4a4236",
+  "accent": "#c9a45a",
+  "grunt": "#a89c86"
+ },
+ "light": {
+  "ambient": 0.45,
+  "tint": "#5a5a6a",
+  "sources": [
+   {
+    "pos": [
+     7,
+     0
+    ],
+    "radius": 5,
+    "power": 0.3
+   }
+  ]
+ },
+ "room": {
+  "floor": [
+   [
+    0,
+    0
+   ],
+   [
+    14,
+    0
+   ],
+   [
+    14,
+    9
+   ],
+   [
+    0,
+    9
+   ]
+  ],
+  "walls": [
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     14,
+     0
+    ],
+    "h": 4.5,
+    "window": {
+     "at": 7,
+     "w": 1.4,
+     "h": 1.2,
+     "z": 2.4
+    }
+   },
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     0,
+     9
+    ],
+    "h": 4.5
+   }
+  ]
+ },
+ "walkable": [
+  [
+   [
+    0.4,
+    0.4
+   ],
+   [
+    13.7,
+    0.4
+   ],
+   [
+    13.7,
+    8.7
+   ],
+   [
+    0.4,
+    8.7
+   ]
+  ]
+ ],
+ "props": [
+  {
+   "id": "bunk1",
+   "shape": "bunk",
+   "pos": [
+    4.5,
+    1.0
+   ],
+   "size": [
+    7.0,
+    1.3,
+    2.2
+   ],
+   "color": "#5a4630"
+  },
+  {
+   "id": "bunk2",
+   "shape": "bunk",
+   "pos": [
+    1.0,
+    5.5
+   ],
+   "size": [
+    1.3,
+    6.0,
+    2.2
+   ],
+   "color": "#5a4630"
+  },
+  {
+   "id": "bunk3",
+   "shape": "bunk",
+   "pos": [
+    10.5,
+    4.6
+   ],
+   "size": [
+    5.0,
+    1.3,
+    2.2
+   ],
+   "color": "#5a4630"
+  },
+  {
+   "id": "samovar",
+   "shape": "cyl",
+   "pos": [
+    12.6,
+    1.2
+   ],
+   "size": [
+    0.8,
+    0.8,
+    1.3
+   ],
+   "color": "#a07a40"
+  },
+  {
+   "id": "table",
+   "shape": "box",
+   "pos": [
+    6.0,
+    6.0
+   ],
+   "size": [
+    2.0,
+    1.0,
+    1.0
+   ],
+   "color": "#4a3a28"
+  }
+ ],
+ "hotspots": [],
+ "sectors": [
+  {
+   "id": "hall",
+   "title": "Ночлежка",
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     14,
+     0
+    ],
+    [
+     14,
+     9
+    ],
+    [
+     0,
+     9
+    ]
+   ]
+  }
+ ],
+ "landmarks": [
+  {
+   "id": "window",
+   "title": "Окно",
+   "pos": [
+    7,
+    0
+   ]
+  }
+ ],
+ "north": 35,
+ "hidden": [],
+ "noFlash": [],
+ "fragile": [],
+ "exits": [
+  {
+   "id": "to_map",
+   "to": "map",
+   "pos": [
+    13.4,
+    8.4
+   ],
+   "label": "На улицу"
+  }
+ ],
+ "spawn": [
+  12.6,
+  7.6
+ ],
+ "npcs": [
+  {
+   "id": "skobtsov",
+   "pos": [
+    9.2,
+    5.8
+   ],
+   "knot": "skobtsov"
+  },
+  {
+   "id": "keeper",
+   "pos": [
+    3.0,
+    3.0
+   ],
+   "knot": "flop_keeper",
+   "person": "flop_keeper"
+  }
+ ],
+ "followers": false,
+ "photoTargets": []
+}

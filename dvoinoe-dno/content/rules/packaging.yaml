@@ -1,0 +1,77 @@
+# Правила изъятия и упаковки. Улика указывает допустимые способы и упаковки и свои материалы;
+# если выбор не подходит материалу — срабатывает правило ниже.
+# TODO(кафедра): подтвердить правила фиксации и упаковки для каждой улики подвала.
+methods:
+  - { id: by_hand, title: Взять рукой, text: Просто взять предмет. }
+  - { id: by_edges, title: Взять за края, text: Держать только за кромки и рёбра, не касаясь поверхностей. }
+  - { id: rigid_board_glass, title: На жёсткую подложку под стекло, text: Подвести картон, переложить стеклом, не сгибая. }
+  - { id: whole_object, title: Изъять предмет целиком, text: Изъять вместе с поверхностью, на которой следы. }
+  - { id: cut_fragment, title: Выпилить фрагмент, text: Выпилить часть косяка или доски со следом. }
+  - { id: paint_sample, title: Снять образец краски на бумагу, text: Прокатать валик по чистому листу; сам пресс опечатать на месте. }
+  - { id: plaster_cast, title: Гипсовый слепок, text: Залить след гипсом после снимка; около 20 минут. }
+  - { id: copy_text, title: Переписать дословно и изъять, text: Переписать текст в протокол, затем упаковать. }
+  - { id: no_marks, title: Изъять без пометок, text: Не делать никаких записей в самом документе. }
+packs:
+  - { id: envelope, title: Бумажный конверт с надписью }
+  - { id: flat_box, title: Плоская коробка }
+  - { id: box_separators, title: Коробка с перекладками }
+  - { id: wrap_paper, title: Обёртка плотной бумагой }
+  - { id: crate, title: Ящик со стружкой }
+  - { id: seal_in_place, title: Опечатать на месте }
+  - { id: corked_crate, title: Ящик, бутыли закупорены и обёрнуты }
+rules:
+  - id: P_BURNT_NO_BOARD
+    material: burnt_paper
+    methodNotIn: [rigid_board_glass]
+    outcome: destroyed
+    text: Обгоревшая бумага без жёсткой подложки рассыпалась в руках.
+  - id: P_BURNT_ENVELOPE
+    material: burnt_paper
+    packNotIn: [flat_box]
+    outcome: degraded
+    text: В мягкой упаковке обгоревшие листы ломаются при перевозке.
+  - id: P_NEGATIVE_NO_SEPARATORS
+    material: glass_negative
+    packNotIn: [box_separators]
+    outcome: degraded
+    text: Негативы без перекладок трутся друг о друга — эмульсия поцарапана.
+  - id: P_NEGATIVE_BY_HAND
+    material: glass_negative
+    methodNotIn: [by_edges]
+    outcome: degraded
+    text: Негатив держали за эмульсию — на нём отпечатки пальцев следователя.
+  - id: P_PRINTS_SURFACE
+    material: prints_surface
+    methodNotIn: [whole_object, cut_fragment]
+    outcome: destroyed
+    text: Предмет взяли за поверхность со следами — следы пальцев смазаны.
+  - id: P_STONE_UNWRAPPED
+    material: litho_stone
+    packNotIn: [wrap_paper, crate]
+    outcome: degraded
+    text: Незавёрнутый камень истёрся в перевозке — изображение на нём почти пропало.
+  - id: P_DOC_MARKS
+    material: document
+    methodIn: [by_hand]
+    outcome: degraded
+    text: Документ мяли и листали голыми руками — на страницах новые пятна.
+  - id: P_SOIL_NO_CAST
+    material: soil_trace
+    methodNotIn: [plaster_cast]
+    outcome: destroyed
+    text: След на сырой земле нельзя «поднять» — только слепок.
+  - id: P_PRESS_HEAVY
+    material: heavy
+    packNotIn: [seal_in_place]
+    outcome: degraded
+    text: Пресс пытались вынести — валик ободран о косяк.
+  - id: P_CHEM_OPEN
+    material: chemical
+    packNotIn: [corked_crate]
+    outcome: degraded
+    text: Бутыли без укупорки протекли — этикетки размокли.
+sealSteps:
+  - Перевязать шпагатом
+  - Залить узел сургучом и приложить печать следователя
+  - Надписать, что упаковано, где и когда изъято
+  - Дать подписать понятым

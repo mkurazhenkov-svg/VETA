@@ -1,0 +1,901 @@
+{
+ "id": "cellar",
+ "title": "Подвал-мастерская",
+ "canvas": [
+  1600,
+  1000
+ ],
+ "origin": [
+  705,
+  260
+ ],
+ "pxPerArshin": 55,
+ "palette": {
+  "ground": "#2a241e",
+  "floor": "#4a3f33",
+  "wall": "#5a4c3e",
+  "wallDark": "#3c3229",
+  "accent": "#c9a45a",
+  "grunt": "#9c8e76"
+ },
+ "light": {
+  "ambient": 0.22,
+  "tint": "#22283a",
+  "sources": [
+   {
+    "pos": [
+     9.4,
+     0.2
+    ],
+    "radius": 4,
+    "power": 0.45,
+    "color": "#9fb4d0"
+   },
+   {
+    "pos": [
+     6.0,
+     5.0
+    ],
+    "radius": 5,
+    "power": 0.35,
+    "color": "#e0a050",
+    "flicker": true
+   },
+   {
+    "pos": [
+     1.5,
+     0.1
+    ],
+    "radius": 3.5,
+    "power": 0.4,
+    "color": "#b8c4d8"
+   }
+  ]
+ },
+ "room": {
+  "floor": [
+   [
+    0,
+    0
+   ],
+   [
+    14,
+    0
+   ],
+   [
+    14,
+    10
+   ],
+   [
+    0,
+    10
+   ]
+  ],
+  "walls": [
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     14,
+     0
+    ],
+    "h": 4,
+    "window": {
+     "at": 9.4,
+     "w": 1.6,
+     "h": 0.9,
+     "z": 2.7
+    },
+    "door": {
+     "at": 1.5,
+     "w": 1.3,
+     "h": 2.8
+    }
+   },
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     0,
+     10
+    ],
+    "h": 4
+   }
+  ]
+ },
+ "walkable": [
+  [
+   [
+    0.35,
+    0.35
+   ],
+   [
+    13.7,
+    0.35
+   ],
+   [
+    13.7,
+    9.7
+   ],
+   [
+    0.35,
+    9.7
+   ]
+  ]
+ ],
+ "props": [
+  {
+   "id": "press",
+   "shape": "press",
+   "pos": [
+    5.2,
+    2.0
+   ],
+   "size": [
+    2.0,
+    1.4,
+    1.9
+   ],
+   "color": "#2e2c29",
+   "detail": true,
+   "label": "Пресс"
+  },
+  {
+   "id": "stone_table",
+   "shape": "box",
+   "pos": [
+    7.0,
+    0.9
+   ],
+   "size": [
+    1.6,
+    1.0,
+    1.0
+   ],
+   "color": "#5a4632"
+  },
+  {
+   "id": "stone",
+   "shape": "flat",
+   "pos": [
+    7.0,
+    0.9
+   ],
+   "z": 1.0,
+   "size": [
+    1.1,
+    0.75,
+    0.18
+   ],
+   "color": "#8c8a82",
+   "detail": true,
+   "label": "Камень"
+  },
+  {
+   "id": "paper_stacks",
+   "shape": "box",
+   "pos": [
+    4.0,
+    3.7
+   ],
+   "size": [
+    0.9,
+    0.7,
+    0.5
+   ],
+   "color": "#cfc6ae",
+   "label": "Бумага"
+  },
+  {
+   "id": "boards",
+   "shape": "panel",
+   "pos": [
+    4.0,
+    0.08
+   ],
+   "size": [
+    1.8,
+    0.1,
+    1.5
+   ],
+   "color": "#6a5440",
+   "detail": true,
+   "label": "Обшивка"
+  },
+  {
+   "id": "desk",
+   "shape": "box",
+   "pos": [
+    9.4,
+    0.8
+   ],
+   "size": [
+    2.0,
+    1.1,
+    1.05
+   ],
+   "color": "#5c4630",
+   "detail": true,
+   "label": "Стол"
+  },
+  {
+   "id": "desk_glass",
+   "shape": "flat",
+   "pos": [
+    9.1,
+    0.8
+   ],
+   "z": 1.05,
+   "size": [
+    1.0,
+    0.7,
+    0.03
+   ],
+   "color": "#a5b6b6"
+  },
+  {
+   "id": "stove",
+   "shape": "stove",
+   "pos": [
+    12.9,
+    1.3
+   ],
+   "size": [
+    1.9,
+    1.9,
+    2.6
+   ],
+   "color": "#8a5a44",
+   "detail": true,
+   "label": "Печь"
+  },
+  {
+   "id": "shelf",
+   "shape": "shelf",
+   "pos": [
+    11.2,
+    0.3
+   ],
+   "size": [
+    1.5,
+    0.45,
+    1.9
+   ],
+   "color": "#4a3a2c"
+  },
+  {
+   "id": "bottles",
+   "shape": "bottles",
+   "pos": [
+    11.2,
+    0.35
+   ],
+   "z": 0.95,
+   "size": [
+    1.2,
+    0.3,
+    0.45
+   ],
+   "color": "#2f3f30",
+   "detail": true,
+   "label": "Бутыли"
+  },
+  {
+   "id": "puddle",
+   "shape": "flat",
+   "pos": [
+    11.6,
+    3.4
+   ],
+   "size": [
+    1.6,
+    1.0,
+    0.01
+   ],
+   "color": "#36485a",
+   "walkable": true
+  },
+  {
+   "id": "cabinet",
+   "shape": "shelf",
+   "pos": [
+    0.45,
+    5.6
+   ],
+   "size": [
+    0.8,
+    1.9,
+    2.4
+   ],
+   "color": "#4e3a2a",
+   "detail": true,
+   "label": "Шкаф"
+  },
+  {
+   "id": "backdrop",
+   "shape": "panel",
+   "pos": [
+    0.12,
+    8.3
+   ],
+   "size": [
+    0.1,
+    2.6,
+    2.6
+   ],
+   "color": "#8a7a64",
+   "label": "Фон"
+  },
+  {
+   "id": "chair",
+   "shape": "box",
+   "pos": [
+    1.3,
+    8.0
+   ],
+   "size": [
+    0.6,
+    0.6,
+    1.1
+   ],
+   "color": "#3a2a20"
+  },
+  {
+   "id": "portrait_camera",
+   "shape": "box",
+   "pos": [
+    3.4,
+    7.2
+   ],
+   "size": [
+    0.6,
+    0.5,
+    1.6
+   ],
+   "color": "#2a2a28",
+   "label": "Камера"
+  },
+  {
+   "id": "screen",
+   "shape": "panel",
+   "pos": [
+    8.05,
+    7.0
+   ],
+   "size": [
+    0.1,
+    3.4,
+    2.0
+   ],
+   "color": "#6a5a4a",
+   "label": "Ширма"
+  },
+  {
+   "id": "rope",
+   "shape": "line",
+   "pos": [
+    11.0,
+    6.8
+   ],
+   "size": [
+    3.0,
+    0.05,
+    2.1
+   ],
+   "color": "#a8a888",
+   "walkable": true
+  },
+  {
+   "id": "sheet",
+   "shape": "panel",
+   "pos": [
+    11.2,
+    6.8
+   ],
+   "z": 1.35,
+   "size": [
+    0.8,
+    0.04,
+    0.7
+   ],
+   "color": "#cbc6aa",
+   "detail": true,
+   "walkable": true,
+   "label": "Лист"
+  },
+  {
+   "id": "coat",
+   "shape": "coat",
+   "pos": [
+    3.0,
+    0.12
+   ],
+   "z": 0.9,
+   "size": [
+    0.7,
+    0.25,
+    1.3
+   ],
+   "color": "#232326",
+   "detail": true,
+   "label": "Пальто"
+  },
+  {
+   "id": "cat",
+   "shape": "cat",
+   "pos": [
+    7.4,
+    8.9
+   ],
+   "size": [
+    0.6,
+    0.4,
+    0.35
+   ],
+   "color": "#3a3030"
+  }
+ ],
+ "hotspots": [
+  {
+   "id": "HS_press",
+   "prop": "press",
+   "approach": [
+    5.2,
+    3.4
+   ],
+   "label": "Пресс"
+  },
+  {
+   "id": "HS_stone",
+   "prop": "stone",
+   "approach": [
+    7.0,
+    2.2
+   ],
+   "label": "Камень на столе"
+  },
+  {
+   "id": "HS_boards",
+   "prop": "boards",
+   "approach": [
+    4.1,
+    1.1
+   ],
+   "label": "Обшивка стены"
+  },
+  {
+   "id": "HS_desk",
+   "prop": "desk",
+   "approach": [
+    9.4,
+    2.1
+   ],
+   "label": "Ретушёрский стол"
+  },
+  {
+   "id": "HS_stove",
+   "prop": "stove",
+   "approach": [
+    11.5,
+    2.9
+   ],
+   "label": "Печь"
+  },
+  {
+   "id": "HS_shelf",
+   "prop": "bottles",
+   "approach": [
+    11.0,
+    1.5
+   ],
+   "label": "Полка с бутылями"
+  },
+  {
+   "id": "HS_puddle",
+   "prop": "puddle",
+   "approach": [
+    10.6,
+    4.2
+   ],
+   "label": "Лужа у печи"
+  },
+  {
+   "id": "HS_cabinet",
+   "prop": "cabinet",
+   "approach": [
+    1.7,
+    5.6
+   ],
+   "label": "Шкаф ателье"
+  },
+  {
+   "id": "HS_backdrop",
+   "prop": "backdrop",
+   "approach": [
+    1.9,
+    8.8
+   ],
+   "label": "Фон и стул"
+  },
+  {
+   "id": "HS_rope",
+   "prop": "sheet",
+   "approach": [
+    11.2,
+    7.9
+   ],
+   "label": "Верёвка за ширмой"
+  },
+  {
+   "id": "HS_coat",
+   "prop": "coat",
+   "approach": [
+    3.0,
+    1.2
+   ],
+   "label": "Пальто на гвозде"
+  },
+  {
+   "id": "HS_entry_prints",
+   "pos": [
+    0.85,
+    2.4
+   ],
+   "r": 0.9,
+   "approach": [
+    2.1,
+    2.4
+   ],
+   "label": "Пол у входа"
+  },
+  {
+   "id": "HS_paws",
+   "pos": [
+    6.9,
+    3.6
+   ],
+   "r": 0.8,
+   "approach": [
+    6.9,
+    4.5
+   ],
+   "label": "Пол у пресса"
+  }
+ ],
+ "sectors": [
+  {
+   "id": "entry",
+   "title": "Вход",
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     3.5,
+     0
+    ],
+    [
+     3.5,
+     3
+    ],
+    [
+     0,
+     3
+    ]
+   ]
+  },
+  {
+   "id": "print",
+   "title": "Печатный угол",
+   "poly": [
+    [
+     3.5,
+     0
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     4.5
+    ],
+    [
+     3.5,
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "retouch",
+   "title": "Ретушёрский стол",
+   "poly": [
+    [
+     8,
+     0
+    ],
+    [
+     11,
+     0
+    ],
+    [
+     11,
+     4.5
+    ],
+    [
+     8,
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "stove",
+   "title": "Печь",
+   "poly": [
+    [
+     11,
+     0
+    ],
+    [
+     14,
+     0
+    ],
+    [
+     14,
+     4.5
+    ],
+    [
+     11,
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "atelier",
+   "title": "Ателье",
+   "poly": [
+    [
+     0,
+     3
+    ],
+    [
+     3.5,
+     3
+    ],
+    [
+     3.5,
+     4.5
+    ],
+    [
+     8,
+     4.5
+    ],
+    [
+     8,
+     10
+    ],
+    [
+     0,
+     10
+    ]
+   ]
+  },
+  {
+   "id": "drying",
+   "title": "Сушильня за ширмой",
+   "poly": [
+    [
+     8,
+     4.5
+    ],
+    [
+     14,
+     4.5
+    ],
+    [
+     14,
+     10
+    ],
+    [
+     8,
+     10
+    ]
+   ]
+  }
+ ],
+ "landmarks": [
+  {
+   "id": "stove",
+   "title": "Печь",
+   "pos": [
+    12.9,
+    1.3
+   ]
+  },
+  {
+   "id": "window",
+   "title": "Окно",
+   "pos": [
+    9.4,
+    0
+   ]
+  },
+  {
+   "id": "door",
+   "title": "Дверь",
+   "pos": [
+    1.5,
+    0
+   ]
+  }
+ ],
+ "north": 35,
+ "hidden": [
+  {
+   "id": "ev02_stone",
+   "shape": "ornament",
+   "from": [
+    7.0,
+    0.9
+   ],
+   "z": 1.18,
+   "color": "#e8dcb0"
+  },
+  {
+   "id": "ev07_shoeprints",
+   "shape": "footprints",
+   "from": [
+    1.2,
+    0.9
+   ],
+   "to": [
+    0.7,
+    3.8
+   ],
+   "color": "#cdb98c"
+  },
+  {
+   "id": "L4_paws",
+   "shape": "paws",
+   "from": [
+    5.9,
+    3.2
+   ],
+   "to": [
+    8.2,
+    3.9
+   ],
+   "color": "#8fd07a"
+  }
+ ],
+ "noFlash": [
+  {
+   "center": [
+    11.2,
+    0.5
+   ],
+   "r": 1.5
+  }
+ ],
+ "fragile": [
+  {
+   "poly": [
+    [
+     0.3,
+     0.8
+    ],
+    [
+     1.3,
+     0.8
+    ],
+    [
+     1.3,
+     4.0
+    ],
+    [
+     0.3,
+     4.0
+    ]
+   ],
+   "evidence": "ev07_shoeprints"
+  }
+ ],
+ "exits": [
+  {
+   "id": "to_yard",
+   "to": "yard",
+   "pos": [
+    1.5,
+    0.4
+   ],
+   "label": "Наверх, во двор"
+  }
+ ],
+ "spawn": [
+  1.6,
+  0.8
+ ],
+ "threshold": [
+  [
+   0.9,
+   0
+  ],
+  [
+   2.4,
+   0
+  ],
+  [
+   2.4,
+   1.3
+  ],
+  [
+   0.9,
+   1.3
+  ]
+ ],
+ "npcs": [],
+ "followers": true,
+ "photoTargets": [
+  {
+   "id": "PT_room",
+   "title": "Подвал от входа (общий вид)",
+   "pos": [
+    7,
+    5
+   ],
+   "kinds": [
+    "orienting",
+    "overview"
+   ]
+  },
+  {
+   "id": "PT_print",
+   "title": "Печатный угол",
+   "pos": [
+    5.6,
+    2
+   ],
+   "kinds": [
+    "overview"
+   ]
+  },
+  {
+   "id": "PT_stove",
+   "title": "Угол с печью",
+   "pos": [
+    12.4,
+    2
+   ],
+   "kinds": [
+    "overview"
+   ]
+  },
+  {
+   "id": "PT_atelier",
+   "title": "Ателье",
+   "pos": [
+    2,
+    7
+   ],
+   "kinds": [
+    "overview"
+   ]
+  },
+  {
+   "id": "PT_drying",
+   "title": "Сушильня",
+   "pos": [
+    11,
+    7.2
+   ],
+   "kinds": [
+    "overview"
+   ]
+  }
+ ]
+}

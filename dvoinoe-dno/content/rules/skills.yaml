@@ -1,0 +1,71 @@
+# Восемь голосов в голове следователя: четыре сферы по два навыка.
+# Названия собственные. Значения навыков 0–6; проверка — 2д6 + навык против сложности.
+spheres:
+  - { id: mind, title: Ум }
+  - { id: eye, title: Глаз }
+  - { id: soul, title: Душа }
+  - { id: city, title: Город }
+skills:
+  - id: logic
+    sphere: mind
+    title: Логика
+    color: "#7fa7c9"
+    gives: Связывает факты, замечает нестыковки во времени
+    danger: Спешит с выводом по двум фактам
+  - id: chancery
+    sphere: mind
+    title: Канцелярия
+    color: "#9fb4a2"
+    gives: Документы, книги, квитанции, шифр в счётной книжке
+    danger: Утопает в формальностях
+  - id: observ
+    sphere: eye
+    title: Наблюдательность
+    color: "#d9b26a"
+    gives: Замечает мелкое — отставшую доску, свежую золу
+    danger: Цепляется за несущественное
+  - id: craft
+    sphere: eye
+    title: Ремесло
+    color: "#c98b5a"
+    gives: Знание печати, гравировки, фотографии, инструмента
+    danger: Восхищается работой мастера и сочувствует ему
+  - id: instinct
+    sphere: soul
+    title: Чутьё
+    color: "#c96a6a"
+    gives: Читает людей, замечает ложь и страх
+    danger: Зовёт «дожать» свидетеля — а это нарушение
+  - id: ustav
+    sphere: soul
+    title: Устав
+    color: "#b9a3d6"
+    gives: "Процессуальная совесть: понятые, порядок, протокол"
+    danger: Скучен и тормозит — а часы идут
+  - id: local
+    sphere: city
+    title: Нижегородец
+    color: "#7fbf9a"
+    gives: Знает Миллионку, ярмарку, пароходное расписание, слухи
+    danger: Верит слухам и предубеждениям
+  - id: merchant
+    sphere: city
+    title: Купеческое слово
+    color: "#d6c27a"
+    gives: Деньги, обмен, торговые обычаи, цена молчания
+    danger: Договаривается там, где нужна процедура
+archetypes:
+  - id: pravoved
+    title: Выпускник Училища правоведения
+    text: Петербургская выучка, Устав знает наизусть, бумаги читает быстрее людей.
+    skills: { logic: 2, chancery: 4, observ: 2, craft: 1, instinct: 1, ustav: 4, local: 1, merchant: 1 }
+  - id: starozhil
+    title: Местный старожил
+    text: Вырос под Кремлём, на Миллионке его помнят мальчишкой. Людей видит насквозь — и иногда слишком.
+    skills: { logic: 2, chancery: 1, observ: 2, craft: 1, instinct: 4, ustav: 2, local: 4, merchant: 2 }
+  - id: syn_gravera
+    title: Сын гравёра
+    text: Детство прошло в мастерской отца. Отличит штихель от шабера, а свежую краску — от старой.
+    skills: { logic: 2, chancery: 1, observ: 4, craft: 4, instinct: 1, ustav: 2, local: 1, merchant: 1 }
+freePoints: 16
+defaultArchetype: pravoved

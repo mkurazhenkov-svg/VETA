@@ -1,0 +1,245 @@
+{
+ "id": "museum",
+ "title": "Фонды музея",
+ "canvas": [
+  1600,
+  1000
+ ],
+ "origin": [
+  696,
+  280
+ ],
+ "pxPerArshin": 60,
+ "palette": {
+  "ground": "#24262a",
+  "floor": "#55524c",
+  "wall": "#77756c",
+  "wallDark": "#55534c",
+  "accent": "#d0b070",
+  "grunt": "#9a968c"
+ },
+ "light": {
+  "ambient": 0.55,
+  "tint": "#8890a0",
+  "sources": [
+   {
+    "pos": [
+     6,
+     4
+    ],
+    "radius": 4,
+    "power": 0.4,
+    "color": "#f0d8a0"
+   }
+  ]
+ },
+ "room": {
+  "floor": [
+   [
+    0,
+    0
+   ],
+   [
+    12,
+    0
+   ],
+   [
+    12,
+    8
+   ],
+   [
+    0,
+    8
+   ]
+  ],
+  "walls": [
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     12,
+     0
+    ],
+    "h": 4
+   },
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     0,
+     8
+    ],
+    "h": 4
+   }
+  ]
+ },
+ "walkable": [
+  [
+   [
+    0.4,
+    0.4
+   ],
+   [
+    11.7,
+    0.4
+   ],
+   [
+    11.7,
+    7.7
+   ],
+   [
+    0.4,
+    7.7
+   ]
+  ]
+ ],
+ "props": [
+  {
+   "id": "shelf1",
+   "shape": "shelf",
+   "pos": [
+    3.0,
+    0.5
+   ],
+   "size": [
+    4.0,
+    0.8,
+    3.2
+   ],
+   "color": "#5a5650"
+  },
+  {
+   "id": "shelf2",
+   "shape": "shelf",
+   "pos": [
+    8.5,
+    0.5
+   ],
+   "size": [
+    4.0,
+    0.8,
+    3.2
+   ],
+   "color": "#5a5650"
+  },
+  {
+   "id": "shelf3",
+   "shape": "shelf",
+   "pos": [
+    0.5,
+    4.5
+   ],
+   "size": [
+    0.8,
+    4.0,
+    3.2
+   ],
+   "color": "#5a5650"
+  },
+  {
+   "id": "table",
+   "shape": "box",
+   "pos": [
+    6.0,
+    4.0
+   ],
+   "size": [
+    2.4,
+    1.4,
+    1.0
+   ],
+   "color": "#6a5a44",
+   "detail": true,
+   "label": "Стол"
+  },
+  {
+   "id": "find",
+   "shape": "flat",
+   "pos": [
+    5.8,
+    4.0
+   ],
+   "z": 1.0,
+   "size": [
+    0.9,
+    0.6,
+    0.15
+   ],
+   "color": "#8a6a3a",
+   "detail": true,
+   "label": "Находка"
+  }
+ ],
+ "hotspots": [
+  {
+   "id": "HS_find",
+   "prop": "find",
+   "approach": [
+    6.0,
+    5.4
+   ],
+   "label": "Находка: папка и пачка билетов",
+   "knot": "museum_find"
+  }
+ ],
+ "sectors": [
+  {
+   "id": "fond",
+   "title": "Хранилище",
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     12,
+     0
+    ],
+    [
+     12,
+     8
+    ],
+    [
+     0,
+     8
+    ]
+   ]
+  }
+ ],
+ "landmarks": [
+  {
+   "id": "table",
+   "title": "Стол",
+   "pos": [
+    6,
+    4
+   ]
+  }
+ ],
+ "north": 35,
+ "hidden": [],
+ "noFlash": [],
+ "fragile": [],
+ "exits": [],
+ "spawn": [
+  9.5,
+  6.5
+ ],
+ "npcs": [
+  {
+   "id": "keeper",
+   "pos": [
+    8.6,
+    4.4
+   ],
+   "knot": "museum_keeper",
+   "person": "museum_keeper"
+  }
+ ],
+ "followers": false,
+ "photoTargets": []
+}

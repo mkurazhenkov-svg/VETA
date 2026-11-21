@@ -1,0 +1,520 @@
+{
+ "id": "yard",
+ "title": "Двор на Миллионке",
+ "canvas": [
+  1600,
+  1000
+ ],
+ "origin": [
+  705,
+  260
+ ],
+ "pxPerArshin": 44,
+ "palette": {
+  "ground": "#5d5340",
+  "floor": "#6b5e47",
+  "wall": "#8a7a62",
+  "wallDark": "#5e5240",
+  "accent": "#c9a45a",
+  "grunt": "#c8bca4"
+ },
+ "light": {
+  "ambient": 0.85,
+  "tint": "#6a7a8a",
+  "sources": []
+ },
+ "room": {
+  "outdoor": true,
+  "floor": [
+   [
+    0,
+    0
+   ],
+   [
+    18,
+    0
+   ],
+   [
+    18,
+    13
+   ],
+   [
+    0,
+    13
+   ]
+  ],
+  "walls": [
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     18,
+     0
+    ],
+    "h": 5,
+    "window": {
+     "at": 9.5,
+     "w": 1.2,
+     "h": 1.2,
+     "z": 2.6
+    },
+    "door": {
+     "at": 2.6,
+     "w": 1.4,
+     "h": 1.2
+    }
+   },
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     0,
+     13
+    ],
+    "h": 3.6
+   }
+  ]
+ },
+ "walkable": [
+  [
+   [
+    0.4,
+    0.6
+   ],
+   [
+    17.7,
+    0.6
+   ],
+   [
+    17.7,
+    12.7
+   ],
+   [
+    0.4,
+    12.7
+   ]
+  ]
+ ],
+ "props": [
+  {
+   "id": "stairs",
+   "shape": "flat",
+   "pos": [
+    2.6,
+    0.9
+   ],
+   "size": [
+    1.5,
+    1.0,
+    0.05
+   ],
+   "color": "#2a2420",
+   "walkable": true
+  },
+  {
+   "id": "porch",
+   "shape": "box",
+   "pos": [
+    9.5,
+    0.7
+   ],
+   "size": [
+    2.2,
+    1.0,
+    0.6
+   ],
+   "color": "#6a5a44"
+  },
+  {
+   "id": "bench",
+   "shape": "box",
+   "pos": [
+    6.5,
+    5.4
+   ],
+   "size": [
+    1.8,
+    0.6,
+    0.5
+   ],
+   "color": "#5a4a36"
+  },
+  {
+   "id": "line1",
+   "shape": "line",
+   "pos": [
+    7.0,
+    4.6
+   ],
+   "size": [
+    5.0,
+    0.05,
+    2.6
+   ],
+   "color": "#d8d0c0",
+   "walkable": true
+  },
+  {
+   "id": "linen",
+   "shape": "panel",
+   "pos": [
+    6.0,
+    4.6
+   ],
+   "z": 1.6,
+   "size": [
+    2.2,
+    0.04,
+    0.9
+   ],
+   "color": "#e4ddd0",
+   "walkable": true
+  },
+  {
+   "id": "booth",
+   "shape": "box",
+   "pos": [
+    4.4,
+    9.4
+   ],
+   "size": [
+    1.6,
+    1.2,
+    2.0
+   ],
+   "color": "#5a4a3a",
+   "label": "Сапожная будка"
+  },
+  {
+   "id": "woodpile",
+   "shape": "box",
+   "pos": [
+    0.9,
+    6.5
+   ],
+   "size": [
+    1.2,
+    2.6,
+    1.3
+   ],
+   "color": "#6a4a30"
+  },
+  {
+   "id": "barrel",
+   "shape": "cyl",
+   "pos": [
+    15.0,
+    5.3
+   ],
+   "size": [
+    1.0,
+    1.0,
+    1.3
+   ],
+   "color": "#5a4026",
+   "label": "Бочка водовоза"
+  },
+  {
+   "id": "pit",
+   "shape": "flat",
+   "pos": [
+    16.2,
+    9.0
+   ],
+   "size": [
+    1.8,
+    1.3,
+    0.05
+   ],
+   "color": "#2d281f",
+   "walkable": true,
+   "label": "Помойная яма"
+  },
+  {
+   "id": "gate_l",
+   "shape": "box",
+   "pos": [
+    8.2,
+    12.8
+   ],
+   "size": [
+    0.4,
+    0.4,
+    2.6
+   ],
+   "color": "#4a3a2a"
+  },
+  {
+   "id": "gate_r",
+   "shape": "box",
+   "pos": [
+    11.0,
+    12.8
+   ],
+   "size": [
+    0.4,
+    0.4,
+    2.6
+   ],
+   "color": "#4a3a2a"
+  },
+  {
+   "id": "shop_door",
+   "shape": "panel",
+   "pos": [
+    13.4,
+    0.08
+   ],
+   "size": [
+    1.4,
+    0.1,
+    2.2
+   ],
+   "color": "#4a3a2a",
+   "label": "Лавка"
+  }
+ ],
+ "hotspots": [
+  {
+   "id": "HS_mud",
+   "pos": [
+    9.5,
+    1.8
+   ],
+   "r": 1.6,
+   "approach": [
+    9.5,
+    3.3
+   ],
+   "label": "Сырая земля у дома"
+  },
+  {
+   "id": "HS_pit",
+   "prop": "pit",
+   "approach": [
+    15.4,
+    10.4
+   ],
+   "label": "Помойная яма"
+  }
+ ],
+ "sectors": [
+  {
+   "id": "mud",
+   "title": "Полоса у дома",
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     18,
+     0
+    ],
+    [
+     18,
+     3.2
+    ],
+    [
+     0,
+     3.2
+    ]
+   ]
+  },
+  {
+   "id": "yard",
+   "title": "Двор",
+   "poly": [
+    [
+     0,
+     3.2
+    ],
+    [
+     14,
+     3.2
+    ],
+    [
+     14,
+     13
+    ],
+    [
+     0,
+     13
+    ]
+   ]
+  },
+  {
+   "id": "pit",
+   "title": "Задний угол",
+   "poly": [
+    [
+     14,
+     3.2
+    ],
+    [
+     18,
+     3.2
+    ],
+    [
+     18,
+     13
+    ],
+    [
+     14,
+     13
+    ]
+   ]
+  }
+ ],
+ "landmarks": [
+  {
+   "id": "stairs",
+   "title": "Спуск в подвал",
+   "pos": [
+    2.6,
+    0.9
+   ]
+  },
+  {
+   "id": "gate",
+   "title": "Ворота",
+   "pos": [
+    9.6,
+    12.8
+   ]
+  }
+ ],
+ "north": 35,
+ "hidden": [
+  {
+   "id": "ev_y1_footprints",
+   "shape": "footprints",
+   "from": [
+    3.4,
+    1.5
+   ],
+   "to": [
+    16.0,
+    2.0
+   ],
+   "color": "#2a2016"
+  }
+ ],
+ "noFlash": [],
+ "fragile": [
+  {
+   "poly": [
+    [
+     3.1,
+     1.1
+    ],
+    [
+     16.4,
+     1.6
+    ],
+    [
+     16.4,
+     2.5
+    ],
+    [
+     3.1,
+     2.0
+    ]
+   ],
+   "evidence": "ev_y1_footprints"
+  }
+ ],
+ "exits": [
+  {
+   "id": "to_cellar",
+   "to": "cellar",
+   "pos": [
+    2.4,
+    0.9
+   ],
+   "label": "Вниз, в подвал"
+  },
+  {
+   "id": "to_map",
+   "to": "map",
+   "pos": [
+    9.6,
+    12.5
+   ],
+   "label": "За ворота"
+  }
+ ],
+ "spawn": [
+  9.6,
+  11.6
+ ],
+ "npcs": [
+  {
+   "id": "pyzhov",
+   "pos": [
+    1.6,
+    3.0
+   ],
+   "knot": "pyzhov"
+  },
+  {
+   "id": "kukushkina",
+   "pos": [
+    6.0,
+    6.0
+   ],
+   "knot": "kukushkina"
+  },
+  {
+   "id": "mitrofan",
+   "pos": [
+    12.2,
+    7.4
+   ],
+   "knot": "mitrofan"
+  },
+  {
+   "id": "sychev",
+   "pos": [
+    10.4,
+    9.4
+   ],
+   "knot": "sychev"
+  },
+  {
+   "id": "laptev",
+   "pos": [
+    5.6,
+    10.2
+   ],
+   "knot": "laptev"
+  },
+  {
+   "id": "ershov",
+   "pos": [
+    14.2,
+    6.2
+   ],
+   "knot": "ershov"
+  }
+ ],
+ "followers": true,
+ "photoTargets": [
+  {
+   "id": "PT_yard",
+   "title": "Двор от ворот (общий вид)",
+   "pos": [
+    9,
+    5
+   ],
+   "kinds": [
+    "orienting",
+    "overview"
+   ]
+  }
+ ]
+}

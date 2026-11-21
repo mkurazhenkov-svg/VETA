@@ -1,0 +1,38 @@
+{
+  "name": "dvoinoe-dno",
+  "version": "0.1.0",
+  "description": "Двойное дно. Дело о фальшивых четвертных — изометрический диалоговый квест музея и кафедры судебной экспертизы",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "pnpm validate && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "validate": "node --experimental-strip-types tools/validate-content.ts",
+    "lint": "eslint . && tsc --noEmit",
+    "placeholder-art": "node --experimental-strip-types tools/placeholder-art.ts"
+  },
+  "dependencies": {
+    "@fontsource/old-standard-tt": "5.3.0",
+    "@fontsource/pt-serif": "5.3.0",
+    "@preact/signals": "2.11.4",
+    "inkjs": "2.4.0",
+    "pixi.js": "8.22.0",
+    "preact": "10.29.8",
+    "yaml": "2.9.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@preact/preset-vite": "2.10.6",
+    "@types/node": "22.19.1",
+    "eslint": "9.39.5",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.73.0",
+    "vite": "8.3.2",
+    "vite-plugin-singlefile": "2.3.3",
+    "vitest": "5.1.1"
+  }
+}

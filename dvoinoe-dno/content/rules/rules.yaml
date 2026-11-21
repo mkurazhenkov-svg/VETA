@@ -1,0 +1,276 @@
+# Процедурные и тактические правила 1913 года, их вес и связь с сегодняшними нормами.
+# Поле check — имя функции из реестра src/domain/rules-engine.ts. Тексты и тяжесть меняет кафедра.
+# TODO(кафедра): статьи Устава уголовного судопроизводства 1864 г. для полей source1913.
+rules:
+  - id: R_ATTESTING_WITNESSES_ABSENT
+    title: Изъятие в отсутствие понятых
+    era: 1913
+    category: procedure
+    criterion: procedure
+    severity: critical
+    check: attestingWitnessesPresentOnCollect
+    explain: Понятые удостоверяют ход и результаты осмотра. Изъятое без двух понятых защита легко объявит подброшенным.
+    right1913: Изымать и упаковывать только при двух понятых; упаковку подписывают оба.
+    zharov: "Ваше высокоблагородие, понятых-то при этом не было. Я запишу."
+    source1913: "TODO(кафедра): статьи УУС 1864 о понятых при осмотре"
+    bridgeToday: bt_witnesses_or_video
+  - id: R_INSPECTION_NO_WITNESSES
+    title: Осмотр без понятых
+    era: 1913
+    category: procedure
+    criterion: procedure
+    severity: critical
+    check: inspectionWithoutWitnesses
+    explain: Осмотр места начат без понятых — всё, что найдено, под сомнением.
+    right1913: Сначала пригласить двух посторонних, незаинтересованных понятых, потом начинать осмотр.
+    zharov: "Понятых бы сперва, ваше высокоблагородие. Без них это не осмотр, а прогулка."
+    source1913: "TODO(кафедра): статьи УУС 1864 об осмотре"
+    bridgeToday: bt_witnesses_or_video
+  - id: R_ONE_WITNESS
+    title: Действия при одном понятом
+    era: 1913
+    category: procedure
+    criterion: procedure
+    severity: minor
+    check: actionsWithOneWitness
+    explain: Часть осмотра проведена, когда при следователе оставался один понятой. Эти записи помечаются.
+    right1913: Если понятой ушёл — приостановить осмотр и пригласить другого.
+    zharov: "Один понятой остался. Подождём второго?"
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_witnesses_or_video
+  - id: R_WITNESS_INADMISSIBLE
+    title: Недопустимый понятой
+    era: 1913
+    category: procedure
+    criterion: procedure
+    severity: major
+    check: witnessInadmissible
+    explain: Понятым не может быть полицейский или свидетель по делу.
+    right1913: Понятые — посторонние люди, не связанные с делом и с полицией.
+    zharov: "Он ведь свидетель, ваше высокоблагородие. Какой же из него понятой."
+    source1913: "TODO(кафедра): кто не может быть понятым по УУС 1864"
+    bridgeToday: bt_witness_admissible
+  - id: R_WITNESS_QUESTIONABLE
+    title: Заинтересованный понятой
+    era: 1913
+    category: procedure
+    criterion: procedure
+    severity: minor
+    check: witnessQuestionable
+    explain: Кум квартирной хозяйки — лицо, близкое к возможной участнице. Защита спросит о его беспристрастности.
+    right1913: Выбирать понятых, не связанных с жильцами и хозяевами дома.
+    zharov: "Сапожник-то хозяйке кум. Суд спросит."
+    source1913: "TODO(кафедра): допустим ли кум хозяйки в понятые?"
+    bridgeToday: bt_witness_admissible
+  - id: R_COLLECTED_UNDESCRIBED
+    title: Неописанное изъятие
+    era: 1913
+    category: procedure
+    criterion: procedure
+    severity: critical
+    check: collectedWithoutDescription
+    explain: Предмет изъят, но не описан на месте — неизвестно, что именно и в каком виде было найдено.
+    right1913: Сначала описать предмет на месте, потом изымать.
+    zharov: "А описать-то, ваше высокоблагородие? Что в протокол писать будем?"
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_protocol
+  - id: R_TOUCH_BEFORE_FIX
+    title: Изменение обстановки до фиксации
+    era: 1913
+    category: tactics
+    criterion: fixation
+    severity: major
+    check: touchedBeforeFix
+    explain: Предмет тронут или сдвинут до снимка и описания. Его первоначальное положение уже не восстановить.
+    right1913: Сначала зафиксировать (описать, снять), потом менять положение.
+    zharov: "Руками-то зачем, ваше высокоблагородие?"
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_protocol
+  - id: R_GENERAL_FIRST
+    title: Шаг внутрь до общего осмотра
+    era: 1913
+    category: tactics
+    criterion: fixation
+    severity: minor
+    check: generalBeforeDetail
+    explain: Следователь вошёл в помещение, не описав его с порога. Так затаптывают следы у входа.
+    right1913: Общий осмотр — с порога; потом детальный.
+    zharov: "С порога бы глянуть сперва."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_inspection_order
+  - id: R_ORIENTING_FIRST
+    title: Детальные снимки раньше обзорных
+    era: 1913
+    category: fixation
+    criterion: fixation
+    severity: minor
+    check: noOrientingFirst
+    params: { loc: cellar }
+    explain: Узловые и детальные снимки без ориентирующего и обзорного не показывают, где всё было.
+    right1913: Съёмка от общего к частному.
+    zharov: "Фотограф ворчит: общего вида-то нет."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_photo
+  - id: R_SECTORS_SKIPPED
+    title: Не все части помещения осмотрены
+    era: 1913
+    category: tactics
+    criterion: evidence
+    severity: minor
+    check: sectorsSkipped
+    params: { loc: cellar }
+    explain: Часть подвала не осмотрена — там могли остаться улики.
+    right1913: Осматривать системно, по частям, ничего не пропуская.
+    zharov: "А в тот угол мы так и не заглянули."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_inspection_order
+  - id: R_THREAT
+    title: Угроза свидетелю
+    era: 1913
+    category: interview
+    criterion: interview
+    severity: critical
+    check: dialogueTag
+    params: { tag: threat }
+    explain: Показания, полученные угрозой, защита оспорит, а суд может не принять.
+    right1913: Опрашивать без угроз и обещаний; предъявлять улики, а не кулак.
+    zharov: "Это вы зря, ваше высокоблагородие. Теперь адвокат скажет — запугали."
+    source1913: "TODO(кафедра): запрет домогаться показаний угрозами"
+    bridgeToday: bt_no_threats
+  - id: R_PRESSURE
+    title: Давление на свидетеля
+    era: 1913
+    category: interview
+    criterion: interview
+    severity: major
+    check: dialogueTag
+    params: { tag: pressure }
+    explain: "Давление портит показания: человек говорит то, что от него хотят услышать."
+    right1913: Задавать вопросы, а не требовать нужного ответа.
+    zharov: "Надавили — он и скажет, что хотите. А правда ли?"
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_no_threats
+  - id: R_LEADING
+    title: Наводящие вопросы
+    era: 1913
+    category: interview
+    criterion: interview
+    severity: minor
+    check: dialogueTag
+    params: { tag: leading, max: "3" }
+    explain: Наводящий вопрос подсказывает ответ — свидетель начинает повторять версию следователя.
+    right1913: Открытые вопросы, потом уточняющие.
+    zharov: "Вы ему подсказали, он и подхватил."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_leading
+  - id: R_UNSEALED
+    title: Упаковка не опечатана
+    era: 1913
+    category: procedure
+    criterion: procedure
+    severity: major
+    check: unsealedPackage
+    explain: Неопечатанную упаковку можно вскрыть и подменить содержимое.
+    right1913: Шпагат, сургуч, печать следователя, надпись, подписи понятых.
+    zharov: "Сургуч забыли."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_packaging
+  - id: R_KEY_DESTROYED
+    title: Уничтожена ключевая улика
+    era: 1913
+    category: evidence
+    criterion: evidence
+    severity: critical
+    check: keyEvidenceDestroyed
+    explain: Ключевая улика утрачена по вине следствия — связь подвала с подделкой ослаблена.
+    right1913: Хрупкие предметы — только после снимка и правильным способом.
+    zharov: "Эх… Было — и нету."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_packaging
+  - id: R_EVIDENCE_DAMAGED
+    title: Повреждена улика
+    era: 1913
+    category: evidence
+    criterion: evidence
+    severity: minor
+    check: evidenceDamaged
+    explain: Улика повреждена при осмотре, изъятии или затоптана.
+    right1913: Выбирать способ изъятия и упаковку по материалу.
+    zharov: "Попортили, ваше высокоблагородие."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_packaging
+  - id: R_CHANGES_UNKNOWN
+    title: Не выяснены изменения обстановки
+    era: 1913
+    category: tactics
+    criterion: procedure
+    severity: major
+    check: factNotEstablished
+    params: { fact: f_pyzhov_changes, requiresVisit: cellar }
+    explain: Околоточный был в подвале до осмотра. Что он тронул и что унёс, следователь не выяснил.
+    right1913: До осмотра выяснить у первых прибывших, что они меняли.
+    zharov: "А околоточного-то мы так и не спросили, что он там трогал."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_inspection_order
+  - id: R_NO_SCALE
+    title: Детальный снимок без масштаба
+    era: 1913
+    category: fixation
+    criterion: fixation
+    severity: minor
+    check: detailWithoutScale
+    explain: По детальному снимку без масштабной линейки нельзя судить о размере.
+    right1913: Класть масштабную линейку на детальную съёмку.
+    zharov: "Линеечку бы положить."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_photo
+  - id: R_FALSE_TRACES
+    title: Ложные следы не отделены
+    era: 1913
+    category: evidence
+    criterion: evidence
+    severity: minor
+    check: falseTracesNotSeparated
+    explain: В протоколе смешаны следы преступников и следы пожарных, околоточного, кошки, легального ателье.
+    right1913: Отделять посторонние следы и указывать их происхождение.
+    zharov: "Это, поди, не их следы."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_protocol
+  - id: R_CONCLUSIONS
+    title: Выводы в описательной части протокола
+    era: 1913
+    category: folder
+    criterion: folder
+    severity: minor
+    check: conclusionsInProtocol
+    explain: Протокол описывает, а не делает выводов. «Фальшивые билеты» — вывод экспертизы, а не осмотра.
+    right1913: Писать, что видно — «листы с изображением, сходным с кредитным билетом».
+    zharov: "В протоколе бы без «фальшивых». Это эксперт скажет."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_protocol
+  - id: R_NOT_IN_PROTOCOL
+    title: Изъятое не отражено в протоколе
+    era: 1913
+    category: folder
+    criterion: folder
+    severity: major
+    check: collectedNotInProtocol
+    explain: Предмет изъят, но в протоколе о нём ни слова.
+    right1913: Всё изъятое — в протокол и опись.
+    zharov: "А это куда делось? В протоколе нет."
+    source1913: "TODO(кафедра)"
+    bridgeToday: bt_protocol
+scoring:
+  # Стартовые веса — предложение для кафедры.
+  max: { procedure: 25, evidence: 25, fixation: 20, interview: 15, folder: 15 }
+  penalty: { critical: 10, major: 5, minor: 2 }
+  cap: 59
+  grades:
+    - { min: 90, title: отлично }
+    - { min: 75, title: хорошо }
+    - { min: 60, title: удовлетворительно }
+    - { min: 0, title: неудовлетворительно }
+# Корни слов-выводов, которых не должно быть в описательной части протокола.
+protocolConclusionWords: [фальшив, поддел, преступ, виновн, очевидно, несомненно, явно, злоумышл, сбытчик, мошенни, улика доказ]
+teacher:
+  pin: "1864"

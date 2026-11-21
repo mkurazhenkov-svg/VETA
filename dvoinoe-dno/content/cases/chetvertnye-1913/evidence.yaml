@@ -1,0 +1,499 @@
+# Улики, ложные следы и «контейнеры» (пальто, ящик стола, обшивка), в которых они спрятаны.
+# visibility.via: look — видно при осмотре; lamp — только в косом свете лампы; inside — внутри контейнера;
+# search — за обшивкой (системный осмотр стены или пассивная проверка Наблюдательности).
+# Ключевая улика никогда не заперта только за броском: у каждой есть путь методичным осмотром.
+evidence:
+  # ================= Касса Госбанка =================
+  - id: ev_bank_fakes
+    num: "К-1"
+    kind: evidence
+    title: Пачка «четвертных» из кассы
+    protocolName: пачка кредитных билетов достоинством 25 рублей, сданная в кассу
+    location: bank
+    hotspot: HS_table
+    sector: hall
+    key: true
+    weight: 6
+    visibility: { via: look }
+    describe: "Пачка из двадцати «четвертных», перетянутая банковской бандеролью. Рядом кассир положил подлинный билет для сличения."
+    protocol: "Пачка из двадцати кредитных билетов достоинством 25 рублей, сданная в ярмарочную кассу менялой Гуровым; все билеты имеют одинаковую серию и номер."
+    lupa: { text: "В лупу сетка на фоне билета расплывается: там, где на подлиннике тонкие линии, у этого — пятно.", fact: f_bank_grid }
+    facts: []
+    voices:
+      - { skill: craft, passive: 7, text: "Ремесло: Печать плоская, без рельефа. Не так печатают в Экспедиции." }
+    materials: [document]
+    documentation: { required: [], closeup: { icon: bills, color: "#7a8a5a" } }
+    collection: { collectable: true, methods: [by_edges, no_marks], packs: [envelope], hint: "Принять под расписку, держать за края, в конверт.", gives: "Образец подделки для сличения и для экспертизы." }
+    museum: { exhibit: ex_bills }
+
+  # ================= Двор =================
+  - id: ev_y1_footprints
+    num: "Д-1"
+    kind: evidence
+    title: Следы обуви на сырой земле
+    protocolName: следы обуви на сырой земле двора
+    location: yard
+    hotspot: HS_mud
+    sector: mud
+    key: false
+    weight: 4
+    visibility: { via: look }
+    describe: "На сырой земле от подвальной лестницы к воротам тянутся две цепочки следов: узкие, с каблуком — городские штиблеты; широкие, с подковкой на каблуке — сапоги."
+    protocol: "От входа в подвал к воротам две цепочки следов обуви: узкая обувь с каблуком и сапоги с подковкой на каблуке."
+    facts: [f_yard_footprints]
+    voices:
+      - { skill: observ, passive: 7, text: "Наблюдательность: Тучи над откосом. Если пойдёт дождь — от следов ничего не останется." }
+      - { skill: ustav, text: "Устав: Сначала снимок с масштабом. Потом гипс. Не наоборот." }
+    materials: [soil_trace]
+    fragile: { onWalk: destroyed, text: "Вы прошли прямо по следам." }
+    documentation: { required: [detail_scaled], closeup: { icon: footprints, color: "#5a4a3a" } }
+    collection: { collectable: true, methods: [plaster_cast], packs: [crate, flat_box], hint: "После снимка — гипсовый слепок, в ящик.", gives: "Слепок следа для сравнения с обувью задержанных." }
+  - id: ev_y2_wrapper
+    num: "Д-2"
+    kind: evidence
+    title: Обёртка от пачки бумаги
+    protocolName: бумажная обёртка с фабричным клеймом
+    location: yard
+    hotspot: HS_pit
+    sector: pit
+    weight: 2
+    visibility: { via: look }
+    describe: "В помойной яме, поверх золы и очисток, — плотная обёртка от пачки писчей бумаги с клеймом фабрики. Сухая: выброшена недавно."
+    protocol: "В помойной яме обёртка от пачки писчей бумаги с клеймом бумажной фабрики, сухая."
+    facts: [f_yard_wrapper]
+    voices:
+      - { skill: merchant, passive: 8, text: "Купеческое слово: Такую бумагу пачками покупают конторы, а не фотографы." }
+    materials: [document]
+    documentation: { required: [], closeup: { icon: paper, color: "#b9a77a" } }
+    collection: { collectable: true, methods: [by_edges, no_marks], packs: [envelope], hint: "За края, в конверт.", gives: "Источник бумаги." }
+
+  # ================= Подвал-мастерская =================
+  - id: ev01_press
+    num: "1"
+    kind: evidence
+    title: Ручной пресс и валик с краской
+    protocolName: ручной печатный пресс с валиком
+    location: cellar
+    hotspot: HS_press
+    sector: print
+    key: true
+    weight: 7
+    visibility: { via: look }
+    describe: "Ручной печатный пресс, чугунная станина, на деревянном основании. Валик покрыт остатками тусклой зеленоватой краски; краска ещё липнет."
+    protocol: "У стены ручной печатный пресс на деревянном основании; на валике остатки краски зеленоватого цвета, липкие на ощупь."
+    facts: [f_press_paint]
+    voices:
+      - { skill: craft, passive: 7, text: "Ремесло: Пресс старый, переплётный, а валик новый — его ставили под другую работу." }
+      - { skill: ustav, text: "Устав: Пресс не унести. Опечатать на месте, образец краски — прокатать на чистый лист." }
+    materials: [heavy]
+    documentation: { required: [node, detail_scaled], closeup: { icon: press, color: "#3b3a36" } }
+    collection: { collectable: true, methods: [paint_sample], packs: [seal_in_place], hint: "Образец краски снять на бумагу, пресс опечатать на месте.", gives: "Образец краски для сравнения с подделкой." }
+    museum: { exhibit: ex_press }
+    supports: [th_photographer, th_engraver, th_guest]
+  - id: ev02_stone
+    num: "2"
+    kind: evidence
+    title: Литографский камень
+    protocolName: литографский камень со стёртым изображением
+    location: cellar
+    hotspot: HS_stone
+    sector: print
+    key: true
+    weight: 6
+    visibility: { via: lamp }
+    hiddenText: "Гладкий серый камень на столе, со стёртой поверхностью. При этом свете на нём ничего не разобрать."
+    describe: "Литографский камень, отшлифованный, со следами стирания. В косом свете лампы на нём проступает фрагмент орнамента — завитки, как в рамке кредитного билета."
+    protocol: "На столе литографский камень; при косом освещении на поверхности различим фрагмент орнамента из завитков."
+    lampText: "Вы ставите лампу на пол, и свет ложится вдоль камня. На стёртой поверхности проступают завитки."
+    facts: [f_stone_ornament]
+    voices:
+      - { skill: craft, passive: 8, text: "Ремесло: Изображение стирали наспех — пемзой, но не до конца." }
+    materials: [litho_stone]
+    documentation: { required: [detail_scaled], closeup: { icon: stone, color: "#8a8a82" } }
+    collection: { collectable: true, methods: [whole_object, by_edges], packs: [wrap_paper, crate], hint: "Снимок в косом свете с масштабом; камень изъять целиком, обернув.", gives: "Печатная форма — для сравнения с билетом." }
+    supports: [th_engraver, th_guest, th_photographer]
+  - id: ev03_burnt_proofs
+    num: "3"
+    kind: evidence
+    title: Полусгоревшие оттиски в печи
+    protocolName: обгоревшие листы бумаги с остатками печатного изображения
+    location: cellar
+    hotspot: HS_stove
+    sector: stove
+    key: true
+    weight: 8
+    visibility: { via: look }
+    describe: "В топке, на тёплой золе, — края бумажных листов, обгоревших, свернувшихся. На уцелевших клочках — остатки печатного изображения. Кто-то пытался сжечь пробы и не успел."
+    protocol: "В топке печи на золе обгоревшие листы бумаги, на сохранившихся частях остатки печатного изображения."
+    lupa: { text: "На краю одного обрывка — цифры: «…7413».", fact: f_proofs_number_visible }
+    facts: [f_proofs]
+    voices:
+      - { skill: observ, passive: 9, text: "Наблюдательность: На одном обрывке — что-то похожее на цифры." }
+      - { skill: ustav, text: "Устав: Сначала снимок. Руками — потом. Бумага рассыпется от дыхания." }
+      - { skill: instinct, text: "Чутьё: Выхватить их, пока не рассыпались! Скорее!", shortcut: true }
+    materials: [burnt_paper]
+    fragile: { onTouchBeforePhoto: degraded, text: "Края листов осыпались." }
+    documentation: { required: [node, detail_scaled], closeup: { icon: burnt, color: "#3a2a22" } }
+    collection: { collectable: true, methods: [rigid_board_glass], packs: [flat_box], hint: "Подвести жёсткий картон, переложить стеклом, в плоскую коробку.", gives: "Последовательность неудачных проб; обрывок с номером." }
+  - id: ev04_negatives
+    num: "4"
+    kind: evidence
+    title: Стеклянные негативы
+    protocolName: стеклянные фотографические негативы в шкафу
+    location: cellar
+    hotspot: HS_cabinet
+    sector: atelier
+    key: true
+    weight: 6
+    visibility: { via: look }
+    describe: "В шкафу ателье — ящики со стеклянными негативами: портреты, свадьбы, купцы с жёнами. Один негатив, вставленный в середину, другой: на нём на просвет — прямоугольник с узором и цифрами."
+    protocol: "В шкафу ящики со стеклянными негативами портретов; среди них негатив с изображением прямоугольного предмета с узором и цифрами."
+    facts: [f_negative_bill]
+    voices:
+      - { skill: craft, passive: 7, text: "Ремесло: Это репродукционная съёмка — в натуральную величину. Портретисту она ни к чему." }
+      - { skill: craft, text: "Ремесло: Держать за рёбра. Эмульсия запомнит каждый палец." }
+    materials: [glass_negative]
+    documentation: { required: [node], closeup: { icon: negative, color: "#6a7a7a" } }
+    collection: { collectable: true, methods: [by_edges], packs: [box_separators], hint: "За рёбра, в коробку с перекладками.", gives: "Негатив билета — звено между ателье и подделкой." }
+    supports: [th_photographer]
+  - id: ev05_sample
+    num: "5"
+    kind: evidence
+    title: Подлинный билет-образец
+    protocolName: кредитный билет достоинством 25 рублей под стеклом стола
+    location: cellar
+    hotspot: HS_desk
+    sector: retouch
+    key: true
+    weight: 8
+    visibility: { via: look }
+    describe: "Под стеклом ретушёрского стола приколот булавками по углам кредитный билет в 25 рублей. Бумага плотная, водяной знак на просвет виден. Серия ВТ № 027413."
+    protocol: "Под стеклом стола кредитный билет достоинством 25 рублей, серия ВТ № 027413, приколот булавками по углам; от булавок проколы."
+    facts: [f_sample_number]
+    voices:
+      - { skill: chancery, text: "Канцелярия: Записать серию и номер. Дословно, буква в букву." }
+      - { skill: logic, passive: 8, text: "Логика: Подлинник — под стеклом, проколы по углам. С него копировали." }
+    materials: [document]
+    documentation: { required: [detail_scaled], closeup: { icon: bill, color: "#8a9a6a" } }
+    collection: { collectable: true, methods: [by_edges, no_marks], packs: [envelope], hint: "За края, в конверт; серию и номер — в протокол.", gives: "Образец, с которого копировали." }
+  - id: ev06_prints
+    num: "6"
+    kind: evidence
+    title: Следы пальцев в краске
+    protocolName: окрашенные следы пальцев рук
+    location: cellar
+    hotspot: HS_press
+    sector: print
+    key: true
+    weight: 7
+    visibility: { via: look }
+    describe: "На деревянной рукояти пресса, на крае камня и на дверном косяке — отпечатки пальцев в зелёной краске. На рукояти — чётче всего: большой и указательный."
+    protocol: "На рукояти пресса, крае камня и дверном косяке окрашенные следы пальцев рук; на рукояти два отчётливых следа."
+    facts: [f_prints]
+    voices:
+      - { skill: ustav, text: "Устав: Снимок в натуральную величину, с масштабом. Рукоять снять целиком — не касаясь отпечатков." }
+      - { skill: logic, passive: 9, text: "Логика: Краска на пальцах — значит, печатал тот, кто оставил следы." }
+    materials: [prints_surface]
+    fragile: { onTouchBeforePhoto: destroyed, text: "Вы взялись за рукоять — отпечатки смазаны." }
+    documentation: { required: [detail_scaled], closeup: { icon: fingerprint, color: "#4a6a4a" } }
+    collection: { collectable: true, methods: [whole_object, cut_fragment], packs: [crate], hint: "Рукоять снять целиком, косяк — выпилить фрагмент; в ящик.", gives: "Следы для сравнения с картотекой." }
+    supports: [th_engraver]
+  - id: ev07_shoeprints
+    num: "7"
+    kind: evidence
+    title: Следы обуви в угольной пыли
+    protocolName: следы обуви в угольной пыли у входа
+    location: cellar
+    hotspot: HS_entry_prints
+    sector: entry
+    weight: 4
+    visibility: { via: lamp }
+    hiddenText: "Пол у входа покрыт угольной пылью. При верхнем свете — ничего особенного."
+    describe: "В угольной пыли у входа две цепочки следов: узкие с каблуком и широкие с подковкой. Их пересекают большие мокрые следы — это уже пожарные."
+    protocol: "У входа на полу в угольной пыли следы обуви двух видов: узкая обувь с каблуком и сапоги с подковкой."
+    lampText: "Низкий свет лампы выхватывает из пыли рельеф подошв."
+    facts: [f_footprints_cellar]
+    voices:
+      - { skill: logic, text: "Логика: Те же две пары, что во дворе." }
+    materials: [dust_trace]
+    fragile: { onWalk: destroyed, text: "Вы наступили в угольную пыль у входа — следы смазаны." }
+    documentation: { required: [detail_scaled], closeup: { icon: footprints, color: "#2a2622" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "Снимок в косом свете с масштабом; на месте оставить.", gives: "Две пары обуви — двое участников." }
+  - id: ev08_notebook
+    num: "8"
+    kind: evidence
+    title: Счётная книжка
+    protocolName: записная книжка с цифровыми записями
+    location: cellar
+    hotspot: HS_boards
+    sector: print
+    key: true
+    weight: 6
+    visibility: { via: search, parent: c_boards, check: { skill: observ, dc: 10 } }
+    describe: "За отставшей доской — засаленная записная книжка. Столбцы: «М.р. 14 — 6», «Ск. 3 — 4», против каждой строки суммы. Последняя запись — третьего дня."
+    protocol: "За отставшей доской обшивки записная книжка в клеёнчатом переплёте с записями цифрами и сокращениями."
+    facts: [f_notebook_cipher]
+    voices:
+      - { skill: chancery, passive: 8, text: "Канцелярия: Это не шифр — сокращения. «М.р. 14» — Мучной ряд, лавка 14." }
+      - { skill: ustav, text: "Устав: Ни одной пометки в самой книжке. Переписать — в протокол." }
+    materials: [document]
+    documentation: { required: [node], closeup: { icon: book, color: "#4a3a2a" } }
+    collection: { collectable: true, methods: [no_marks, by_edges], packs: [envelope], hint: "Без пометок, в конверт; место находки — в протокол.", gives: "Ведомость сбыта — к меняле." }
+  - id: ev09_receipt
+    num: "9"
+    kind: evidence
+    title: Пароходная квитанция
+    protocolName: надорванная пароходная квитанция
+    location: cellar
+    hotspot: HS_coat
+    sector: entry
+    key: true
+    weight: 6
+    visibility: { via: inside, parent: c_coat }
+    describe: "В кармане пальто — надорванная багажная квитанция пароходства: «Волжанин», вниз по Волге, рейс сего числа в 6 часов утра, до Казани."
+    protocol: "В кармане пальто багажная квитанция пароходства, надорванная, на пароход «Волжанин», рейс сего числа в 6 часов утра, до Казани."
+    facts: [f_receipt_vetlugin, f_steamer]
+    byVariant:
+      truth_guest: { facts: [f_receipt_mokhov, f_steamer] }
+    voices:
+      - { skill: logic, passive: 8, text: "Логика: Квитанция надорвана — багажная часть не сдана. Он бросил багаж. До Казани не поедет." }
+      - { skill: local, passive: 7, text: "Нижегородец: «Волжанин» к вечеру в Козьмодемьянске, стоит там час. Там и брать." }
+      - { skill: chancery, text: "Канцелярия: Текст — дословно. Номер, рейс, имя." }
+    materials: [document]
+    documentation: { required: [], closeup: { icon: ticket, color: "#b9a46a" } }
+    collection: { collectable: true, methods: [copy_text], packs: [envelope], hint: "Переписать дословно, в конверт.", gives: "Куда и когда ушёл беглец." }
+  - id: ev10_bottles
+    num: "10"
+    kind: evidence
+    title: Бутыли с аптечными этикетками
+    protocolName: стеклянные бутыли с жидкостями
+    location: cellar
+    hotspot: HS_shelf
+    sector: stove
+    weight: 4
+    visibility: { via: look }
+    describe: "На полке у печи — бутыли тёмного стекла с притёртыми пробками. Этикетки аптеки Н. П. Лаврова, Рождественская улица; на двух — латинские надписи."
+    protocol: "На полке стеклянные бутыли с жидкостями, укупоренные; на этикетках надпись аптеки Н. П. Лаврова, Рождественская улица."
+    facts: [f_labels]
+    voices:
+      - { skill: craft, passive: 6, text: "Ремесло: Не открывать и не нюхать. В фотографии такие склянки бывают ядовиты." }
+      - { skill: ustav, text: "Устав: Переписать этикетки. Вспышку здесь не жечь." }
+    materials: [chemical]
+    documentation: { required: [node], closeup: { icon: bottles, color: "#3a4a3a" } }
+    collection: { collectable: true, methods: [whole_object], packs: [corked_crate], hint: "Не открывать, переписать этикетки, в ящик, обернув.", gives: "Адрес аптеки — к рецептурной книге." }
+  - id: ev11_tools
+    num: "11"
+    kind: evidence
+    title: Штихели с инициалами
+    protocolName: набор гравировальных резцов
+    location: cellar
+    hotspot: HS_desk
+    sector: retouch
+    key: true
+    weight: 5
+    visibility: { via: inside, parent: c_drawer }
+    describe: "В ящике — свёрток из замши: шесть штихелей с грибовидными рукоятями. На каждой рукояти выбиты буквы «А. С.»."
+    protocol: "В ящике стола свёрток с шестью гравировальными резцами; на рукоятях выбиты буквы «А. С.»."
+    lupa: { text: "В лупу видно состояние инструмента." }
+    byVariant:
+      truth_main: { lupa: "Рукояти отполированы ладонью, лезвия много раз точены — инструмент в работе годами.", lupaFact: f_tools_used }
+      truth_landlord: { lupa: "Рукояти отполированы ладонью, лезвия много раз точены — инструмент в работе годами.", lupaFact: f_tools_used }
+      truth_guest: { lupa: "Буквы выбиты свежо, края насечек острые; лезвия почти не тронуты — инструментом едва работали.", lupaFact: f_tools_planted }
+    facts: [f_tools_as]
+    voices:
+      - { skill: craft, text: "Ремесло: Хороший инструмент. Тот, кто им работал, — мастер. Жаль его, право." }
+      - { skill: craft, passive: 9, text: "Ремесло: Посмотрите на насечки букв в лупу — по ним видно, давно ли их выбили.", variants: [truth_guest] }
+    materials: [tools]
+    documentation: { required: [detail_scaled], closeup: { icon: tools, color: "#6a5a4a" } }
+    collection: { collectable: true, methods: [by_edges, by_hand], packs: [box_separators, envelope], hint: "Опись каждого инструмента, в коробку.", gives: "Указывает на «А. С.»" }
+    supports: [th_engraver]
+    contradicts: [th_guest]
+  - id: ev12_ash
+    num: "12"
+    kind: evidence
+    title: Тёплая зола и копоть вспышки
+    protocolName: зола в печи и копоть на своде
+    location: cellar
+    hotspot: HS_stove
+    sector: stove
+    weight: 2
+    visibility: { via: look }
+    describe: "Зола в печи ещё тёплая. На своде над ретушёрским столом — свежая копоть, широким веером: так бывает после магниевой вспышки."
+    protocol: "Зола в печи тёплая на ощупь (время осмотра отмечено); на своде над столом свежая копоть веерообразной формы."
+    facts: [f_ash_warm]
+    voices:
+      - { skill: logic, text: "Логика: Тёплая зола в такой час — топили после полуночи. Записать время осмотра." }
+    materials: []
+    documentation: { required: [], closeup: { icon: ash, color: "#5a5a5a" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "Описать состояние с указанием времени.", gives: "Время ухода, причина вызова околоточного." }
+  - id: ev13_sheet
+    num: "13"
+    kind: evidence
+    title: Лист на сушильной верёвке
+    protocolName: лист бумаги с печатным изображением на верёвке
+    location: cellar
+    hotspot: HS_rope
+    sector: drying
+    key: true
+    weight: 5
+    visibility: { via: look }
+    describe: "За ширмой, на верёвке, прищепленный за угол, — лист с изображением лицевой стороны билета. Оборот чистый."
+    protocol: "За ширмой на верёвке лист бумаги с печатным изображением с одной стороны; оборотная сторона без изображения."
+    facts: [f_sheet_face_only]
+    voices:
+      - { skill: craft, passive: 7, text: "Ремесло: Лицо напечатали, оборот — не успели. Полуфабрикат." }
+    materials: [paper_sheet]
+    fragile: { onTouchBeforePhoto: degraded, text: "Лист соскользнул с прищепки и смялся." }
+    documentation: { required: [node], closeup: { icon: sheet, color: "#a8a888" } }
+    collection: { collectable: true, methods: [by_edges], packs: [flat_box], hint: "Снимок на месте; за края, в плоскую коробку.", gives: "Полуфабрикат подделки." }
+
+  # ---- Ложные следы ----
+  - id: L1_props
+    num: "Л-1"
+    kind: false_trace
+    title: Реквизит ателье
+    protocolName: принадлежности фотографического ателье
+    location: cellar
+    hotspot: HS_backdrop
+    sector: atelier
+    visibility: { via: look }
+    describe: "Расписной фон с балюстрадой и пальмой, венский стул, портретная камера на треноге. Пыль на стуле нетронута."
+    protocol: "Расписной фон, венский стул и портретная камера на треноге; на стуле слой пыли без следов."
+    facts: [f_false_props]
+    voices:
+      - { skill: instinct, text: "Чутьё: Ширма для дураков! Всё это — бутафория мастерской.", shortcut: false }
+    documentation: { required: [], closeup: { icon: backdrop, color: "#7a6a5a" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "Отметить происхождение.", gives: "" }
+    origin:
+      options: [{ id: studio, title: Имущество легального ателье }, { id: workshop, title: Принадлежности мастерской подделок }]
+      correct: studio
+      text: "Пыль на стуле нетронута: им давно не пользовались. Это прикрытие, но не орудие."
+  - id: L2_firemen
+    num: "Л-2"
+    kind: false_trace
+    title: Мокрые следы у печи
+    protocolName: лужа и мокрые следы обуви у печи
+    location: cellar
+    hotspot: HS_puddle
+    sector: stove
+    visibility: { via: look }
+    describe: "У печи лужа, мокрая ветошь и крупные следы сапог с подбитыми каблуками — трёх или четырёх человек."
+    protocol: "У печи лужа воды, мокрая ветошь, мокрые следы крупной обуви нескольких лиц."
+    voices:
+      - { skill: logic, text: "Логика: Мокрые — значит, после того, как печь заливали." }
+    documentation: { required: [], closeup: { icon: puddle, color: "#3a4a5a" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "Отметить происхождение.", gives: "" }
+    origin:
+      options: [{ id: firemen, title: Пожарные и околоточный, тушившие печь }, { id: criminals, title: Следы участников подделки }]
+      correct: firemen
+      text: "Следы мокрые и поверх угольной пыли — их оставили те, кто тушил печь."
+  - id: L3_handprint
+    num: "Л-3"
+    kind: false_trace
+    title: Смазанная ладонь на станине
+    protocolName: смазанный след ладони на станине пресса
+    location: cellar
+    hotspot: HS_press
+    sector: print
+    visibility: { via: look }
+    describe: "На пыльной станине пресса — смазанный след широкой ладони. Чистый: краски на нём нет."
+    protocol: "На станине пресса в слое пыли смазанный след ладони, без краски."
+    voices:
+      - { skill: instinct, text: "Чутьё: Чья-то лапища. Вот он, мастер!", shortcut: false }
+      - { skill: logic, passive: 7, text: "Логика: Без краски — значит, после работы. Кто трогал пресс после?" }
+    documentation: { required: [], closeup: { icon: hand, color: "#5a5048" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "Отметить происхождение.", gives: "" }
+    origin:
+      options: [{ id: pyzhov, title: Околоточный трогал пресс }, { id: maker, title: Мастер мастерской }]
+      correct: pyzhov
+      text: "Околоточный сам сказал, что трогал рукоять и станину."
+  - id: L4_paws
+    num: "Л-4"
+    kind: false_trace
+    title: Маленькие следы в краске
+    protocolName: мелкие округлые следы в краске на полу
+    location: cellar
+    hotspot: HS_paws
+    sector: print
+    visibility: { via: lamp }
+    hiddenText: "Пол у пресса заляпан. При верхнем свете ничего не разобрать."
+    describe: "От пресса к печи — цепочка маленьких округлых следов в зелёной краске, по четыре пятнышка."
+    protocol: "От пресса к печи цепочка мелких округлых следов в краске, по четыре отпечатка в каждом."
+    lampText: "В косом свете на полу проступают маленькие зелёные пятнышки."
+    voices:
+      - { skill: observ, text: "Наблюдательность: Третий! Маленький — может, мальчишка-подручный?", shortcut: true }
+      - { skill: local, passive: 6, text: "Нижегородец: На Миллионке в каждом подвале по кошке." }
+    documentation: { required: [], closeup: { icon: paws, color: "#4a6a4a" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "Отметить происхождение.", gives: "" }
+    origin:
+      options: [{ id: cat, title: Кошка }, { id: child, title: Ребёнок-подручный }, { id: third, title: Третий участник }]
+      correct: cat
+      text: "Четыре пятнышка — кошачья лапа."
+
+  # ---- Контейнеры ----
+  - id: c_coat
+    num: "—"
+    kind: container
+    title: Пальто на гвозде
+    protocolName: мужское пальто
+    location: cellar
+    hotspot: HS_coat
+    sector: entry
+    visibility: { via: look }
+    describe: "На гвозде у двери — мужское пальто городского покроя, дорогого сукна. На полке над ним — пустая шляпная коробка от котелка."
+    protocol: "У двери на гвозде мужское пальто тёмного сукна; на полке шляпная коробка без шляпы."
+    facts: [f_coat_owner]
+    reveals: [ev09_receipt]
+    documentation: { required: [], closeup: { icon: coat, color: "#2a2a2c" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "Осмотреть карманы.", gives: "" }
+  - id: c_drawer
+    num: "—"
+    kind: container
+    title: Ящик ретушёрского стола
+    protocolName: выдвижной ящик стола
+    location: cellar
+    hotspot: HS_desk
+    sector: retouch
+    visibility: { via: look }
+    describe: "Ящик стола заедает; внутри — кисти, ретушь, пузырёк туши и свёрток из замши."
+    protocol: "В ящике стола кисти, ретушь, пузырёк туши и свёрток из замши."
+    reveals: [ev11_tools]
+    documentation: { required: [], closeup: { icon: drawer, color: "#5a4a3a" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "", gives: "" }
+  - id: c_boards
+    num: "—"
+    kind: container
+    title: Обшивка стены
+    protocolName: дощатая обшивка стены
+    location: cellar
+    hotspot: HS_boards
+    sector: print
+    visibility: { via: look }
+    describe: "Стена обшита досками от сырости. Внизу одна доска сидит не так плотно, как соседние."
+    protocol: "Стена обшита досками; одна доска внизу отстаёт."
+    searchLabel: "Осмотреть обшивку доска за доской (10 мин)"
+    searchMinutes: 10
+    reveals: [ev08_notebook]
+    documentation: { required: [], closeup: { icon: boards, color: "#5a4a38" } }
+    collection: { collectable: false, methods: [], packs: [], hint: "", gives: "" }
+
+  # ================= Меняльная лавка =================
+  - id: ev_s1_ledger
+    num: "М-1"
+    kind: evidence
+    title: Книга менялы
+    protocolName: книга записей меняльной лавки
+    location: shop
+    hotspot: HS_ledger
+    sector: shop
+    weight: 4
+    visibility: { via: look }
+    describe: "Толстая книга в кожаном переплёте: даты ярмарки, суммы приёма и выдачи. Почерк ровный, приказчичий."
+    protocol: "Книга записей меняльной лавки с датами и суммами приёма и выдачи денег."
+    facts: [f_gurov_ledger]
+    voices:
+      - { skill: chancery, passive: 7, text: "Канцелярия: Сверить даты и суммы с книжкой из подвала — строка в строку." }
+      - { skill: merchant, text: "Купеческое слово: Хорошая книга. Честная — если не знать, что ищешь." }
+    materials: [document]
+    documentation: { required: [], closeup: { icon: book, color: "#5a3a2a" } }
+    collection: { collectable: true, methods: [no_marks, by_edges], packs: [wrap_paper, envelope], hint: "Без пометок, обернуть, опечатать.", gives: "Для сверки с книжкой из подвала." }

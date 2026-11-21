@@ -1,0 +1,351 @@
+# «Дело о фальшивых четвертных», август 1913. Люди, адреса и события вымышлены.
+# Эпоха, город, учреждения и предметы — правдоподобны; их сверяет музей (TODO(музей) в тексте).
+id: chetvertnye-1913
+title: Дело о фальшивых четвертных
+date: "16 августа 1913 года"   # TODO(музей): сроки ярмарки 1913 г.
+startTime: "8:30"
+endTime: "20:00"
+intro:
+  - Август 1913 года, разгар Нижегородской ярмарки.
+  - Меняла сдаёт в ярмарочную кассу Государственного банка пачку «четвертных». Кассиру-контролёру не нравится бумага на ощупь, а в лупу видно, что сетка расплывается.
+  - В ту же ночь в подвале дома на Миллионке, где работает «Фотография и переплётная И. Ветлугина», — вспышка и задымление. Прибежавший околоточный видит печатный пресс и стопки нарезанной бумаги. Хозяин исчез.
+  - Утром судебному следователю поручено связать фальшивки с подвалом и найти тех, кто их делал и сбывал.
+locations:
+  - id: museum
+    title: Фонды музея «Двойное дно»
+    short: Музей
+    scene: museum
+    plates: 0
+    onMap: false
+    exhibit: true
+    mapPos: [80, 60]
+    enterKnot: museum_enter
+    text: Сегодня. Хранилище музея, стеллажи с коробками, на столе — находка.
+  - id: bank
+    title: Ярмарочная касса Государственного банка
+    short: Касса Госбанка
+    scene: bank
+    plates: 2
+    onMap: true
+    exhibit: true
+    mapPos: [250, 210]
+    enterKnot: bank_enter
+    text: "Ярмарка, Главный дом. Полдень пыльный, у окошек очередь купцов.   # TODO(музей): где работала касса на ярмарке"
+  - id: shop
+    title: Меняльная лавка Гурова
+    short: Меняльная лавка
+    scene: shop
+    plates: 2
+    onMap: true
+    exhibit: false
+    mapPos: [170, 300]
+    enterKnot: shop_enter
+    text: Ярмарочный ряд. Вывеска «Размен денег. Ф. М. Гуровъ».
+  - id: yard
+    title: "Миллионка: двор дома вдовы Кукушкиной"
+    short: Двор на Миллионке
+    scene: yard
+    plates: 4
+    onMap: true
+    exhibit: false
+    mapPos: [640, 330]
+    enterKnot: yard_enter
+    text: Нижний базар, под Кремлёвским откосом. Сырость, бельё на верёвках, запах гари из подвального окна.
+  - id: cellar
+    title: Подвал «Фотографии и переплётной И. Ветлугина»
+    short: Подвал-мастерская
+    scene: cellar
+    plates: 12
+    onMap: false
+    exhibit: true
+    mapPos: [640, 330]
+    enterKnot: cellar_enter
+    text: Низкий сводчатый подвал. Лампа, магниевая гарь, тёплая зола.
+  - id: pharmacy
+    title: Аптека Н. П. Лаврова на Рождественской
+    short: Аптека
+    scene: null
+    plates: 0
+    onMap: true
+    exhibit: false
+    requiresFact: f_labels
+    mapPos: [560, 250]
+    enterKnot: pharmacy_enter
+    text: Аптека с рецептурным отделом. Провизор за конторкой.
+  - id: flophouse
+    title: Ночлежный дом у Нижнего базара
+    short: Ночлежка
+    scene: flophouse
+    plates: 0
+    onMap: true
+    exhibit: false
+    requiresFact: f_skobtsov_whereabouts
+    mapPos: [720, 380]
+    enterKnot: flophouse_enter
+    text: Нары в два яруса, кипяток, запах махорки.
+  - id: chamber
+    title: Камера судебного следователя
+    short: Камера следователя
+    scene: chamber
+    plates: 0
+    onMap: true
+    exhibit: false
+    mapPos: [760, 180]
+    enterKnot: chamber_enter
+    text: Здание окружного суда в Кремле. Стол, шкаф с делами, окно на Волгу.
+travel:
+  "museum>bank": 0
+  "bank>shop": 10
+  "bank>yard": 30
+  "shop>yard": 30
+  "yard>cellar": 1
+  "yard>flophouse": 5
+  "yard>pharmacy": 10
+  "yard>chamber": 20
+  "pharmacy>chamber": 15
+  "flophouse>chamber": 20
+  "bank>chamber": 35
+  "shop>chamber": 35
+  "cellar>chamber": 20
+travelDefault: 25
+costs:
+  look: 3
+  describeRoom: 5
+  examine: 2
+  lupa: 3
+  search: 10
+  photo: 5
+  magnesium: 2
+  measure: 2
+  collect: 6
+  cast: 20
+  note: 1
+  dialogue: 2
+  tripod: 1
+  origin: 2
+  telegram: 10
+persons:
+  - id: zharov
+    name: Иван Фомич Жаров
+    role: Надзиратель сыскного отделения, напарник
+    portrait: { coat: "#3d4434", skin: "#c9a27e", hat: cap, hair: "#7a6a58" }
+    accusable: false
+  - id: photographer
+    name: Осип Лукич Брюханов
+    role: Фотограф сыскного отделения
+    portrait: { coat: "#4a3b33", skin: "#d1ab88", hat: none, hair: "#3a2c22" }
+    accusable: false
+  - id: cashier
+    name: Аполлинарий Саввич Нестеров
+    role: Кассир-контролёр Государственного банка
+    portrait: { coat: "#2f3a48", skin: "#dcb796", hat: none, hair: "#9a9488" }
+    accusable: false
+  - id: pyzhov
+    name: Степан Ильич Пыжов
+    role: Околоточный надзиратель
+    portrait: { coat: "#2c3440", skin: "#c49072", hat: cap, hair: "#4a3a2a" }
+    accusable: true
+    witnessCandidate: { admissible: "no", reason: Полицейский чин — не может быть понятым }
+  - id: mitrofan
+    name: Митрофан
+    role: Дворник
+    portrait: { coat: "#5a4a32", skin: "#c58f6a", hat: cap, hair: "#5c4a38" }
+    accusable: true
+    witnessCandidate: { admissible: "no", reason: Свидетель по делу — не может быть понятым }
+  - id: kukushkina
+    name: Агриппина Степановна Кукушкина
+    role: Вдова, квартирная хозяйка
+    portrait: { coat: "#3a2f3a", skin: "#d8b08e", hat: kerchief, hair: "#6a5446" }
+    accusable: true
+  - id: sychev
+    name: Сычёв
+    role: Лавочник с соседнего двора
+    portrait: { coat: "#5b5040", skin: "#d2a585", hat: cap, hair: "#7a5a3a" }
+    accusable: false
+    witnessCandidate: { admissible: "yes", reason: Посторонний, с делом не связан — но спешит в лавку }
+  - id: laptev
+    name: Лаптев
+    role: Сапожник, кум хозяйки
+    portrait: { coat: "#463a30", skin: "#c99a76", hat: none, hair: "#2e2620" }
+    accusable: false
+    witnessCandidate: { admissible: "questionable", reason: Кум квартирной хозяйки — возможна заинтересованность }
+  - id: ershov
+    name: Тимофей Ершов
+    role: Водовоз
+    portrait: { coat: "#4f5a52", skin: "#c99772", hat: cap, hair: "#8a6a48" }
+    accusable: false
+    witnessCandidate: { admissible: "yes", reason: Посторонний, с делом не связан }
+  - id: gurov
+    name: Фрол Матвеевич Гуров
+    role: Ярмарочный меняла
+    portrait: { coat: "#3b3226", skin: "#d6ad86", hat: bowler, hair: "#5a4632" }
+    accusable: true
+  - id: provizor
+    name: Николай Петрович Лавров
+    role: Провизор
+    portrait: { coat: "#e3ddd0", skin: "#dcb595", hat: none, hair: "#8a8278" }
+    accusable: false
+  - id: vetlugin
+    name: Илья Ветлугин
+    role: Фотограф, хозяин ателье
+    portrait: { coat: "#262628", skin: "#d6b08c", hat: bowler, hair: "#2a2220" }
+    accusable: true
+  - id: skobtsov
+    name: Аким Скобцов
+    role: Гравёр-ретушёр, ранее судим
+    portrait: { coat: "#3a3a36", skin: "#bf9476", hat: cap, hair: "#3a3026" }
+    accusable: true
+  - id: mokhov
+    name: Лаврентий Мохов
+    role: Приезжий «переплётчик»
+    portrait: { coat: "#3f3330", skin: "#d4aa88", hat: bowler, hair: "#6a4a30" }
+    accusable: true
+  - id: museum_keeper
+    name: Вера Андреевна
+    role: Смотритель фондов музея (сегодня)
+    portrait: { coat: "#4a4a58", skin: "#dab694", hat: none, hair: "#9a8a80" }
+    accusable: false
+  - id: merchant
+    name: Купец в очереди
+    role: Посетитель кассы
+    portrait: { coat: "#5a4630", skin: "#d0a07a", hat: cap, hair: "#6a5038" }
+    accusable: false
+  - id: flop_keeper
+    name: Смотритель ночлежки
+    role: Смотритель ночлежного дома
+    portrait: { coat: "#4a4238", skin: "#c99a78", hat: cap, hair: "#8a8070" }
+    accusable: false
+variants:
+  - id: truth_main
+    title: Основной
+    summary: Ветлугин организовал, Скобцов изготовлял, меняла Гуров сбывал, хозяйка покрывала за надбавку.
+    roles: { vetlugin: organizer, skobtsov: maker, gurov: seller, kukushkina: concealer, pyzhov: none, mitrofan: none, mokhov: none }
+    fugitive: vetlugin
+    reveal:
+      - Ночью Скобцов печатал очередную пробу, и Ветлугин, торопясь, поджёг магний, чтобы снять лист для сверки. Вспышка, дым, крики соседей.
+      - Ветлугин схватил деньги, сунул квитанцию в карман старого пальто — и бросил пальто вместе с багажом. С первым гудком он был на пристани.
+      - Скобцов ушёл раньше, к Нижнему базару, в ночлежку. Хозяйка видела обоих — и промолчала, как молчала всё лето за пять рублей надбавки.
+    proofs:
+      vetlugin: [[f_receipt_vetlugin, f_kukushkina_admits], [f_receipt_vetlugin, f_gurov_admits]]
+      skobtsov: [[f_prints_match], [f_tools_as, f_skobtsov_confession]]
+      gurov: [[f_book_match], [f_gurov_admits]]
+      kukushkina: [[f_kukushkina_admits]]
+    workshopLink: [f_paint_match, f_stone_ornament, f_negative_bill, f_sample_number_match, f_proof_number]
+    reference:
+      protocolPoints:
+        - Описание помещения с порога, обзорные снимки до входа
+        - Выяснено у околоточного, что он менял до осмотра
+        - Ключевые предметы сняты до изъятия, с масштабом
+        - Оттиски из печи — на жёсткую подложку под стекло
+        - Пресс опечатан на месте, образец краски снят на бумагу
+        - Ложные следы отделены и описано их происхождение
+        - Понятые — водовоз Ершов и лавочник Сычёв (или замена), без кума хозяйки
+      examination:
+        ev_bank_fakes: Экспедиция заготовления государственных бумаг — вопрос о способе изготовления и общем источнике
+        ev06_prints: Сыскное отделение (картотека) — сравнение со Скобцовым
+      telegram: До 17:00 — в Козьмодемьянск, приметы «господина в котелке», пароход «Волжанин»
+  - id: truth_landlord
+    title: «Подставной хозяин»
+    summary: Ветлугин лишь сдавал подвал. Мастерскую держал Скобцов, а околоточный за долю закрывал глаза.
+    roles: { vetlugin: none, skobtsov: organizer, gurov: seller, kukushkina: concealer, pyzhov: patron, mitrofan: none, mokhov: none }
+    fugitive: null
+    reveal:
+      - Ветлугин ещё весной сдал подвал «переплётчику» Скобцову и почти не спускался туда. Утренним пароходом он уехал по своим делам — закупать пластинки в Казани.
+      - Скобцов работал по ночам. Околоточный Пыжов знал и раз в неделю заходил «за долей».
+      - Когда ночью полыхнул магний, Пыжов прибежал первым — и унёс из подвала свёрток бумаг, где было письмо о сдаче подвала. «На сохранность».
+    proofs:
+      skobtsov: [[f_prints_match], [f_sublet_letter], [f_skobtsov_confession]]
+      pyzhov: [[f_pyzhov_visits, f_dvornik_pyzhov_bundle], [f_pyzhov_visits, f_pyzhov_papers_hidden]]
+      gurov: [[f_book_match], [f_gurov_admits]]
+      kukushkina: [[f_kukushkina_admits]]
+    workshopLink: [f_paint_match, f_stone_ornament, f_negative_bill, f_sample_number_match, f_proof_number]
+    reference:
+      protocolPoints:
+        - Изменения обстановки от околоточного — не небрежность, а сокрытие; записать дословно
+        - Бумаги, вынесенные околоточным, истребовать и описать
+        - Ключевые предметы сняты до изъятия, с масштабом
+      examination:
+        ev_bank_fakes: Экспедиция заготовления государственных бумаг
+        ev06_prints: Сыскное отделение (картотека) — сравнение со Скобцовым
+      telegram: Ветлугин не скрывается — телеграмма не обязательна
+  - id: truth_guest
+    title: «Гастролёр»
+    summary: Подвал на ярмарку снял приезжий мастер; местные только сбывали. Штихели с инициалами — подброшены.
+    roles: { vetlugin: none, skobtsov: none, gurov: seller, kukushkina: concealer, pyzhov: none, mitrofan: none, mokhov: organizer }
+    fugitive: mokhov
+    reveal:
+      - Ветлугин с июня в отъезде; хозяйка тайком сдала подвал на ярмарку приезжему «переплётчику» Мохову.
+      - Мохов работал один и предусмотрительно подбросил в стол чужие штихели с выбитыми буквами «А. С.» — инициалами известного полиции гравёра.
+      - После вспышки он ушёл первым пароходом, бросив пальто. Скобцов всю ночь был в ночлежке — это видели десятки людей.
+    proofs:
+      mokhov: [[f_receipt_mokhov, f_kukushkina_admits], [f_receipt_mokhov, f_gurov_admits]]
+      gurov: [[f_book_match], [f_gurov_admits]]
+      kukushkina: [[f_kukushkina_admits]]
+    workshopLink: [f_paint_match, f_stone_ornament, f_negative_bill, f_sample_number_match, f_proof_number]
+    reference:
+      protocolPoints:
+        - Инструмент с инициалами описать, но не делать выводов о владельце
+        - Проверить алиби Скобцова в ночлежке
+        - Ключевые предметы сняты до изъятия, с масштабом
+      examination:
+        ev_bank_fakes: Экспедиция заготовления государственных бумаг
+        ev06_prints: Сыскное отделение (картотека) — сравнение; результат отрицательный
+      telegram: До 17:00 — в Козьмодемьянск, приметы «господина в котелке», пароход «Волжанин»
+timeline:
+  - id: sychev_leaves
+    at: "11:00"
+    effect: witness_leaves:sychev
+    delayIfFlag: { flag: sychev_stays, at: "12:30" }
+    text: "Лавочник Сычёв мнётся у двери: «Ваше благородие, лавка без хозяина стоит!» — и уходит наверх."
+  - id: rain
+    at: "11:40"
+    effect: rain:yard
+    text: Над Миллионкой пошёл дождь. Двор раскисает, следы на сырой земле расплываются.
+  - id: steamer
+    at: "17:00"
+    effect: flag:steamer_passed
+    text: Пять часов пополудни. «Волжанин» уже подходит к нижним пристаням — телеграмме теперь не успеть.
+  - id: day_end
+    at: "20:00"
+    effect: flag:day_over
+    text: Восемь вечера. Пора сдавать дело.
+telegram:
+  deadline: "17:00"
+  destinations:
+    - { id: vasilsursk, title: Васильсурск — пристань }
+    - { id: kozmodemyansk, title: Козьмодемьянск — полицейскому надзирателю пристани }
+    - { id: cheboksary, title: Чебоксары — пристань }
+    - { id: kazan, title: Казань — сыскное отделение }
+  correctDestination: kozmodemyansk
+  steamerFact: f_steamer
+  descriptionFacts: [f_dvornik_two_men, f_receipt_vetlugin, f_receipt_mokhov, f_coat_owner]
+examination:
+  addressees:
+    - { id: egzb, title: Экспедиция заготовления государственных бумаг (С.-Петербург), status: "TODO(кафедра/музей): подтвердить маршрут" }
+    - { id: kabinet, title: Кабинет научно-судебной экспертизы (Москва), status: "TODO(кафедра): открыт ли к августу 1913 г.?" }
+    - { id: sysk, title: Сыскное отделение — дактилоскопическая картотека, status: черновик }
+    - { id: local, title: Местный аптекарь, status: черновик }
+  questions:
+    - { id: q_method, text: "Каким способом изготовлены представленные билеты — тем же, что подлинные, или иным?", for: [ev_bank_fakes, ev03_burnt_proofs, ev13_sheet], good: true }
+    - { id: q_same, text: "Изготовлены ли билеты из кассы и листы из подвала с одних печатных форм и одной краской?", for: ["*"], good: true }
+    - { id: q_paint, text: "Однородна ли краска с валика пресса с краской на билетах из кассы?", for: [ev01_press], good: true }
+    - { id: q_prints, text: "Пригодны ли следы пальцев для сравнения и не оставлены ли они лицами из картотеки?", for: [ev06_prints], good: true }
+    - { id: q_chem, text: "Какие вещества содержатся в бутылях и для каких работ они применяются?", for: [ev10_bottles], good: true }
+    - { id: q_neg, text: "Не изготовлен ли негатив с подлинного билета, найденного под стеклом стола?", for: [ev04_negatives], good: true }
+    - { id: q_guilty, text: "Кто именно изготовил фальшивые билеты?", for: ["*"], good: false }
+  objects:
+    - { evidence: ev_bank_fakes, correct: [egzb] }
+    - { evidence: ev01_press, correct: [kabinet, egzb] }
+    - { evidence: ev03_burnt_proofs, correct: [egzb, kabinet] }
+    - { evidence: ev04_negatives, correct: [kabinet] }
+    - { evidence: ev06_prints, correct: [sysk, kabinet] }
+    - { evidence: ev10_bottles, correct: [kabinet, local] }
+exhibitRoute: [museum, cellar, bank]
+exhibitFinale:
+  signs:
+    - { id: s_paint, text: "Краска на валике пресса — того же тусклого оттенка, что у подделки", evidence: [ev01_press] }
+    - { id: s_number, text: "Номер подлинного билета под стеклом — тот же, что на всех фальшивках", evidence: [ev05_sample] }
+    - { id: s_stone, text: "На камне в косом свете — орнамент, как рамка билета", evidence: [ev02_stone] }
+    - { id: s_negative, text: "Среди портретов — негатив с изображением билета", evidence: [ev04_negatives] }
+    - { id: s_sheet, text: "Лист на верёвке напечатан только с лицевой стороны", evidence: [ev13_sheet] }
+  suspects: [vetlugin, skobtsov, gurov, kukushkina, mitrofan, pyzhov]

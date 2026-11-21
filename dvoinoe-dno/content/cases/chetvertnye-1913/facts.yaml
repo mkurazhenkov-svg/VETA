@@ -1,0 +1,80 @@
+# Факты записной книжки. kind: bank | evidence | testimony | document | inference | archive.
+# infer — факт выводится сам, когда известны все перечисленные. key — ключевой (для оценки опроса).
+facts:
+  # --- Касса Госбанка ---
+  - { id: f_bank_paper, kind: bank, presentable: true, text: "Бумага подделки мягче и тоньше подлинной; на просвет нет водяного знака." }
+  - { id: f_bank_grid, kind: bank, presentable: true, text: "В лупу: фоновая сетка подделки расплывается, тонкие линии сливаются." }
+  - { id: f_bank_color, kind: bank, presentable: true, text: "Краска подделки тусклее и темнее, с зеленоватым отливом." }
+  - { id: f_bank_numbers, kind: bank, presentable: true, text: "Все фальшивые билеты пачки несут один и тот же номер: серия ВТ № 027413." }
+  - { id: f_bank_changer, kind: testimony, key: true, presentable: true, text: "Кассир: пачку сдал ярмарочный меняла Гуров из Мучного ряда." }
+  - { id: f_bank_sample_taken, kind: document, text: "Пачка подделок принята от кассы под расписку как вещественное доказательство." }
+  - { id: f_bank_cashier_offended, kind: testimony, text: "Кассир обиделся, что его перебили, и замолчал о деталях." }
+  # --- Двор ---
+  - { id: f_dvornik_two_men, kind: testimony, key: true, presentable: true, text: "Дворник ночью видел двоих: «господина в котелке» с саквояжем и «худого, с руками в чёрном»." }
+  - { id: f_dvornik_time, kind: testimony, key: true, text: "«Господин в котелке» ушёл со двора с первым пароходным гудком — около шести; «худой» — раньше, к базару." }
+  - { id: f_dvornik_pyzhov_bundle, kind: testimony, presentable: true, text: "Дворник видел, как околоточный вынес из подвала свёрток бумаг." }
+  - { id: f_dvornik_parrot, kind: testimony, text: "Дворник повторяет за следователем: «Он, он самый, фотограф»." }
+  - { id: f_dvornik_boots, kind: evidence, text: "У дворника сапоги с подковкой — как один из следов во дворе." }
+  - { id: f_pyzhov_changes, kind: testimony, key: true, presentable: true, text: "Околоточный: трогал рукоять пресса, залил печь водой, открывал шкаф, взял со стола свёрток бумаг «на сохранность». С ним были двое пожарных.",
+      textByVariant: { truth_landlord: "Околоточный: трогал рукоять пресса, залил печь водой, открывал шкаф; с ним были двое пожарных. О бумагах промолчал." } }
+  - { id: f_pyzhov_papers, kind: document, presentable: true, text: "Бумаги из подвала, отданные околоточным: квитанции за наём и письма.",
+      textByVariant: { truth_main: "Бумаги, отданные околоточным: квитанции Кукушкиной за наём подвала Ветлугиным с припиской «надбавка».", truth_landlord: "Бумаги, отданные околоточным, — после долгого запирательства: письмо Ветлугина «сдаю подвал А. С. под переплётную».", truth_guest: "Бумаги, отданные околоточным: расписка Кукушкиной в получении денег «от г. Мохова за подвал на ярмарку»." } }
+  - { id: f_sublet_letter, kind: document, key: false, variants: [truth_landlord], presentable: true, text: "Письмо Ветлугина: подвал с весны сдан «А. С.» под переплётную." }
+  - { id: f_mokhov_rent, kind: document, variants: [truth_guest], presentable: true, text: "Расписка хозяйки: деньги за подвал получены от приезжего Мохова." }
+  - { id: f_pyzhov_papers_hidden, kind: testimony, variants: [truth_landlord], text: "Околоточный сперва отрицал, что выносил бумаги, и отдал их, лишь когда ему предъявили показания дворника." }
+  - { id: f_pyzhov_visits, kind: testimony, variants: [truth_landlord], key: true, text: "Хозяйка: околоточный по вечерам спускался в подвал «за долей»." }
+  - { id: f_kukushkina_lie, kind: testimony, presentable: true, text: "Хозяйка: «Подвал сдан под фотографию, что там делали — не знаю, не спускалась»." }
+  - { id: f_kukushkina_admits, kind: testimony, key: true, presentable: true, text: "Хозяйка призналась, что знала: в подвале «нечисто».",
+      textByVariant: { truth_main: "Хозяйка призналась: знала, что Ветлугин с «худым» печатают по ночам, и брала надбавку — пять рублей в месяц.", truth_landlord: "Хозяйка призналась: подвал держал Скобцов, платил надбавку; околоточный знал.", truth_guest: "Хозяйка призналась: в отсутствие Ветлугина сдала подвал на ярмарку приезжему Мохову, брала надбавку." } }
+  - { id: f_yard_footprints, kind: evidence, presentable: true, text: "Во дворе на сырой земле — две пары следов: городские штиблеты и сапоги с подковкой, от подвала к воротам." }
+  - { id: f_yard_wrapper, kind: evidence, presentable: true, text: "В помойной яме — обёртка от пачки писчей бумаги с клеймом бумажной фабрики." }
+  - { id: f_rumor_guest, kind: inference, text: "Нижегородец: на ярмарку и мастера-гастролёры приезжают — снимают углы на сезон." }
+  - { id: f_sychev_stays, kind: testimony, text: "Лавочник согласился задержаться до половины первого." }
+  # --- Подвал ---
+  - { id: f_room_general, kind: evidence, text: "Подвал описан с порога: сводчатый, около 14 × 10 аршин, окно во двор, печь в дальнем углу." }
+  - { id: f_press_paint, kind: evidence, presentable: true, text: "На валике ручного пресса — остатки тусклой зеленоватой краски." }
+  - { id: f_paint_match, kind: inference, infer: [f_press_paint, f_bank_color], key: false, text: "Цвет краски на валике совпадает с оттенком подделки из кассы." }
+  - { id: f_stone_ornament, kind: evidence, presentable: true, text: "На литографском камне в косом свете проступает фрагмент орнамента, сходного с рамкой кредитного билета." }
+  - { id: f_proofs, kind: evidence, presentable: true, text: "В печи — полусгоревшие листы с печатным изображением: следы многих неудачных проб." }
+  - { id: f_proofs_number_visible, kind: evidence, text: "На одном обрывке из печи читается часть номера: «…7413»." }
+  - { id: f_proof_number, kind: inference, infer: [f_proofs_number_visible, f_bank_numbers], text: "Обрывок номера из печи совпадает с номером на фальшивках." }
+  - { id: f_negative_bill, kind: evidence, presentable: true, text: "Среди стеклянных негативов с портретами клиентов — негатив с изображением кредитного билета." }
+  - { id: f_sample_number, kind: evidence, presentable: true, text: "Под стеклом ретушёрского стола — подлинный билет с проколами от булавок по углам; серия ВТ № 027413." }
+  - { id: f_sample_number_match, kind: inference, infer: [f_sample_number, f_bank_numbers], text: "Номер подлинника из-под стекла совпадает с номером на всех фальшивках: их копировали с него." }
+  - { id: f_prints, kind: evidence, presentable: true, text: "Окрашенные краской следы пальцев: на рукояти пресса, на крае камня, на дверном косяке." }
+  - { id: f_footprints_cellar, kind: evidence, presentable: true, text: "У входа в угольной пыли — две пары следов: городские штиблеты и сапоги с подковкой." }
+  - { id: f_notebook_cipher, kind: evidence, presentable: true, text: "Счётная книжка: столбцы номеров, похожих на номера ярмарочных лавок, и суммы." }
+  - { id: f_book_match, kind: inference, infer: [f_notebook_cipher, f_gurov_ledger], key: false, text: "Записи в книжке из подвала совпадают с книгой менялы Гурова по датам и суммам." }
+  - { id: f_receipt_vetlugin, kind: document, variants: [truth_main, truth_landlord], presentable: true, text: "Надорванная багажная квитанция парохода «Волжанин» на имя г. Ветлугина, рейс сего числа в 6 утра." }
+  - { id: f_receipt_mokhov, kind: document, variants: [truth_guest], presentable: true, text: "Надорванная багажная квитанция парохода «Волжанин» на имя г. Мохова, рейс сего числа в 6 утра." }
+  - { id: f_steamer, kind: document, text: "Пароход «Волжанин» ушёл вниз по Волге в 6 утра сего дня, до Казани. Квитанция надорвана — багаж брошен." }
+  - { id: f_coat_owner, kind: evidence, text: "Пальто на гвозде — городское, дорогого сукна; в кармане котелок не поместится, но рядом на полке — шляпная коробка от котелка." }
+  - { id: f_labels, kind: evidence, presentable: true, text: "На бутылях этикетки аптеки Н. П. Лаврова на Рождественской улице." }
+  - { id: f_tools_as, kind: evidence, presentable: true, text: "В ящике стола — набор штихелей с выбитыми на рукоятях инициалами «А. С.»." }
+  - { id: f_tools_used, kind: evidence, variants: [truth_main, truth_landlord], text: "В лупу: рукояти отполированы ладонью, лезвия много раз точены — инструмент в работе годами." }
+  - { id: f_tools_planted, kind: evidence, variants: [truth_guest], text: "В лупу: буквы «А. С.» выбиты свежо, лезвия почти не тронуты — инструментом едва работали." }
+  - { id: f_ash_warm, kind: evidence, text: "Зола в печи ещё тёплая; на своде — свежая копоть от магниевой вспышки." }
+  - { id: f_sheet_face_only, kind: evidence, presentable: true, text: "На сушильной верёвке — лист с изображением только лицевой стороны билета." }
+  - { id: f_false_props, kind: evidence, text: "Фон с балюстрадой, стул, камера для портретов — обычное имущество ателье." }
+  # --- Из разговоров с Жаровым ---
+  - { id: f_skobtsov_card, kind: document, text: "Жаров: «А. С.» — это, поди, Аким Скобцов, гравёр-ретушёр, судим за подделку бумаг; карта его в нашей картотеке." }
+  - { id: f_skobtsov_whereabouts, kind: testimony, text: "Жаров: Скобцова видели в ночлежном доме у Нижнего базара." }
+  - { id: f_prints_match, kind: document, variants: [truth_main, truth_landlord], key: false, text: "Картотека сыскного: следы с рукояти пресса сходны с картой Скобцова по узору и нескольким приметам." }
+  - { id: f_prints_nomatch, kind: document, variants: [truth_guest], text: "Картотека сыскного: следы с рукояти пресса не сходны с картой Скобцова." }
+  - { id: f_prints_doubtful, kind: document, text: "Следы на изъятом предмете смазаны — сравнить с картотекой нельзя." }
+  # --- Аптека ---
+  - { id: f_pharmacy_book, kind: document, key: true, text: "Рецептурная книга аптеки: кто брал фотореактивы.",
+      textByVariant: { truth_main: "Рецептурная книга: фотореактивы брал Ветлугин, а с июля — ещё и «худой мастеровой» по его записке.", truth_landlord: "Рецептурная книга: с весны фотореактивы брал мастеровой А. Скобцов «для переплётной», Ветлугин — лишь дважды.", truth_guest: "Рецептурная книга: в июле и августе фотореактивы брал приезжий г. Мохов, назвался переплётчиком." } }
+  # --- Меняльная лавка ---
+  - { id: f_gurov_story, kind: testimony, text: "Гуров: четвертные принял от случайного купца-хлебника, имени не спросил." }
+  - { id: f_gurov_ledger, kind: document, presentable: true, text: "Книга менялы Гурова: записи о приёме и выдаче денег по дням ярмарки." }
+  - { id: f_gurov_admits, kind: testimony, key: true, presentable: true, text: "Гуров признал, что пачки получал не от купца.",
+      textByVariant: { truth_main: "Гуров признал: пачки ему приносил «господин из фотографии» Ветлугин, за каждую — четвертая часть.", truth_landlord: "Гуров признал: пачки приносил гравёр Скобцов, «а околоточный обещал, что не тронут».", truth_guest: "Гуров признал: пачки приносил приезжий «переплётчик» Мохов, назвался москвичом." } }
+  # --- Ночлежка ---
+  - { id: f_skobtsov_confession, kind: testimony, variants: [truth_main, truth_landlord], key: true, text: "Скобцов, увидев снимки и штихели, признал, что резал и печатал.",
+      textByVariant: { truth_main: "Скобцов признал: резал и печатал по заказу Ветлугина, за поштучную плату.", truth_landlord: "Скобцов признал: подвал держал сам, Ветлугин ни при чём, околоточному платил долю." } }
+  - { id: f_skobtsov_alibi, kind: testimony, variants: [truth_guest], key: true, text: "Смотритель ночлежки и десяток постояльцев: Скобцов всю ночь был на нарах. Штихели у него украли ещё весной." }
+  # --- Архив (QR) ---
+  - { id: f_archive_bank_signs, kind: archive, text: "Справка кассы: подделки распознают по бумаге, водяному знаку, сетке, краске и номерам." }
+  - { id: f_archive_engravers, kind: archive, text: "Циркуляр сыскного: в Нижнем живёт ранее судимый гравёр Аким Скобцов." }
+  - { id: f_archive_schedule, kind: archive, text: "Расписание: «Волжанин» около 18:30 в Козьмодемьянске, стоит час; в Чебоксарах — к полуночи." }

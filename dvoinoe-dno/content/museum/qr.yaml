@@ -1,0 +1,18 @@
+# QR-коды у витрин → архивные документы в игре. Код вводится вручную или открывается ссылкой ?qr=КОД.
+# TODO(музей): места для QR-кодов в зале.
+codes:
+  - code: DD-1913
+    document: doc_bank_note
+    title: Справка ярмарочной кассы Государственного банка
+    hint: Напоминает, по каким признакам кассир отличил подделку.
+    fact: f_archive_bank_signs
+  - code: DD-PRESS
+    document: doc_police_circular
+    title: Циркуляр сыскного отделения о гравёрах
+    hint: Список ранее судимых гравёров — среди них есть инициалы «А. С.».
+    fact: f_archive_engravers
+  - code: DD-VOLGA
+    document: doc_steamer_schedule
+    title: Расписание пароходов вниз по Волге
+    hint: Когда пароход «Волжанин» проходит пристани до Казани.
+    fact: f_archive_schedule

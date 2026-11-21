@@ -1,0 +1,9 @@
+{
+  "name": "Двойное дно. Дело о фальшивых четвертных",
+  "short_name": "Двойное дно",
+  "start_url": "./index.html?mode=exhibit&kiosk=1",
+  "display": "fullscreen",
+  "background_color": "#1c1612",
+  "theme_color": "#1c1612",
+  "lang": "ru"
+}

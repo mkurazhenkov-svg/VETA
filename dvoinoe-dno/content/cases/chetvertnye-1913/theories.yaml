@@ -1,0 +1,73 @@
+# Картотека версий. Принятая («обдуманная») версия даёт бонус к навыкам и туннельное зрение:
+# проверки на факты из contradicts становятся на 2 сложнее.
+theories:
+  - id: th_photographer
+    title: Мастерская — дело фотографа Ветлугина
+    text: Подвал его, ателье его, негатив билета среди его портретов. Он и сбежал.
+    revealedBy: [f_receipt_vetlugin, f_negative_bill, f_kukushkina_lie]
+    thinkMinutes: 20
+    bonus: { craft: 1, logic: 1 }
+    supports: [f_receipt_vetlugin, f_negative_bill, f_pharmacy_book]
+    contradicts: [f_sublet_letter, f_receipt_mokhov, f_tools_planted, f_mokhov_rent]
+    trueIn: [truth_main]
+    voice: logic
+  - id: th_engraver
+    title: Руки мастерской — гравёр Скобцов
+    text: Штихели «А. С.», окрашенные пальцы, «худой с руками в чёрном». Резал и печатал он.
+    revealedBy: [f_tools_as, f_skobtsov_card]
+    thinkMinutes: 15
+    bonus: { craft: 1, instinct: 1 }
+    supports: [f_tools_as, f_prints_match, f_dvornik_two_men]
+    contradicts: [f_tools_planted, f_prints_nomatch, f_skobtsov_alibi]
+    trueIn: [truth_main, truth_landlord]
+    voice: craft
+  - id: th_changer
+    title: Сбыт шёл через менялу Гурова
+    text: Меняла сдал пачку в кассу, его лавка — в Мучном ряду, а в книжке из подвала — «М.р. 14».
+    revealedBy: [f_bank_changer, f_notebook_cipher]
+    thinkMinutes: 15
+    bonus: { merchant: 1, chancery: 1 }
+    supports: [f_book_match, f_gurov_admits]
+    contradicts: [f_gurov_story]
+    trueIn: [truth_main, truth_landlord, truth_guest]
+    voice: merchant
+  - id: th_landlady
+    title: Хозяйка знала и молчала
+    text: Не спускалась в подвал всё лето? При запахе гари и стуке пресса по ночам?
+    revealedBy: [f_kukushkina_lie]
+    thinkMinutes: 15
+    bonus: { instinct: 1 }
+    supports: [f_kukushkina_admits, f_pyzhov_papers]
+    contradicts: []
+    trueIn: [truth_main, truth_landlord, truth_guest]
+    voice: instinct
+  - id: th_okolotochny
+    title: Околоточный в доле
+    text: Первым прибежал, трогал пресс, залил печь, унёс бумаги «на сохранность». Небрежность — или сокрытие?
+    revealedBy: [f_pyzhov_changes, f_dvornik_pyzhov_bundle]
+    thinkMinutes: 25
+    bonus: { instinct: 1, ustav: 1 }
+    supports: [f_pyzhov_visits, f_pyzhov_papers_hidden, f_sublet_letter]
+    contradicts: []
+    trueIn: [truth_landlord]
+    voice: ustav
+  - id: th_guest
+    title: Мастер — приезжий
+    text: На ярмарку съезжаются не только купцы. Кто снял подвал на сезон?
+    revealedBy: [f_rumor_guest, f_tools_planted, f_receipt_mokhov, f_mokhov_rent]
+    thinkMinutes: 20
+    bonus: { local: 1, logic: 1 }
+    supports: [f_receipt_mokhov, f_tools_planted, f_skobtsov_alibi, f_mokhov_rent]
+    contradicts: [f_tools_used, f_prints_match]
+    trueIn: [truth_guest]
+    voice: local
+  - id: th_dvornik
+    title: Дворник замешан
+    text: Сапоги с подковкой, пьёт, путается в показаниях. Удобный подозреваемый.
+    revealedBy: [f_dvornik_boots]
+    thinkMinutes: 15
+    bonus: { instinct: 1 }
+    supports: [f_dvornik_boots]
+    contradicts: [f_dvornik_two_men, f_dvornik_time]
+    trueIn: []
+    voice: instinct

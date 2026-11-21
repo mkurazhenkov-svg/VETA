@@ -1,0 +1,262 @@
+{
+ "id": "chamber",
+ "title": "Камера судебного следователя",
+ "canvas": [
+  1600,
+  1000
+ ],
+ "origin": [
+  743,
+  304
+ ],
+ "pxPerArshin": 66,
+ "palette": {
+  "ground": "#30281e",
+  "floor": "#6a5236",
+  "wall": "#9a8a6a",
+  "wallDark": "#6e624a",
+  "accent": "#c9a45a",
+  "grunt": "#c6b89c"
+ },
+ "light": {
+  "ambient": 0.6,
+  "tint": "#c8b080",
+  "sources": [
+   {
+    "pos": [
+     6,
+     0
+    ],
+    "radius": 5,
+    "power": 0.35
+   }
+  ]
+ },
+ "room": {
+  "floor": [
+   [
+    0,
+    0
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    10,
+    8
+   ],
+   [
+    0,
+    8
+   ]
+  ],
+  "walls": [
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     10,
+     0
+    ],
+    "h": 4,
+    "window": {
+     "at": 6,
+     "w": 1.8,
+     "h": 2.0,
+     "z": 1.2
+    }
+   },
+   {
+    "from": [
+     0,
+     0
+    ],
+    "to": [
+     0,
+     8
+    ],
+    "h": 4
+   }
+  ]
+ },
+ "walkable": [
+  [
+   [
+    0.4,
+    0.4
+   ],
+   [
+    9.7,
+    0.4
+   ],
+   [
+    9.7,
+    7.7
+   ],
+   [
+    0.4,
+    7.7
+   ]
+  ]
+ ],
+ "props": [
+  {
+   "id": "desk",
+   "shape": "box",
+   "pos": [
+    4.5,
+    2.6
+   ],
+   "size": [
+    2.6,
+    1.4,
+    1.1
+   ],
+   "color": "#4a321e",
+   "detail": true,
+   "label": "Стол"
+  },
+  {
+   "id": "folder",
+   "shape": "flat",
+   "pos": [
+    4.3,
+    2.6
+   ],
+   "z": 1.1,
+   "size": [
+    0.8,
+    0.6,
+    0.1
+   ],
+   "color": "#a8865a",
+   "detail": true,
+   "label": "Папка дела"
+  },
+  {
+   "id": "lamp",
+   "shape": "cyl",
+   "pos": [
+    5.4,
+    2.3
+   ],
+   "z": 1.1,
+   "size": [
+    0.3,
+    0.3,
+    0.6
+   ],
+   "color": "#406a40"
+  },
+  {
+   "id": "cabinet",
+   "shape": "shelf",
+   "pos": [
+    0.5,
+    3.5
+   ],
+   "size": [
+    0.8,
+    2.4,
+    2.8
+   ],
+   "color": "#4a3a28",
+   "label": "Шкаф с делами"
+  },
+  {
+   "id": "chair",
+   "shape": "box",
+   "pos": [
+    4.5,
+    1.4
+   ],
+   "size": [
+    0.7,
+    0.7,
+    1.2
+   ],
+   "color": "#3a2618"
+  }
+ ],
+ "hotspots": [
+  {
+   "id": "HS_folder",
+   "prop": "folder",
+   "approach": [
+    4.4,
+    3.9
+   ],
+   "label": "Папка дела",
+   "action": "folder"
+  }
+ ],
+ "sectors": [
+  {
+   "id": "office",
+   "title": "Камера",
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     10,
+     8
+    ],
+    [
+     0,
+     8
+    ]
+   ]
+  }
+ ],
+ "landmarks": [
+  {
+   "id": "desk",
+   "title": "Стол",
+   "pos": [
+    4.5,
+    2.6
+   ]
+  }
+ ],
+ "north": 35,
+ "hidden": [],
+ "noFlash": [],
+ "fragile": [],
+ "exits": [
+  {
+   "id": "to_map",
+   "to": "map",
+   "pos": [
+    9.4,
+    7.4
+   ],
+   "label": "В город"
+  }
+ ],
+ "spawn": [
+  8.2,
+  6.6
+ ],
+ "npcs": [
+  {
+   "id": "zharov_chamber",
+   "pos": [
+    7.2,
+    4.0
+   ],
+   "knot": "zharov_chamber",
+   "person": "zharov"
+  }
+ ],
+ "followers": false,
+ "photoTargets": []
+}

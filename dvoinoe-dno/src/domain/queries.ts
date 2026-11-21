@@ -36,14 +36,15 @@ export function hasOkPhoto(state: GameState, id: string) {
   return state.photos.some((p) => p.target === id && p.ok && p.inSitu);
 }
 
-/** Улика «зафиксирована»: описана, и (если требует съёмки) есть хороший снимок на месте. */
+/** Улика «зафиксирована»: описана и либо снята на месте, либо описана словами и зарисована с привязкой
+ *  к двум неподвижным ориентирам (пластинок на всё не хватает — так и задумано). */
 export function isFixed(state: GameState, content: Content, id: string): boolean {
   const ev = evidenceDef(content, id);
   const e = state.evidence[id];
   if (!ev || !e) return false;
   if (!e.examined) return false;
   if (ev.documentation.required.length === 0) return true;
-  return hasOkPhoto(state, id);
+  return hasOkPhoto(state, id) || Object.keys(e.measured).length >= 2;
 }
 
 export function docStatus(state: GameState, content: Content, id: string) {

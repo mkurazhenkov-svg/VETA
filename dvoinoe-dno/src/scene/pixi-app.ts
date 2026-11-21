@@ -3,6 +3,7 @@ import { Application, Container, Graphics, Sprite, Text, Texture } from 'pixi.js
 import type { SceneDef } from '../content/schemas';
 import { toScreen, toWorld, pointInPoly, hash, prng, type Vec2 } from './iso';
 import { NavGrid } from './navmesh';
+import { sceneArt, loadImage } from './art';
 import { hex, makeCanvas, paintBackground, paintFigure, paintMarks, paintProp, rgba, type Look } from './painter';
 
 export interface SceneCallbacks {
@@ -36,6 +37,8 @@ interface Actor {
   phase: number;
   npcKnot?: string;
   follower?: boolean;
+  back: boolean;
+  breath: number;
 }
 
 interface Drawable {
@@ -144,6 +147,15 @@ export class SceneView {
     const bg = new Sprite(Texture.from(this.baseCanvas));
     bg.zIndex = -100000;
     this.layer.addChild(bg);
+    const art = sceneArt(scene.id, 'base');
+    if (art)
+      loadImage(art).then((img) => {
+        if (this.scene !== scene) return;
+        const c = makeCanvas(scene.canvas[0], scene.canvas[1]);
+        c.getContext('2d')!.drawImage(img, 0, 0, c.width, c.height);
+        this.baseCanvas = c;
+        bg.texture = Texture.from(c);
+      });
 
     for (const p of scene.props) {
       const ps = paintProp(scene, p);
@@ -161,6 +173,13 @@ export class SceneView {
 
     // скрытый слой (виден только в круге света лампы)
     this.hiddenCanvas = paintMarks(scene, (id) => opts.lampOnly.has(id));
+    const hiddenArt = sceneArt(scene.id, 'hidden');
+    if (hiddenArt)
+      loadImage(hiddenArt).then((img) => {
+        const c = makeCanvas(scene.canvas[0], scene.canvas[1]);
+        c.getContext('2d')!.drawImage(img, 0, 0, c.width, c.height);
+        this.hiddenCanvas = c;
+      });
     const lctx = this.lampCanvas.getContext('2d')!;
     lctx.clearRect(0, 0, 800, 500);
     this.lampTex = Texture.from(this.lampCanvas);
@@ -205,12 +224,13 @@ export class SceneView {
 
   private makeActor(id: string, look: Look, pos: Vec2, isPlayer = false): Actor {
     const k = this.scene!.pxPerArshin;
-    const f0 = paintFigure(look, k, 0, id, false);
-    const f1 = paintFigure(look, k, 1, id, false);
+    // стоит + 4 фазы шага × (лицом / спиной)
+    const figs = [false, true].flatMap((back) => [0, 1, 2, 3, 4].map((f) => paintFigure(look, k, f, id, back)));
+    const f0 = figs[0];
     const sprite = new Sprite(Texture.from(f0.canvas));
     sprite.anchor.set(f0.foot[0] / f0.canvas.width, f0.foot[1] / f0.canvas.height);
     this.layer.addChild(sprite);
-    const a: Actor = { id, look, pos: [...pos] as Vec2, path: [], sprite, frames: [Texture.from(f0.canvas), Texture.from(f1.canvas)], foot: f0.foot, phase: 0 };
+    const a: Actor = { id, look, pos: [...pos] as Vec2, path: [], sprite, frames: figs.map((f) => Texture.from(f.canvas)), foot: f0.foot, phase: 0, back: false, breath: (hash(id) % 100) / 16 };
     this.actors.push(a);
     this.drawables.push({ obj: sprite, box: [pos[0] - 0.2, pos[1] - 0.2, pos[0] + 0.2, pos[1] + 0.2], z: 0, actor: a });
     if (isPlayer) a.sprite.label = 'player';
@@ -469,10 +489,13 @@ export class SceneView {
         } else {
           a.pos = [a.pos[0] + (dx / d) * step, a.pos[1] + (dy / d) * step];
         }
-        a.phase += dt * 7;
-        a.sprite.texture = a.frames[Math.floor(a.phase) % 2];
+        a.phase += dt * 8;
         const sdx = dx - dy; // экранное направление по x
+        const sdy = dx + dy; // экранное направление по y
+        if (Math.abs(sdy) > 0.02) a.back = sdy < 0;
+        a.sprite.texture = a.frames[(a.back ? 5 : 0) + 1 + (Math.floor(a.phase) % 4)];
         if (Math.abs(sdx) > 0.01) a.sprite.scale.x = sdx < 0 ? -1 : 1;
+        a.sprite.scale.y = 1;
         this.placeActor(a);
         moved = true;
         if (a === this.player) {
@@ -484,7 +507,13 @@ export class SceneView {
             f();
           }
         }
-      } else if (a.sprite.texture !== a.frames[0]) a.sprite.texture = a.frames[0];
+      } else {
+        const idle = a.frames[a.back ? 5 : 0];
+        if (a.sprite.texture !== idle) a.sprite.texture = idle;
+        // дыхание и лёгкое покачивание в покое
+        a.sprite.scale.y = 1 + Math.sin(this.time * 1.9 + a.breath) * 0.012;
+        a.sprite.skew.x = Math.sin(this.time * 0.6 + a.breath) * 0.012;
+      }
     }
     if (moved || this.needSort) this.sortDepth();
     this.needSort = false;
@@ -554,7 +583,7 @@ export class SceneView {
     // «cover», если обрезка небольшая (края холста и так растворяются в грунт), иначе «contain»
     const kc = Math.max(sw / W, sh / H);
     const kf = Math.min(sw / W, sh / H);
-    const k = kc / kf < 1.22 ? kc : kf;
+    const k = kc / kf < 1.32 ? kc : kf;
     this.world.scale.set(k);
     this.world.position.set((sw - W * k) / 2, (sh - H * k) / 2);
   }

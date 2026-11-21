@@ -366,7 +366,9 @@ function Teacher() {
 
 // ---------- киоск ----------
 function KioskLayer() {
-  const cfg = content.exhibits.kiosk;
+  // ?idle=N — переопределить таймаут бездействия (для проверки и наладки киоска)
+  const idleOverride = Number(params.get('idle'));
+  const cfg = idleOverride > 0 ? { ...content.exhibits.kiosk, idleSeconds: idleOverride, warnSeconds: Math.min(content.exhibits.kiosk.warnSeconds, Math.ceil(idleOverride / 2)) } : content.exhibits.kiosk;
   const [idle, setIdle] = useState(0);
   const [service, setService] = useState<'none' | 'pin' | 'menu'>('none');
   const [pin, setPin] = useState('');

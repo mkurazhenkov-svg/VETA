@@ -11,9 +11,17 @@ import { App } from './ui/App';
 import * as store from './store/game';
 import * as ctl from './ui/controller';
 import { content } from './content';
+import { portraitUrl } from './ui/portraits';
+import { scenePainting } from './scene/photo-render';
 
 // Хук для e2e-тестов и отладки: только чтение состояния и те же команды, что у интерфейса.
-(window as any).__dd = { store, ctl, content };
+(window as any).__dd = {
+  store,
+  ctl,
+  content,
+  portraitUrl,
+  art: (id: string) => scenePainting(content.scenes[id], new Set()).toDataURL('image/png'),
+};
 
 // Service Worker — только при раздаче по http(s) (киоск, сайт музея). Из файла открывается и без него.
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !import.meta.env.DEV) {

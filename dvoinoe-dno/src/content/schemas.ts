@@ -166,7 +166,18 @@ export const CaseFile = z.object({
       id: z.string(),
       name: z.string(),
       role: z.string(),
-      portrait: z.object({ coat: z.string(), skin: z.string(), hat: z.string(), hair: z.string() }),
+      portrait: z.object({
+        coat: z.string(),
+        skin: z.string(),
+        hat: z.string(),
+        hair: z.string(),
+        beard: z.enum(['none', 'mustache', 'full', 'stubble', 'sideburns']).optional(),
+        age: z.enum(['young', 'mid', 'old']).optional(),
+        build: z.enum(['thin', 'normal', 'stout']).optional(),
+        dress: z.enum(['gentleman', 'uniform', 'worker', 'apron', 'woman', 'robe', 'vest', 'merchant', 'modern']).optional(),
+        glasses: z.boolean().optional(),
+        eyes: z.string().optional(),
+      }),
       accusable: z.boolean(),
       witnessCandidate: z
         .object({ admissible: z.enum(['yes', 'no', 'questionable']), reason: z.string() })

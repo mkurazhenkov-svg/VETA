@@ -128,92 +128,98 @@ persons:
   - id: zharov
     name: Иван Фомич Жаров
     role: Надзиратель сыскного отделения, напарник
-    portrait: { coat: "#3d4434", skin: "#c9a27e", hat: cap, hair: "#7a6a58" }
+    portrait: { coat: "#3d4434", skin: "#c9a27e", hat: cap, hair: "#7a6a58", beard: mustache, age: mid, build: normal, dress: gentleman, eyes: "#5a6a52" }
     accusable: false
   - id: photographer
     name: Осип Лукич Брюханов
     role: Фотограф сыскного отделения
-    portrait: { coat: "#4a3b33", skin: "#d1ab88", hat: none, hair: "#3a2c22" }
+    portrait: { coat: "#4a3b33", skin: "#d1ab88", hat: none, hair: "#3a2c22", beard: full, age: mid, build: stout, dress: vest, eyes: "#4a3a2a" }
     accusable: false
   - id: cashier
     name: Аполлинарий Саввич Нестеров
     role: Кассир-контролёр Государственного банка
-    portrait: { coat: "#2f3a48", skin: "#dcb796", hat: none, hair: "#9a9488" }
+    portrait: { coat: "#2f3a48", skin: "#dcb796", hat: none, hair: "#9a9488", beard: sideburns, age: old, build: thin, dress: gentleman, glasses: true, eyes: "#5a6a7a" }
     accusable: false
   - id: pyzhov
     name: Степан Ильич Пыжов
     role: Околоточный надзиратель
-    portrait: { coat: "#2c3440", skin: "#c49072", hat: cap, hair: "#4a3a2a" }
+    portrait: { coat: "#2c3440", skin: "#c49072", hat: cap, hair: "#4a3a2a", beard: mustache, age: mid, build: stout, dress: uniform, eyes: "#4a3a2a" }
     accusable: true
     witnessCandidate: { admissible: "no", reason: Полицейский чин — не может быть понятым }
   - id: mitrofan
     name: Митрофан
     role: Дворник
-    portrait: { coat: "#5a4a32", skin: "#c58f6a", hat: cap, hair: "#5c4a38" }
+    portrait: { coat: "#5a4a32", skin: "#c58f6a", hat: cap, hair: "#5c4a38", beard: full, age: mid, build: normal, dress: apron, eyes: "#5a5a4a" }
     accusable: true
     witnessCandidate: { admissible: "no", reason: Свидетель по делу — не может быть понятым }
   - id: kukushkina
     name: Агриппина Степановна Кукушкина
     role: Вдова, квартирная хозяйка
-    portrait: { coat: "#3a2f3a", skin: "#d8b08e", hat: kerchief, hair: "#6a5446" }
+    portrait: { coat: "#3a2f3a", skin: "#d8b08e", hat: kerchief, hair: "#6a5446", beard: none, age: mid, build: normal, dress: woman, eyes: "#3a2a22" }
     accusable: true
   - id: sychev
     name: Сычёв
     role: Лавочник с соседнего двора
-    portrait: { coat: "#5b5040", skin: "#d2a585", hat: cap, hair: "#7a5a3a" }
+    portrait: { coat: "#5b5040", skin: "#d2a585", hat: cap, hair: "#7a5a3a", beard: full, age: mid, build: stout, dress: apron, eyes: "#4a5a6a" }
     accusable: false
     witnessCandidate: { admissible: "yes", reason: Посторонний, с делом не связан — но спешит в лавку }
   - id: laptev
     name: Лаптев
     role: Сапожник, кум хозяйки
-    portrait: { coat: "#463a30", skin: "#c99a76", hat: none, hair: "#2e2620" }
+    portrait: { coat: "#463a30", skin: "#c99a76", hat: none, hair: "#2e2620", beard: stubble, age: mid, build: thin, dress: apron, eyes: "#3a2a22" }
     accusable: false
     witnessCandidate: { admissible: "questionable", reason: Кум квартирной хозяйки — возможна заинтересованность }
   - id: ershov
     name: Тимофей Ершов
     role: Водовоз
-    portrait: { coat: "#4f5a52", skin: "#c99772", hat: cap, hair: "#8a6a48" }
+    portrait: { coat: "#4f5a52", skin: "#c99772", hat: cap, hair: "#8a6a48", beard: full, age: young, build: normal, dress: worker, eyes: "#6a7a8a" }
     accusable: false
     witnessCandidate: { admissible: "yes", reason: Посторонний, с делом не связан }
+  - id: nosov
+    name: Приказчик Носов
+    role: Приказчик скобяной лавки с Нижнего базара
+    portrait: { coat: "#4a4a3a", skin: "#d4a888", hat: cap, hair: "#5a4430", beard: mustache, age: young, build: thin, dress: worker, eyes: "#5a4a3a" }
+    accusable: false
+    witnessCandidate: { admissible: "yes", reason: Посторонний, приведён с улицы }
   - id: gurov
     name: Фрол Матвеевич Гуров
     role: Ярмарочный меняла
-    portrait: { coat: "#3b3226", skin: "#d6ad86", hat: bowler, hair: "#5a4632" }
+    portrait: { coat: "#3b3226", skin: "#d6ad86", hat: bowler, hair: "#5a4632", beard: full, age: old, build: stout, dress: merchant, eyes: "#3a2a22" }
     accusable: true
   - id: provizor
     name: Николай Петрович Лавров
     role: Провизор
-    portrait: { coat: "#e3ddd0", skin: "#dcb595", hat: none, hair: "#8a8278" }
+    portrait: { coat: "#e3ddd0", skin: "#dcb595", hat: none, hair: "#8a8278", beard: mustache, age: old, build: thin, dress: robe, glasses: true, eyes: "#5a6a7a" }
     accusable: false
   - id: vetlugin
     name: Илья Ветлугин
     role: Фотограф, хозяин ателье
-    portrait: { coat: "#262628", skin: "#d6b08c", hat: bowler, hair: "#2a2220" }
+    portrait: { coat: "#262628", skin: "#d6b08c", hat: bowler, hair: "#2a2220", beard: mustache, age: mid, build: thin, dress: gentleman, eyes: "#3a2a22" }
     accusable: true
   - id: skobtsov
     name: Аким Скобцов
     role: Гравёр-ретушёр, ранее судим
-    portrait: { coat: "#3a3a36", skin: "#bf9476", hat: cap, hair: "#3a3026" }
+    portrait: { coat: "#3a3a36", skin: "#bf9476", hat: cap, hair: "#3a3026", beard: stubble, age: mid, build: thin, dress: worker, eyes: "#5a5a5a" }
     accusable: true
   - id: mokhov
     name: Лаврентий Мохов
     role: Приезжий «переплётчик»
-    portrait: { coat: "#3f3330", skin: "#d4aa88", hat: bowler, hair: "#6a4a30" }
+    portrait: { coat: "#3f3330", skin: "#d4aa88", hat: bowler, hair: "#6a4a30", beard: mustache, age: mid, build: normal, dress: gentleman, eyes: "#4a5a4a" }
     accusable: true
   - id: museum_keeper
     name: Вера Андреевна
     role: Смотритель фондов музея (сегодня)
-    portrait: { coat: "#4a4a58", skin: "#dab694", hat: none, hair: "#9a8a80" }
+    portrait: { coat: "#4a4a58", skin: "#dab694", hat: none, hair: "#9a8a80", beard: none, age: old, build: normal, dress: modern, glasses: true, eyes: "#5a6a7a" }
     accusable: false
   - id: merchant
     name: Купец в очереди
     role: Посетитель кассы
-    portrait: { coat: "#5a4630", skin: "#d0a07a", hat: cap, hair: "#6a5038" }
+    portrait: { coat: "#5a4630", skin: "#d0a07a", hat: cap, hair: "#6a5038", beard: full, age: mid, build: stout, dress: merchant, eyes: "#4a3a2a" }
     accusable: false
   - id: flop_keeper
     name: Смотритель ночлежки
     role: Смотритель ночлежного дома
-    portrait: { coat: "#4a4238", skin: "#c99a78", hat: cap, hair: "#8a8070" }
+    portrait: { coat: "#4a4238", skin: "#c99a78", hat: cap, hair: "#8a8070", beard: mustache, age: old, build: normal, dress: vest, eyes: "#5a5a4a" }
     accusable: false
 variants:
   - id: truth_main

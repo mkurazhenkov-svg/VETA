@@ -65,6 +65,11 @@
     ~ invite("ershov")
     Ершов: Здравия желаю. Где стать-то? #s:ershov
     -> hub
++ {mode() == "practicum" && witnesses_count() < 2 && not is_witness("nosov")} [Приведите с улицы постороннего человека — в понятые. #min:15]
+    Жаров возвращается с приказчиком скобяной лавки. #s:zharov
+    ~ invite("nosov")
+    Носов: Приказчик я, Носов. Велено — стою. #s:nosov
+    -> hub
 + {mode() == "practicum" && witnesses_count() < 2 && is_witness("ershov") && not is_witness("laptev")} [Позовите сапожника в понятые. #min:15]
     ~ invite("laptev")
     Лаптев спускается, вытирая руки о фартук. #s:laptev

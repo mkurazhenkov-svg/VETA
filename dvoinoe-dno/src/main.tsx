@@ -13,6 +13,7 @@ import * as ctl from './ui/controller';
 import { content } from './content';
 import { portraitUrl } from './ui/portraits';
 import { scenePainting } from './scene/photo-render';
+import { MusicPlayer, PIECES } from './audio/music';
 
 // Хук для e2e-тестов и отладки: только чтение состояния и те же команды, что у интерфейса.
 (window as any).__dd = {
@@ -20,6 +21,7 @@ import { scenePainting } from './scene/photo-render';
   ctl,
   content,
   portraitUrl,
+  music: { MusicPlayer, PIECES },
   art: (id: string) => scenePainting(content.scenes[id], new Set()).toDataURL('image/png'),
 };
 

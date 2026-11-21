@@ -9,7 +9,7 @@ import { GameScreen } from './GameScreen';
 import { MapScreen } from './MapScreen';
 import { Debrief, DebriefView, ExhibitResult } from './Debrief';
 import { enterLocation, ink, scene, travel } from './controller';
-import { setAmbient } from '../audio/sound';
+import { setAmbient, setMusic } from '../audio/sound';
 import { lsGet, lsSet, verifyJournal, download, type JournalExport } from '../store/save';
 import { replay } from '../domain/state';
 import { scoreSession, OUTCOME_LETTER } from '../domain/scoring';
@@ -441,6 +441,15 @@ function KioskLayer() {
   );
 }
 
+function musicKeyFor(): string | null {
+  const sc = screen.value;
+  if (sc === 'game') return state.value.location;
+  if (sc === 'map') return 'map';
+  if (sc === 'debrief' || sc === 'exhibit_result') return 'museum';
+  if (sc === 'title' || sc === 'attract' || sc === 'hero') return 'title';
+  return null;
+}
+
 export function App() {
   useEffect(() => {
     const mode = params.get('mode');
@@ -489,7 +498,14 @@ export function App() {
   const s = state.value;
   useEffect(() => {
     setAmbient(screen.value === 'game' || screen.value === 'map' ? s.location : null);
+    setMusic(musicKeyFor());
   }, [s.location, screen.value]);
+  useEffect(() => {
+    // браузер разрешает звук только после первого касания
+    const first = () => setMusic(musicKeyFor());
+    window.addEventListener('pointerdown', first, { once: true });
+    return () => window.removeEventListener('pointerdown', first);
+  }, []);
 
   if (params.has('editor') && import.meta.env.DEV) return <Editor />;
   let body;

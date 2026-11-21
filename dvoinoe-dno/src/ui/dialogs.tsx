@@ -322,6 +322,9 @@ function SettingsDialog() {
         <input type="checkbox" checked={p.sound} onChange={() => setPrefs({ sound: !p.sound })} /> Звук
       </label>
       <label class="check">
+        <input type="checkbox" checked={p.music} disabled={!p.sound} onChange={() => setPrefs({ music: !p.music })} /> Музыка (вальс, романс, гармонь — негромко)
+      </label>
+      <label class="check">
         <input type="checkbox" checked={!p.timePressure} onChange={() => setPrefs({ timePressure: !p.timePressure })} /> Отключить давление временем (для новой сессии)
       </label>
       <p class="muted">Клавиатура: 1–9 — выбор реплики; Q / E — перебор предметов и людей на сцене, Enter — подойти; Esc — закрыть окно.</p>

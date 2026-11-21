@@ -1,6 +1,10 @@
 // Звук синтезируется Web Audio: гул ярмарки, пароходные гудки, колокола, капель подвала, щелчки и магний.
 // Без файлов — работает офлайн и ничего не весит. Настоящие записи — этап M8.
 import { prefs } from '../store/game';
+import { MusicPlayer, MUSIC_FOR } from './music';
+
+let music: MusicPlayer | null = null;
+let musicKey: string | null = null;
 
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
@@ -126,11 +130,6 @@ export function setAmbient(loc: string | null) {
   if (loc === 'yard' || loc === 'bank' || loc === 'shop') timers.push(setInterval(() => Math.random() < 0.3 && sfx('horn'), 17000));
   if (loc === 'yard' || loc === 'chamber') timers.push(setInterval(() => Math.random() < 0.3 && sfx('bell'), 23000));
   if (loc === 'cellar') timers.push(setInterval(() => tone(1400 + Math.random() * 600, 0.08, 'sine', 0.03), 2600));
-  // скупая музыка: фортепианные ноты издалека
-  const notes = [220, 247, 262, 294, 330, 392];
-  timers.push(setInterval(() => {
-    if (Math.random() < 0.5) tone(notes[Math.floor(Math.random() * notes.length)], 2.4, 'triangle', 0.025);
-  }, 3100));
   ambient = {
     stop: () => {
       try {
@@ -143,7 +142,17 @@ export function setAmbient(loc: string | null) {
   };
 }
 
+/** Музыка по месту действия: ключ локации или 'title' / 'map'; null — тишина. */
+export function setMusic(key: string | null) {
+  musicKey = key;
+  const c = ac();
+  if (!c || !master) return;
+  if (!music) music = new MusicPlayer(c, master);
+  music.play(prefs.value.music && key ? MUSIC_FOR[key] ?? null : null);
+}
+
 prefs.subscribe((p) => {
+  if (music) music.play(p.sound && p.music && musicKey ? MUSIC_FOR[musicKey] ?? null : null);
   if (!p.sound) {
     ambient?.stop();
     ambient = null;

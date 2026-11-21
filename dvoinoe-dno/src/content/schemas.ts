@@ -322,7 +322,8 @@ export const TheoriesFile = z.object({
 // ---------- Сцена ----------
 export const Prop = z.object({
   id: z.string(),
-  shape: z.enum(['box', 'cyl', 'flat', 'panel', 'stove', 'press', 'shelf', 'bunk', 'counter', 'window', 'coat', 'bottles', 'cat', 'line']),
+  shape: z.enum(['box', 'cyl', 'flat', 'panel', 'stove', 'press', 'shelf', 'bunk', 'counter', 'window', 'coat', 'bottles', 'cat', 'line',
+    'table', 'chair', 'stool', 'crate', 'sack', 'bucket', 'lamp', 'frame', 'poster', 'clock', 'rug', 'pipe', 'papers', 'broom']),
   pos: Vec2,
   size: z.tuple([z.number(), z.number(), z.number()]),
   color: z.string(),
@@ -377,6 +378,7 @@ export const SceneFile = z.object({
   npcs: z.array(z.object({ id: z.string(), person: z.string().optional(), pos: Vec2, knot: z.string(), facing: z.number().optional(), requiresFlag: z.string().optional(), hideFlag: z.string().optional() })),
   photoTargets: z.array(z.object({ id: z.string(), title: z.string(), pos: Vec2, kinds: z.array(z.enum(PHOTO_KINDS)) })),
   followers: z.boolean(),
+  wear: z.number().min(0).max(1).optional(), // износ стен: 0 — опрятно, 1 — обшарпано
 });
 
 export const DocumentFile = z.object({

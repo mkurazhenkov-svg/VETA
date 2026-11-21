@@ -146,9 +146,49 @@ export function paintBackground(s: SceneDef, marks: { lampOnly: Set<string> }): 
     ctx.restore();
   }
 
+  // пятна, мусор, солома на полу
+  {
+    const fx = s.room.floor.map((p) => p[0]);
+    const fy = s.room.floor.map((p) => p[1]);
+    const X = Math.max(...fx);
+    const Y = Math.max(...fy);
+    ctx.save();
+    polyPath(ctx, floor);
+    ctx.clip();
+    for (let i = 0; i < 9; i++) {
+      const c = toScreen(s, r() * X, r() * Y);
+      const rr = 30 + r() * 70;
+      ctx.save();
+      ctx.translate(c[0], c[1]);
+      ctx.scale(1, 0.5);
+      const g = ctx.createRadialGradient(0, 0, 2, 0, 0, rr);
+      g.addColorStop(0, 'rgba(20,16,10,0.22)');
+      g.addColorStop(1, 'rgba(20,16,10,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(-rr, -rr, rr * 2, rr * 2);
+      ctx.restore();
+    }
+    for (let i = 0; i < 220; i++) {
+      const c = toScreen(s, r() * X, r() * Y);
+      if (s.room.outdoor || r() < 0.4) {
+        ctx.strokeStyle = r() < 0.5 ? 'rgba(200,170,90,0.35)' : 'rgba(60,50,35,0.4)';
+        ctx.lineWidth = 1;
+        const a = r() * Math.PI;
+        ctx.beginPath();
+        ctx.moveTo(c[0], c[1]);
+        ctx.lineTo(c[0] + Math.cos(a) * 8, c[1] + Math.sin(a) * 4);
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = `rgba(30,24,18,${0.25 + r() * 0.3})`;
+        ctx.fillRect(c[0], c[1], 2 + r() * 3, 1.5 + r() * 2);
+      }
+    }
+    ctx.restore();
+  }
+
   // тени от предметов на полу
   for (const p of s.props) {
-    if (p.walkable || p.shape === 'flat' || p.shape === 'line') continue;
+    if (p.walkable || ['flat', 'line', 'rug', 'papers', 'lamp', 'frame', 'poster', 'clock', 'pipe', 'broom'].includes(p.shape)) continue;
     const z0 = p.z ?? 0;
     if (z0 > 0.5) continue;
     const c = toScreen(s, p.pos[0] + 0.25, p.pos[1] + 0.3);
@@ -213,6 +253,76 @@ export function paintBackground(s: SceneDef, marks: { lampOnly: Set<string> }): 
         ctx.fillStyle = g2;
         ctx.fillRect(0, 0, W, H);
       }
+    }
+    // износ: облупленная штукатурка с кирпичом, трещины, подтёки
+    {
+      const len = Math.hypot(w.to[0] - w.from[0], w.to[1] - w.from[1]);
+      ctx.save();
+      polyPath(ctx, [a0, a1, b1, b0]);
+      ctx.clip();
+      const wear = s.wear ?? 0.5;
+      const patches = Math.round((len / 4) * wear * 1.6);
+      for (let i = 0; i < patches; i++) {
+        const t0 = 0.6 + r() * (len - 2.2);
+        const z1 = 0.3 + r() * (w.h - 1.4);
+        const pw = 0.7 + r() * 1.1;
+        const ph = 0.4 + r() * 0.7;
+        const quad = [along(t0, z1), along(t0 + pw, z1 + (r() - 0.5) * 0.2), along(t0 + pw * 0.9, z1 + ph), along(t0 + 0.1, z1 + ph * 0.9)];
+        const brick = mix(wc, shade(hex('#8a5038'), alongX ? 0 : -0.2), 0.55);
+        paintPoly(ctx, r, quad, brick, { angles: [alongX ? ISO_A : ISO_B], density: 3, len: 8, width: 4, jitter: 0.2 });
+        ctx.strokeStyle = 'rgba(200,180,150,0.45)';
+        ctx.lineWidth = 1;
+        for (let rz = 0; rz < ph; rz += 0.14) {
+          const pa = along(t0, z1 + rz);
+          const pb = along(t0 + pw, z1 + rz);
+          ctx.beginPath();
+          ctx.moveTo(pa[0], pa[1]);
+          ctx.lineTo(pb[0], pb[1]);
+          ctx.stroke();
+        }
+        ctx.strokeStyle = rgba(shade(wc, -0.5), 0.6);
+        ctx.lineWidth = 1.5;
+        polyPath(ctx, quad);
+        ctx.stroke();
+      }
+      // трещины
+      ctx.strokeStyle = rgba(shade(wc, -0.55), 0.55);
+      ctx.lineWidth = 1.2;
+      for (let i = 0; i < Math.round(patches * 0.8 + wear * 2); i++) {
+        let t = r() * len;
+        let z = w.h * (0.5 + r() * 0.5);
+        ctx.beginPath();
+        let p0 = along(t, z);
+        ctx.moveTo(p0[0], p0[1]);
+        for (let k = 0; k < 6; k++) {
+          t += (r() - 0.5) * 0.5;
+          z -= 0.15 + r() * 0.3;
+          p0 = along(t, Math.max(0, z));
+          ctx.lineTo(p0[0], p0[1]);
+        }
+        ctx.stroke();
+      }
+      // подтёки сырости
+      for (let i = 0; i < patches; i++) {
+        const c = along(r() * len, w.h * (0.6 + r() * 0.35));
+        const g = ctx.createLinearGradient(c[0], c[1], c[0], c[1] + 120);
+        g.addColorStop(0, `rgba(40,36,24,${0.08 + wear * 0.18})`);
+        g.addColorStop(1, 'rgba(40,36,24,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(c[0] - 14 - r() * 10, c[1], 28 + r() * 20, 120);
+      }
+      // плинтус
+      if (!s.room.outdoor) {
+        ctx.strokeStyle = rgba(shade(wc, -0.45), 0.9);
+        ctx.lineWidth = 5;
+        const pa = along(0, 0.12);
+        const pb = along(len, 0.12);
+        ctx.beginPath();
+        ctx.moveTo(pa[0], pa[1]);
+        ctx.lineTo(pb[0], pb[1]);
+        ctx.stroke();
+      }
+      ctx.restore();
     }
     if (w.door) {
       const { at, w: dw, h: dh } = w.door;
@@ -571,6 +681,244 @@ export function paintProp(s: SceneDef, p: PropDef): PropSprite {
       ctx.moveTo(c0[0] - 16, c0[1] - 6);
       ctx.quadraticCurveTo(c0[0] - 26, c0[1] + 2, c0[0] - 10, c0[1] + 2);
       ctx.stroke();
+      break;
+    }
+    case 'table':
+    case 'stool': {
+      const legs = p.shape === 'stool' ? [[-0.3, -0.3], [0.3, -0.3], [0, 0.35]] : [[-0.42, -0.4], [0.42, -0.4], [-0.42, 0.4], [0.42, 0.4]];
+      for (const [lx, ly] of legs) drawBox(sub(p.pos[0] + lx * w, p.pos[1] + ly * d, 0.09, 0.09, z0, h * 0.92), shade(col, -0.25), 0.3);
+      drawBox(sub(p.pos[0], p.pos[1], w, d, z0 + h * 0.9, h * 0.1), col);
+      if (p.shape === 'table') {
+        // мелочи на столе
+        for (let i = 0; i < 3; i++) {
+          const q = toScreen(s, p.pos[0] + (r() - 0.5) * w * 0.7, p.pos[1] + (r() - 0.5) * d * 0.6, z0 + h);
+          ctx.fillStyle = rgba(shade(hex('#d8ccb0'), (r() - 0.5) * 0.3), 0.95);
+          ctx.beginPath();
+          ctx.ellipse(q[0], q[1], 8 + r() * 6, 4, r(), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      break;
+    }
+    case 'chair': {
+      for (const [lx, ly] of [[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]) drawBox(sub(p.pos[0] + lx * w, p.pos[1] + ly * d, 0.06, 0.06, z0, h * 0.45), shade(col, -0.2), 0.3);
+      drawBox(sub(p.pos[0], p.pos[1], w, d, z0 + h * 0.42, h * 0.06), col, 0.6);
+      drawBox(sub(p.pos[0], p.pos[1] - d * 0.45, w, d * 0.1, z0 + h * 0.48, h * 0.52), shade(col, -0.05), 0.6);
+      break;
+    }
+    case 'crate': {
+      drawBox(cs, col);
+      ctx.strokeStyle = rgba(shade(col, -0.5), 0.8);
+      ctx.lineWidth = 1.5;
+      for (const f of [faceX(cs), faceY(cs)]) {
+        for (let i = 1; i < 4; i++) {
+          const t = i / 4;
+          ctx.beginPath();
+          ctx.moveTo(f[0][0] + (f[3][0] - f[0][0]) * t, f[0][1] + (f[3][1] - f[0][1]) * t);
+          ctx.lineTo(f[1][0] + (f[2][0] - f[1][0]) * t, f[1][1] + (f[2][1] - f[1][1]) * t);
+          ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.moveTo(f[0][0], f[0][1]);
+        ctx.lineTo(f[2][0], f[2][1]);
+        ctx.stroke();
+      }
+      break;
+    }
+    case 'sack': {
+      const c0 = toScreen(s, p.pos[0], p.pos[1], z0);
+      const rx = (w * s.pxPerArshin) / 2;
+      const hh = h * s.pxPerArshin;
+      ctx.beginPath();
+      ctx.moveTo(c0[0] - rx, c0[1]);
+      ctx.bezierCurveTo(c0[0] - rx * 1.2, c0[1] - hh * 0.7, c0[0] - rx * 0.4, c0[1] - hh, c0[0], c0[1] - hh * 1.05);
+      ctx.bezierCurveTo(c0[0] + rx * 0.4, c0[1] - hh, c0[0] + rx * 1.2, c0[1] - hh * 0.7, c0[0] + rx, c0[1]);
+      ctx.quadraticCurveTo(c0[0], c0[1] + rx * 0.5, c0[0] - rx, c0[1]);
+      ctx.fillStyle = rgba(col);
+      ctx.fill();
+      ctx.save();
+      ctx.clip();
+      for (let i = 0; i < 70; i++) brush(ctx, r, c0[0] + (r() - 0.5) * rx * 2, c0[1] - r() * hh, 1.2 + (r() - 0.5), 14, 5, shade(col, (r() - 0.5) * 0.35), 0.4);
+      const g = ctx.createLinearGradient(c0[0] - rx, 0, c0[0] + rx, 0);
+      g.addColorStop(0, 'rgba(255,240,210,0.15)');
+      g.addColorStop(1, 'rgba(20,10,0,0.35)');
+      ctx.fillStyle = g;
+      ctx.fillRect(c0[0] - rx * 1.3, c0[1] - hh * 1.1, rx * 2.6, hh * 1.3);
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(60,40,20,0.9)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(c0[0] - 5, c0[1] - hh * 0.9);
+      ctx.lineTo(c0[0] + 5, c0[1] - hh * 0.92);
+      ctx.stroke();
+      break;
+    }
+    case 'bucket': {
+      const c0 = toScreen(s, p.pos[0], p.pos[1], z0);
+      const c1 = toScreen(s, p.pos[0], p.pos[1], z0 + h);
+      const rx0 = (w * s.pxPerArshin) / 2.4;
+      const rx1 = (w * s.pxPerArshin) / 2;
+      ctx.fillStyle = rgba(shade(col, -0.15));
+      ctx.beginPath();
+      ctx.moveTo(c0[0] - rx0, c0[1]);
+      ctx.lineTo(c1[0] - rx1, c1[1]);
+      ctx.lineTo(c1[0] + rx1, c1[1]);
+      ctx.lineTo(c0[0] + rx0, c0[1]);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = rgba(shade(col, -0.55));
+      ctx.beginPath();
+      ctx.ellipse(c1[0], c1[1], rx1, rx1 * 0.45, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = rgba(shade(col, 0.3), 0.8);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.ellipse(c1[0], c1[1] - rx1 * 0.3, rx1, rx1 * 1.1, 0, Math.PI, 0);
+      ctx.stroke();
+      break;
+    }
+    case 'lamp': {
+      // висячая керосиновая лампа: шнур от свода, стекло со светом
+      const top = toScreen(s, p.pos[0], p.pos[1], z0 + h);
+      const c = toScreen(s, p.pos[0], p.pos[1], z0);
+      ctx.strokeStyle = 'rgba(30,24,18,0.9)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(top[0], top[1]);
+      ctx.lineTo(c[0], c[1] - 18);
+      ctx.stroke();
+      const g = ctx.createRadialGradient(c[0], c[1], 2, c[0], c[1], 46);
+      g.addColorStop(0, 'rgba(255,214,140,0.55)');
+      g.addColorStop(1, 'rgba(255,190,110,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(c[0] - 50, c[1] - 50, 100, 100);
+      ctx.fillStyle = rgba(col);
+      ctx.beginPath();
+      ctx.ellipse(c[0], c[1] - 16, 12, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,236,190,0.9)';
+      ctx.beginPath();
+      ctx.ellipse(c[0], c[1] - 4, 6, 10, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = rgba(shade(col, -0.2));
+      ctx.fillRect(c[0] - 8, c[1] + 4, 16, 7);
+      break;
+    }
+    case 'frame':
+    case 'poster':
+    case 'clock': {
+      const alongX = w >= d;
+      const face = alongX ? faceY(cs) : faceX(cs);
+      paintPoly(ctx, r, face, p.shape === 'frame' ? hex('#6a4a24') : col, { angles: [Math.PI / 2], density: 2, len: 8, width: 3, jitter: 0.12, edge: shade(col, -0.6) });
+      const lerp = (a: Vec2, b: Vec2, t: number): Vec2 => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+      const ins = 0.14;
+      const inner: Vec2[] = [
+        lerp(lerp(face[0], face[1], ins), lerp(face[3], face[2], ins), ins),
+        lerp(lerp(face[0], face[1], 1 - ins), lerp(face[3], face[2], 1 - ins), ins),
+        lerp(lerp(face[0], face[1], 1 - ins), lerp(face[3], face[2], 1 - ins), 1 - ins),
+        lerp(lerp(face[0], face[1], ins), lerp(face[3], face[2], ins), 1 - ins),
+      ];
+      if (p.shape === 'frame') {
+        paintPoly(ctx, r, inner, col, { angles: [0.2, 1.5], density: 6, len: 8, width: 3, jitter: 0.35 });
+      } else if (p.shape === 'poster') {
+        paintPoly(ctx, r, inner, hex('#d8ceb0'), { angles: [0], density: 4, len: 6, width: 2, jitter: 0.08 });
+        ctx.strokeStyle = 'rgba(50,30,20,0.75)';
+        ctx.lineWidth = 2;
+        for (let i = 1; i < 6; i++) {
+          const a = lerp(inner[0], inner[3], i / 6);
+          const b = lerp(inner[1], inner[2], i / 6);
+          ctx.beginPath();
+          ctx.moveTo(a[0], a[1]);
+          ctx.lineTo(a[0] + (b[0] - a[0]) * (i === 1 ? 0.9 : 0.4 + r() * 0.5), a[1] + (b[1] - a[1]) * (i === 1 ? 0.9 : 0.4 + r() * 0.5));
+          ctx.stroke();
+        }
+      } else {
+        const c = lerp(lerp(face[0], face[2], 0.5), lerp(face[1], face[3], 0.5), 0.5);
+        ctx.fillStyle = '#e8dfc8';
+        ctx.beginPath();
+        ctx.ellipse(c[0], c[1] - 6, 12, 14, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#2a2018';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(c[0], c[1] - 6);
+        ctx.lineTo(c[0], c[1] - 16);
+        ctx.moveTo(c[0], c[1] - 6);
+        ctx.lineTo(c[0] + 7, c[1] - 3);
+        ctx.stroke();
+        ctx.strokeStyle = '#b8902a';
+        ctx.beginPath();
+        ctx.moveTo(c[0], c[1] + 8);
+        ctx.lineTo(c[0], c[1] + 26);
+        ctx.stroke();
+        ctx.fillStyle = '#c9a040';
+        ctx.beginPath();
+        ctx.arc(c[0], c[1] + 28, 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      break;
+    }
+    case 'rug': {
+      const t = top(cs);
+      paintPoly(ctx, r, t, col, { angles: [ISO_A, ISO_B], density: 3, len: 10, width: 4, jitter: 0.18 });
+      const lerp = (a: Vec2, b: Vec2, k2: number): Vec2 => [a[0] + (b[0] - a[0]) * k2, a[1] + (b[1] - a[1]) * k2];
+      const c = [lerp(t[0], t[2], 0.12), lerp(t[1], t[3], 0.12), lerp(t[2], t[0], 0.12), lerp(t[3], t[1], 0.12)];
+      ctx.strokeStyle = rgba(shade(col, 0.4), 0.8);
+      ctx.lineWidth = 3;
+      polyPath(ctx, [c[0], c[1], c[2], c[3]]);
+      ctx.stroke();
+      break;
+    }
+    case 'pipe': {
+      const c0 = toScreen(s, p.pos[0], p.pos[1], z0);
+      const c1 = toScreen(s, p.pos[0], p.pos[1], z0 + h);
+      const g = ctx.createLinearGradient(c0[0] - 6, 0, c0[0] + 6, 0);
+      g.addColorStop(0, rgba(shade(col, 0.3)));
+      g.addColorStop(1, rgba(shade(col, -0.5)));
+      ctx.fillStyle = g;
+      ctx.fillRect(c0[0] - 5, c1[1], 10, c0[1] - c1[1]);
+      ctx.fillStyle = rgba(shade(col, -0.3));
+      for (let i = 1; i < 4; i++) ctx.fillRect(c0[0] - 7, c1[1] + ((c0[1] - c1[1]) * i) / 4, 14, 4);
+      break;
+    }
+    case 'papers': {
+      for (let i = 0; i < 7; i++) {
+        const q = toScreen(s, p.pos[0] + (r() - 0.5) * w, p.pos[1] + (r() - 0.5) * d, z0 + 0.01);
+        ctx.save();
+        ctx.translate(q[0], q[1]);
+        ctx.rotate((r() - 0.5) * 1.2);
+        ctx.scale(1, 0.55);
+        ctx.fillStyle = rgba(shade(col, (r() - 0.5) * 0.25), 0.95);
+        ctx.fillRect(-11, -14, 22, 28);
+        ctx.strokeStyle = 'rgba(60,40,20,0.35)';
+        for (let k = 0; k < 4; k++) {
+          ctx.beginPath();
+          ctx.moveTo(-8, -9 + k * 6);
+          ctx.lineTo(7, -9 + k * 6);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+      break;
+    }
+    case 'broom': {
+      const a = toScreen(s, p.pos[0], p.pos[1], z0 + h);
+      const b = toScreen(s, p.pos[0] + 0.3, p.pos[1], z0);
+      ctx.strokeStyle = 'rgba(110,80,40,1)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1] - 16);
+      ctx.stroke();
+      ctx.strokeStyle = rgba(col, 0.9);
+      ctx.lineWidth = 1.2;
+      for (let i = 0; i < 14; i++) {
+        ctx.beginPath();
+        ctx.moveTo(b[0], b[1] - 18);
+        ctx.lineTo(b[0] + (i - 7) * 1.6, b[1]);
+        ctx.stroke();
+      }
       break;
     }
     case 'window':

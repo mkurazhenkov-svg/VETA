@@ -49,8 +49,9 @@ export interface Prefs {
   contrast: boolean;
   sound: boolean;
   timePressure: boolean;
+  music: boolean;
 }
-export const prefs = signal<Prefs>(lsGet('dd.prefs', { textScale: 1, contrast: false, sound: true, timePressure: true }));
+export const prefs = signal<Prefs>({ textScale: 1, contrast: false, sound: true, timePressure: true, music: true, ...lsGet<Partial<Prefs>>('dd.prefs', {}) });
 export function setPrefs(p: Partial<Prefs>) {
   prefs.value = { ...prefs.value, ...p };
   lsSet('dd.prefs', prefs.value);
